@@ -1,0 +1,166 @@
+/* /* *{
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif;
+}
+.circle{
+    width: 300px;
+    height: 300px;
+    background-color: limegreen;
+    border-radius: 50%;
+    Transition properties 
+    transition-property: background-color, border-radius, height, width,opacity;
+    transition-duration: 1.5s;
+     transition-delay: 2s; 
+}
+.circle:hover {
+    background-color: blue;
+    border-radius: 25%;
+    height: 600px;
+    width: 600px;
+    opacity: 0.3;
+}
+.btn-raised{
+    font-size: 2.5rem;
+    transition: 0.5s;
+    margin: 20px;
+    transform: rotate(180deg);
+    transform: scale(2);
+    transform: skew(30deg);
+}
+.btn-raised:hover {
+    margin:20px;
+    transform: translate(50px, 50px);
+}
+.timing-container{
+    background-color: lightgray;
+    border:2px solid black;
+    margin: 20px;
+}
+.timing-box{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: goldenrod;
+    transition-duration: 1s;
+}
+.timing-box:hover{
+    width:90%
+}
+.timing-box:nth-child(2){
+    transition-timing-function: linear;
+}
+.timing-box:nth-child(3){
+    transition-timing-function: ease-in;
+}
+.timing-box:nth-child(4){
+    transition-timing-function: ease-in-out;
+}
+.animation-container{
+    position: relative;
+}
+.animation-box{
+    width: 200px;
+    height: 200px;
+    background-color: lightpink;
+    animation-name: boxAnimation;
+    animation-duration: 2s;
+} */
+
+
+  
+  .traffic-lights {
+    padding: 10px 50px;
+    background: #222;
+    border-radius: 35px;
+    border: 15px solid #111;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index:100;
+  }
+  
+  .light {
+    border-top: 0.8em solid black;
+    border-radius: 50%;
+    background: teal;
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+  }
+  
+  .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #ffffff14;
+    border-radius: 30px 0px 0px 30px
+  }
+  
+  @keyframes red {
+    0% {
+      background: #111;
+    }
+    2%,
+    40% {
+      background: #c0392b;
+    }
+    42%,
+    100% {
+      background: #111;
+    }
+  }
+  
+  @keyframes amber {
+    0%,
+    20% {
+      background: #111;
+    }
+    22%,
+    40% {
+      background: #FBC00C;
+    }
+    42%,
+    80% {
+      background: #111;
+    }
+    82%,
+    100% {
+      background: #FBC00C;
+    }
+  }
+  
+  @keyframes green {
+    0%,
+    40% {
+      background: #111;
+    }
+    42%,
+    80% {
+      background: #1abc9c;
+    }
+    82%,
+    100% {
+      background: #111;
+    }
+  }
+  
+  .red {
+    animation: red 10s linear infinite;
+    
+  }
+  
+  .amber {
+    animation: amber 10s linear infinite;
+  }
+  
+  .green {
+    animation: green 10s linear infinite;
+  }
+  
+  

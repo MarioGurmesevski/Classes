@@ -1,0 +1,37 @@
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: sans-serif;
+}
+a{
+    text-decoration: none;
+}
+.header{
+    background-color: black;
+    padding: 6%;
+    border: 1px solid white;
+}
+.nav{
+    background-color: black;
+    padding: 1px;
+    border: 1px solid white;
+}
+.content{
+    background-color: black;
+    padding: 200px 200px 200px 150px;
+    border: 1px solid white;
+    width: 400px;
+    height: 200px;
+    position: relative;
+    left: 600px;
+}
+.menu{
+    background-color: black;
+    border: 1px solid white;
+    position: relative;
+}
+.footer{
+
+}
