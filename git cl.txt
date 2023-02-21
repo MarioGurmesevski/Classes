@@ -1,0 +1,7 @@
+git clone https://github.com/Peckoo/Java-Basics.git
+git status (optional)
+git add . - dodava filovi
+git commit -m"Poraka"   - lokalen save
+git push - Prikacuva na git 
+
+
