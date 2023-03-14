@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import reviewRoutes from "./reviews.routes.js";
 
 // Creating a server
 const app = express();
@@ -13,11 +14,7 @@ app.use(express.json()); //to enable working with JSON in body
 app.use(cors());
 
 // Rotes
-app.use("/api", (req, res) => {
-  console.log("The request has been sent to /api");
-
-  res.sendStatus(200);
-});
+app.use("/api", reviewRoutes);
 
 // Server listening
 app.listen(3000, "localhost", () => {
