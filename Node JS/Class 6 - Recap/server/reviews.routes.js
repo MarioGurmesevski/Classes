@@ -10,7 +10,14 @@ const reviewsRoute = "/reviews";
 //Method === GET
 rounter.get(reviewsRoute, (req, res) => {
   try {
-  } catch (error) {}
+    //get data from the service
+    const reviews = reviewsService.getReview.res //return data as reponse
+      .status(200)
+      .send(reviews);
+  } catch (error) {
+    //return error
+    res.sendStatus(500).send("Problem While Fetching");
+  }
 });
 
 //Method === POST
@@ -19,16 +26,19 @@ rounter.post(reviewsRoute, (req, res) => {
   const body = req.body;
   try {
     //Business logic(in service)
-    reviewsService.addReview(body);
+    const review = reviewsService.addReview(body);
     //send responce
+    res.sendStatus(200).send(review);
   } catch (error) {
     //Send error
+    res.status(500).send(error.message);
   }
 });
 
 //Method === PUT
 rounter.put(reviewsRoute, (req, res) => {
   try {
+    const body = req.body;
   } catch (error) {}
 });
 
