@@ -44,4 +44,10 @@
 
   - [Basic Node](/Node%20JS/)
 
-  -[Class 1 Intro To NodeJS](/Node%20JS/Class%201/) -[Class 2 - Modules/Import|Outport](/Node%20JS/Class%202%20-%20Modules%20Import%20outport/) -[Class 3 - Events](/Node%20JS/Class%203%20-%20Events/) -[Class 4 - Clients](/Node%20JS/Class%204%20-%20Clients/) -[Class 5 - Express](/Node%20JS/Class%205%20-%20Express/) -[Class 6 - Recap](/Node%20JS/Class%206%20-%20Recap/) -[Class 7 - MVC Pattern](/Node%20JS/Class%207%20-%20MVC%20Pattern/)
+  - [Class 1 Intro To NodeJS](/Node%20JS/Class%201/)
+  - [Class 2 - Modules/Import|Outport](/Node%20JS/Class%202%20-%20Modules%20Import%20outport/)
+  - [Class 3 - Events](/Node%20JS/Class%203%20-%20Events/)
+  - [Class 4 - Clients](/Node%20JS/Class%204%20-%20Clients/)
+  - [Class 5 - Express](/Node%20JS/Class%205%20-%20Express/)
+  - [Class 6 - Recap](/Node%20JS/Class%206%20-%20Recap/)
+  - [Class 7 - MVC Pattern](/Node%20JS/Class%207%20-%20MVC%20Pattern/)
