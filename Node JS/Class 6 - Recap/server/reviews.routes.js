@@ -42,7 +42,12 @@ router.put(reviewsRoute, (req, res) => {
   const id = req.params.id;
   const body = req.body;
   try {
-  } catch (error) {}
+    const updatedReview = reviewsService.updateReview(id, body);
+
+    res.status(200).send(updatedReview);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 // method === PATCH
