@@ -6,7 +6,7 @@ const inventoryController = new InvetnoryController();
 const router = express.Router();
 
 //api/inventory
-router.get("", inventoryController.getAllItems);
+router.get("/:id", inventoryController.getAllItems);
 router.post("", inventoryController.addInventoryItem);
 router.put("/:id", inventoryController.updateInventoryItem);
 

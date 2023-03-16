@@ -10,6 +10,21 @@ export default class InvetnoryModel {
       resolve(inventoryItems);
     });
   }
+
+  getItemById(id) {
+    return new Promise(async (resolve, reject) => {
+      const items = await this.getAllItems();
+
+      const item = items.find((item) => item.id === id);
+
+      if (!item) {
+        reject("Item not found");
+      }
+
+      resolve(item);
+    });
+  }
+
   addInventoryItem(body) {
     return new Promise(async (resolve, reject) => {
       const items = await this.getAllItems();

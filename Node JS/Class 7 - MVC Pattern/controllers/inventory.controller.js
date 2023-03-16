@@ -3,13 +3,16 @@ import InvetnoryModel from "../models/inventory.model.js";
 const invetnoryModel = new InvetnoryModel();
 
 export default class InvetnoryController {
-  getAllItems(req, res) {
-    console.log("Inventory controller get method called");
+  async getAllItems(req, res) {
+    const shouldGetAllItems = !req.params.id;
     try {
-      const items = invetnoryModel.getAllItems();
-      console.log("items", items);
-
-      res.status(200).send(items);
+      if (shouldGetAllItems) {
+        const items = invetnoryModel.getAllItems();
+        res.status(200).send(items);
+      } else {
+        const item = await invetnoryModel.getItemById(req.params.id);
+        res.status(200).send(item);
+      }
     } catch (error) {
       res.sendStatus(500);
     }
