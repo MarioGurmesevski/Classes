@@ -1,7 +1,7 @@
 git clone https://github.com/https://github.com/MarioGurmesevski/Classes.git
 git status (optional)
-git add . - dodava filovi
-git commit -m"Poraka"   - lokalen save
-git push - Prikacuva na git 
+git add . - adds files
+git commit -message- local save
+git push - adds on github
 
 
