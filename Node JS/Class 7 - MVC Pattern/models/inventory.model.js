@@ -59,7 +59,7 @@ export default class InvetnoryModel {
       resolve(items[index]);
     });
   }
-  deleteInventoryItem() {
+  deleteInventoryItem(id) {
     return new Promise(async (resolve, rejct) => {
       const items = await this.getAllItems();
       const filteredItems = items.filter((item) => item.id !== id);
