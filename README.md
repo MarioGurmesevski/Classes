@@ -26,7 +26,7 @@
     - [Class 6 - Events](/Basic%20JavaScript/6th%20Class%20Events/)
     - [Class 7 - Objects](/Basic%20JavaScript/7th%20Class%20Objects/)
     - [Class 8 - Exercises](/Basic%20JavaScript/8th%20Class%20Exercises/)
-    - [Class 1 - Ajax](/Basic%20JavaScript/9th%20Class%20Ajax/)
+    - [Class 9 - Ajax](/Basic%20JavaScript/9th%20Class%20Ajax/)
 
   - [Advanced JavaScript](/Advanced%20JavaScript/)
 
