@@ -47,8 +47,31 @@ export const addReview = (body) => {
 
 export const updateReview = (id, body) => {
   // get all reviews
+  const json = fs.readFileSync("db.json", { encoding: "utf-8" });
+  const reviews = JSON.parse(json);
+
   //find existing review
+  const index = reviews.findIndex((review) => review.id === id);
+
+  //index === -1 if it;s not existing
+  if (index < 0) {
+    throw new Error(`Can't find review wit id:${id}`);
+  }
+
   //validate inputs
+  if (!body?.title || !body?.text || !body?.score) {
+    throw new Error(`Bad request, review is not in proper form`);
+  }
+
   //replace old review with new body
+  reviews[index] = { ...body, id };
+  //if key and value in object are the same name, no need to write them both
+  //{id:id}=== {id}
+  //reviews[index].id = id
+
   //save reviews back to DB
+  const stringifiedReviews = JSON.stringify(reviews, null, 2);
+  fs.writeFileSync("db.json", stringifiedReviews);
+
+  return reviews[index];
 };
