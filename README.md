@@ -1,4 +1,4 @@
-# All of the Classes so far in SEDC
+# All of the Subjects that i've studied at SEDC so far
 
 - Classes:
   - [HTML & Css](/Html%20%26%20Css/)
