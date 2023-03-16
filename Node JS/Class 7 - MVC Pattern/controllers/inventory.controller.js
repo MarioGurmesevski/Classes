@@ -37,4 +37,13 @@ export default class InvetnoryController {
       res.status(400).send(error.message);
     }
   }
+  async deleteInventoryItem(req, res) {
+    const id = req.params.id;
+    try {
+      await invetnoryModel.deleteInventoryItem(id);
+      res.sendStatus(200);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  }
 }

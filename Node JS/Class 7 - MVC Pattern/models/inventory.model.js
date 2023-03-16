@@ -59,4 +59,14 @@ export default class InvetnoryModel {
       resolve(items[index]);
     });
   }
+  deleteInventoryItem() {
+    return new Promise(async (resolve, rejct) => {
+      const items = await this.getAllItems();
+      const filteredItems = items.filter((item) => item.id !== id);
+
+      dataService.writeData(inventoryDataPath, filteredItems);
+
+      resolve();
+    });
+  }
 }
