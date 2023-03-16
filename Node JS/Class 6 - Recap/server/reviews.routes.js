@@ -38,7 +38,7 @@ router.post(reviewsRoute, (req, res) => {
 });
 
 // method === PUT
-router.put(reviewsRoute, (req, res) => {
+router.put(`${reviewsRoute}/:id`, (req, res) => {
   const id = req.params.id;
   const body = req.body;
   try {
@@ -51,15 +51,34 @@ router.put(reviewsRoute, (req, res) => {
 });
 
 // method === PATCH
-router.patch(reviewsRoute, (req, res) => {
+router.patch(`${reviewsRoute}/:id`, (req, res) => {
+  //Prepare data
+  const id = req.params.id;
+  const body = req.body;
   try {
-  } catch (error) {}
+    //send data to service
+    const updatedReview = reviewsService.partiallyUpdateReview(id, body);
+    //send response
+    res.status(200).send(updatedReview);
+  } catch (error) {
+    res.status(400).send(error.message);
+    //send error
+  }
 });
 
 // method === DELETE
-router.delete(reviewsRoute, (req, res) => {
+router.delete(`${reviewsRoute}/:id`, (req, res) => {
+  // Prepare data
+  const id = req.params.id;
   try {
-  } catch (error) {}
+    //send id to service
+    reviewsService.deleteReview(id);
+    //send response
+    res.sendStatus(200);
+  } catch (error) {
+    //send error
+    res.status(500).send("cannot delete review");
+  }
 });
 
 export default router;
