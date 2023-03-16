@@ -1,57 +1,60 @@
 import express from "express";
 import * as reviewsService from "./reviews.service.js";
 
-const rounter = express.Router();
+const router = express.Router();
 
 // /api
 
 const reviewsRoute = "/reviews";
 
-//Method === GET
-rounter.get(reviewsRoute, (req, res) => {
+// method === GET
+router.get(reviewsRoute, (req, res) => {
   try {
-    //get data from the service
-    const reviews = reviewsService.getReview.res //return data as reponse
-      .status(200)
-      .send(reviews);
+    // get data from the service
+    const reviews = reviewsService.getReviews();
+    // return data as response
+    res.status(200).send(reviews);
   } catch (error) {
-    //return error
-    res.sendStatus(500).send("Problem While Fetching");
+    // return error
+    // res.sendStatus(500)
+    res.status(500).send("Problem while fetching reviews");
   }
 });
 
-//Method === POST
-rounter.post(reviewsRoute, (req, res) => {
-  //Prepare data
+// method === POST
+router.post(reviewsRoute, (req, res) => {
+  // Prepare data
   const body = req.body;
+
   try {
-    //Business logic(in service)
+    // Business logic (in service)
     const review = reviewsService.addReview(body);
-    //send responce
-    res.sendStatus(200).send(review);
+    // Send response
+    res.status(200).send(review);
   } catch (error) {
-    //Send error
+    // Send error
     res.status(500).send(error.message);
   }
 });
 
-//Method === PUT
-rounter.put(reviewsRoute, (req, res) => {
-  try {
-    const body = req.body;
-  } catch (error) {}
-});
-
-//Method === PATCH
-rounter.patch(reviewsRoute, (req, res) => {
+// method === PUT
+router.put(reviewsRoute, (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
   try {
   } catch (error) {}
 });
 
-//Method === DELETE
-rounter.delete(reviewsRoute, (req, res) => {
+// method === PATCH
+router.patch(reviewsRoute, (req, res) => {
   try {
   } catch (error) {}
 });
 
-export default rounter;
+// method === DELETE
+router.delete(reviewsRoute, (req, res) => {
+  try {
+  } catch (error) {}
+});
+
+export default router;
