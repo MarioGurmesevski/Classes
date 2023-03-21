@@ -2,7 +2,7 @@ import express from "express";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 import fs from "fs";
-import { ChildProcess } from "child_process";
+import { createAccessToken } from "../jwt.const.js";
 
 const router = express.Router();
 
@@ -40,8 +40,8 @@ router.post("/login", (req, res) => {
     res.status(400).send("Invalid credentials");
   }
 
-  console.log("login password", userData.password);
-  console.log("saved password", user.password);
+  const token = createAccessToken(user.id);
+  console.log(token);
   res.sendStatus(200);
 });
 
