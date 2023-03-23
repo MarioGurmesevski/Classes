@@ -2,6 +2,9 @@
   {
     "id": "60189bd9-f382-4e97-9d51-a591bc0985e1",
     "username": "mariogurme@gmail.com",
-    "password": "$2a$10$murwnWp82Ssg2cpb7SZWY.D/1f4E3ZVP/hxyulQUHvkLKJibbvytC"
+    "password": "$2a$10$murwnWp82Ssg2cpb7SZWY.D/1f4E3ZVP/hxyulQUHvkLKJibbvytC",
+    "refreshTokens": [
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDE4OWJkOS1mMzgyLTRlOTctOWQ1MS1hNTkxYmMwOTg1ZTEiLCJpYXQiOjE2Nzk2MDAzMzUsImV4cCI6MTY4MDIwNTEzNX0.B_3KJh6uvRzH1rwmyvSGtcrKad_mVK0jmPUUclLDC_I"
+    ]
   }
 ]

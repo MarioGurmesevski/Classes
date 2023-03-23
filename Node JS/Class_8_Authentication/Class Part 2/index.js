@@ -8,8 +8,6 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const HOSTNAME = process.env.NAMEHOST || "localhost";
 
-// console.log('test env var', process.env.TEST)
-
 const app = express();
 
 app.use(cors());
