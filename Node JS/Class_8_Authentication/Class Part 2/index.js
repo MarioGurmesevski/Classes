@@ -7,11 +7,11 @@ const HOSTNAME = "localhost";
 
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.use("/api", router);
 
 app.listen(PORT, HOSTNAME, () => {
-  console.log(`Server start listening on http://${HOSTNAME}:${PORT}`);
+  console.log(`Server is listening on http://${HOSTNAME}:${PORT}`);
 });

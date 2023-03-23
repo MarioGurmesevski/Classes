@@ -9,6 +9,8 @@ const router = express.Router();
 router.post("/register", (req, res) => {
   const userData = req.body;
 
+  console.log(userData);
+
   const hashedPassword = bcrypt.hashSync(userData.password, 10);
 
   const user = {
@@ -19,6 +21,8 @@ router.post("/register", (req, res) => {
 
   fs.writeFileSync("./data/users.json", JSON.stringify([user]));
 
+  console.log(user);
+
   res.status(200).send(user);
 });
 
@@ -28,6 +32,7 @@ router.post("/login", (req, res) => {
   const users = JSON.parse(fs.readFileSync("./data/users.json"));
 
   const user = users.find((user) => user.username === userData.username);
+
   if (!user) {
     res.status(404).send("User not found");
   }
@@ -41,7 +46,9 @@ router.post("/login", (req, res) => {
   }
 
   const token = createAccessToken(user.id);
+
   console.log(token);
+
   res.sendStatus(200);
 });
 
