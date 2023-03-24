@@ -1,10 +1,10 @@
 [
   {
-    "id": "60189bd9-f382-4e97-9d51-a591bc0985e1",
-    "username": "mariogurme@gmail.com",
-    "password": "$2a$10$murwnWp82Ssg2cpb7SZWY.D/1f4E3ZVP/hxyulQUHvkLKJibbvytC",
+    "id": "63bfb8cb-cc67-4afe-8ee9-b2b911dea447",
+    "username": "ivo.kostovski@gmail.com",
+    "password": "$2a$10$Zf/lueCJviLxqZm/pZSflusdtqeStzAwfAv0U8cr/mVHcc5Z0T0Eu",
     "refreshTokens": [
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDE4OWJkOS1mMzgyLTRlOTctOWQ1MS1hNTkxYmMwOTg1ZTEiLCJpYXQiOjE2Nzk2MDAzMzUsImV4cCI6MTY4MDIwNTEzNX0.B_3KJh6uvRzH1rwmyvSGtcrKad_mVK0jmPUUclLDC_I"
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2JmYjhjYi1jYzY3LTRhZmUtOGVlOS1iMmI5MTFkZWE0NDciLCJpYXQiOjE2Nzk2NzYzMzEsImV4cCI6MTY4MDI4MTEzMX0.Bi-p7nYnT5dzy9UkcNDEy8AK1ZgdmP9ccf-f3y-oIzQ"
     ]
   }
 ]

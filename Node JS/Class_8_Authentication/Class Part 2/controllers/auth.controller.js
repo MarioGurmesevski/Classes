@@ -21,4 +21,15 @@ export default class AuthController {
             res.status(400).send(error.message)
         }        
     }
+
+    async refreshToken(req, res) {
+        const refreshToken = req.body.refreshToken;
+        
+        try {
+            const response = await authModel.refreshToken(refreshToken)
+            res.status(200).send(response);
+        } catch (error) {
+            res.sendStatus(400)
+        }
+    }
 }
