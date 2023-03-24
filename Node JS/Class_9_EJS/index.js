@@ -1,4 +1,4 @@
-import express, { urlencoded } from "express";
+import express from "express";
 import cors from "cors";
 import router from "./router.const.js";
 
@@ -6,6 +6,8 @@ const app = express();
 
 const PORT = 3000;
 const HOSTNAME = "localhost";
+
+app.use(express.static("./public"))
 
 app.use(cors());
 app.use(express.json())

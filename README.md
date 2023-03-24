@@ -52,3 +52,4 @@
     - [Class 6 - Recap](/Node%20JS/Class%206%20-%20Recap/)
     - [Class 7 - MVC Pattern](/Node%20JS/Class%207%20-%20MVC%20Pattern/)
     - [Class 8/9 - Authentication](/Node%20JS/Class_8_Authentication/)
+    - [Class 10 - EJS](/Node%20JS/Class_9_EJS/)
