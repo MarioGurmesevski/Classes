@@ -55,3 +55,5 @@
     - [Class 10 - EJS](/Node%20JS/Basic%20NodeJS/Class_9_EJS/)
 
   - [Advnaced Node](/Node%20JS/Advanced%20NodeJS/)
+
+    - [Class 1 - MongoDB](/Node%20JS/Advanced%20NodeJS/Class_1_MongoDB/)
