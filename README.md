@@ -45,7 +45,7 @@
   - [Basic Node](/Node%20JS/Basic%20NodeJS/)
 
     - [Class 1 Intro To NodeJS](/Node%20JS/Basic%20NodeJS/Class_1/)
-    - [Class 2 - Modules/Import|Outport](/Node%20JS/Basic%20NodeJS/Class%202%20-%20Modules%20Import%20outport/)
+    - [Class 2 - Modules/Import|Outport](/Node%20JS/Basic%20NodeJS/Class_2_Modules_Import_outport/)
     - [Class 3 - Events](/Node%20JS/Basic%20NodeJS/Class_3_Events/)
     - [Class 4 - Clients](/Node%20JS/Basic%20NodeJS/Class_4_Clients/)
     - [Class 5 - Express](/Node%20JS/Basic%20NodeJS/Class_5_Express/)
