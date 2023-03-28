@@ -12,8 +12,9 @@ const HOST = process.env.HOST || "localhost";
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
-app.use("api", router);
+app.use("/api", router);
 
 app.listen(PORT, HOST, async (error) => {
   if (error) console.log("Error while start server", error);
