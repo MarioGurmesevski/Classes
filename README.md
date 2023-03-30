@@ -56,4 +56,4 @@
 
   - [Advnaced Node](/Node%20JS/Advanced%20NodeJS/)
 
-    - [Class 1 - MongoDB](/Node%20JS/Advanced%20NodeJS/Class_1_MongoDB/)
+    - [Class 1/2 - MongoDB](/Node%20JS/Advanced%20NodeJS/Class_1_MongoDB/)

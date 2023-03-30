@@ -5,5 +5,7 @@ const router = express.Router();
 
 router.get("/", ProductController.getAllProducts);
 router.get("/:id", ProductController.getProductById);
+router.post("/purchases", ProductController.makePurchase);
+router.put("/pruchases/:id", ProductController.updatePurchase);
 
 export default router;
