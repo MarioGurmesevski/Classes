@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 export default class ProductModel {
   static async getAllProducts() {
     const collection = await getDb().collection("products");
-    // console.log('collection', collection)
+    // console.log("collection", collection);
     const products = await collection.find().toArray();
     return products;
   }
