@@ -6,7 +6,7 @@ export default class AdminController {
       const product = await ProductModel.addProduct(req.body);
       res.status(200).send(product);
     } catch (error) {
-      res.status(500).send({ message: "Error while adding product" });
+      res.status(500).send({ message: "Error while adding product!" });
     }
   }
 }

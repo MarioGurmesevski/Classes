@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/api", router);
 
 app.listen(PORT, HOST, async (error) => {
-  if (error) console.log("Error while start server", error);
+  if (error) console.log("Error while starting server:", error);
 
   await connectToDatabase();
 

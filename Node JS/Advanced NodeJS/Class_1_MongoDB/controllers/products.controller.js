@@ -6,7 +6,7 @@ export default class ProductController {
       const products = await ProductModel.getAllProducts();
       res.status(200).send(products);
     } catch (error) {
-      res.status(500).send({ message: "Something went wrong" });
+      res.status(500).send({ message: "Something wen't wrong" });
     }
   }
 
@@ -15,7 +15,7 @@ export default class ProductController {
       const product = await ProductModel.getProductById(req.params.id);
       res.status(200).send(product);
     } catch (error) {
-      res.status(500).send({ message: "Something went wrong" });
+      res.status(500).send({ message: "Something wen't wrong" });
     }
   }
 }
