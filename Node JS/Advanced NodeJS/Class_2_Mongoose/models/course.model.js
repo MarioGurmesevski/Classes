@@ -4,12 +4,12 @@ const courseSchema = new Schema({
   title: {
     type: String,
     required: true,
-    minLenght: 3,
+    minLenght: 2,
   },
   NumberOfClasses: {
     type: Number,
-    required: true,
     min: 1,
+    required: true,
   },
   trainer: {
     tyep: String,
