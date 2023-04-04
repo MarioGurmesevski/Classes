@@ -14,7 +14,7 @@ const studentSchema = new Schema({
   },
   age: {
     type: Number,
-    min: [18, "Age must be greater then 18"],
+    min: [16, "Age must be greater then 16"],
     max: 120,
     required: [true, "Age is required"],
   },
