@@ -1,47 +1,57 @@
-import Student from '../models/student.model.js'
+import Student from "../models/student.model.js";
+import Course from "../models/course.model.js";
 
 export default class StudentService {
-    static async getAllStudents() {
-        const students = await Student.find({})
+  static async getAllStudents() {
+    const students = await Student.find({});
 
-        return students;
-    }
+    return students;
+  }
 
-    static async addNewStudent(studentData) {
-        // preparing & validating data
-        const student = new Student(studentData);
+  static async getStudentById(studentId) {
+    const student = await Student.findById(studentId).lean();
+    const course = await Course.findById(student.courseId).lean();
 
-        // adding data to Mongo DB
-        const response = await student.save()
+    const fullStudent = {
+      ...student,
+      course,
+    };
 
-        // Returning back to controller
-        return response;
-    }
+    return fullStudent;
+  }
 
-    static async updateStudent(studentId, updateData) {
-        const student = await Student.findById(studentId);
-        
-        if (!student) throw new Error(`Student with ID:${studentId} doesn't exist!`)
+  static async addNewStudent(studentData) {
+    // Preparing & validating data
+    const student = new Student(studentData);
 
-        // student.firstName = updateData.firstName
-        // student.lastName = updateData.lastName
-        // student.age = updateData.age
-        // student.email = updateData.email
+    // Adding data to Mongo DB
+    const response = await student.save();
 
-        const keys = Object.keys(updateData);
+    // Returing back to controller
+    return response;
+  }
 
-        keys.forEach(key => {
-            if (key !== '_id' && key !== '__v') {
-                student[key] = updateData[key]
-            }
-        })
+  static async updateStudent(studentId, updateData) {
+    const student = await Student.findById(studentId);
 
-        const updatedStudent = await student.save();
+    if (!student) throw new Error(`Student with ID:${studentId} doesn't exist!`);
 
-        return updatedStudent;
-    }
+    const keys = Object.keys(student);
 
-    static async deleteStudent(studentId) {
-        await Student.findByIdAndDelete(studentId);
-    }
+    console.log(updateData);
+
+    keys.forEach((key) => {
+      if (key !== "_id" && key !== "__v") {
+        student[key] = updateData[key];
+      }
+    });
+
+    const updatedStudent = await student.save();
+
+    return updatedStudent;
+  }
+
+  static async deleteStudent(studentId) {
+    await Student.findByIdAndDelete(studentId);
+  }
 }
