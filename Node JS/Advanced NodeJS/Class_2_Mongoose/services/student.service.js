@@ -1,32 +1,47 @@
-import Student from "../models/student.model.js";
+import Student from '../models/student.model.js'
 
 export default class StudentService {
-  static async getAllStudents() {
-    const students = await Student.find({});
+    static async getAllStudents() {
+        const students = await Student.find({})
 
-    return students;
-  }
-  static async addNewStudent(studentData) {
-    const student = new Student(studentData);
-    const response = await student.save();
+        return students;
+    }
 
-    return response;
-  }
-  static async updateStudent(studentId, updateData) {
-    const student = await Student.findById(studentId);
+    static async addNewStudent(studentData) {
+        // preparing & validating data
+        const student = new Student(studentData);
 
-    if (!student) throw new Error(`Student with ID:${studentId} doesn't exist `);
+        // adding data to Mongo DB
+        const response = await student.save()
 
-    const keys = Object.keys(updateData);
-    keys.forEach((key) => {
-      if (key !== "_id" && key !== "__v") student[key] = updateData[key];
-    });
+        // Returning back to controller
+        return response;
+    }
 
-    const updatedStudent = await student.save();
+    static async updateStudent(studentId, updateData) {
+        const student = await Student.findById(studentId);
+        
+        if (!student) throw new Error(`Student with ID:${studentId} doesn't exist!`)
 
-    return updatedStudent;
-  }
-  static async deleteStudent(studentId) {
-    await Student.findByIdAndDelete(studentId);
-  }
+        // student.firstName = updateData.firstName
+        // student.lastName = updateData.lastName
+        // student.age = updateData.age
+        // student.email = updateData.email
+
+        const keys = Object.keys(updateData);
+
+        keys.forEach(key => {
+            if (key !== '_id' && key !== '__v') {
+                student[key] = updateData[key]
+            }
+        })
+
+        const updatedStudent = await student.save();
+
+        return updatedStudent;
+    }
+
+    static async deleteStudent(studentId) {
+        await Student.findByIdAndDelete(studentId);
+    }
 }

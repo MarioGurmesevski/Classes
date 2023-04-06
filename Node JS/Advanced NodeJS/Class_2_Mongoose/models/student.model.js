@@ -1,34 +1,34 @@
-import { Schema, model } from "mongoose";
-import validator from "validator";
+import { Schema, model } from 'mongoose';
+import validator from 'validator';
 
 const studentSchema = new Schema({
-  firstName: {
-    type: String,
-    required: [true, "First name is required"],
-    minLenght: 2,
-  },
-  lastName: {
-    type: String,
-    required: [true, "Last name is required"],
-    minLenght: 2,
-  },
-  age: {
-    type: Number,
-    min: [16, "Age must be greater then 16"],
-    max: 120,
-    required: [true, "Age is required"],
-  },
-  email: {
-    type: String,
-    validate: {
-      validator: (value) => validator.isEmail(value),
-      message: (error) => `${error.value}is not a valid email`,
+    firstName: {
+        type: String,
+        required: [true, 'First name is required'],
+        minLength: 2
     },
-    required: true,
-    unique: true,
-  },
-});
+    lastName: {
+        type: String,
+        required: [true, 'Last name is required'],
+        minLength: 2
+    },
+    age: {
+        type: Number,
+        min: [18, 'Age must be greater than 18'],
+        max: 120,
+        required: [true, 'Age is required']
+    },
+    email: {
+        type: String,
+        validate: {
+            validator: (value) => validator.isEmail(value),
+            message: (error) => `${error.value} is not a valid email`
+        },
+        required: true,
+        unique: true
+    }
+})
 
-const Student = model("Student", studentSchema);
+const Student = model('Student', studentSchema);
 
 export default Student;
