@@ -10,7 +10,7 @@ export default class StudentService {
 
     static async getStudentById(studentId) {
         const student = await Student.findById(studentId).populate('course', '-students')
-        
+
         // const course = await Course.findById(student.courseId).lean()
         // const fullStudent = {
         //     ...student,
@@ -33,7 +33,7 @@ export default class StudentService {
 
     static async updateStudent(studentId, updateData) {
         const student = await Student.findById(studentId);
-        
+
         if (!student) throw new Error(`Student with ID:${studentId} doesn't exist!`)
 
         // student.firstName = updateData.firstName
