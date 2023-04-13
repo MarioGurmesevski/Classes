@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "16ec1a87-6909-4d35-a87c-eb15f2a370ce",
+		"name": "Export",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Workshop",
+			"item": [
+				{
+					"name": "artists",
+					"item": [
+						{
+							"name": "Get song by artistname",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/artists?artistName=lilTest",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"artists"
+									],
+									"query": [
+										{
+											"key": "artistName",
+											"value": "lilTest"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new artist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\":\"Test\",\r\n    \"lastName\":\"Test1\",\r\n    \"artistName\":\"lilTest\",\r\n    \"age\":18,\r\n    \"totalSongs\":50,\r\n    \"genre\":\"rock\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/artists",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"artists"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "songs",
+					"item": [
+						{
+							"name": "Get song by title",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/songs?title=Test",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"songs"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "Test"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get song by artist",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/songs?title=Test",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"songs"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "Test"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get song by genre",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/songs?genre=rock",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"songs"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "rock"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add new song",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"Test\",\r\n    \"artist\":\"lilTest\",\r\n    \"genre\":\"rock\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/songs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"songs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
