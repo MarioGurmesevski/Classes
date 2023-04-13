@@ -1,48 +1,48 @@
 // Basic Types
 
 // String
-let firstName: string = "Mario"
+let firstName: string = "Mario";
 
 // Boolean
 let isDone: boolean = false;
 
 // Number
 
-let animalsCount: number = 3
+let animalsCount: number = 3;
 
 // let number1: bigint = 41251251251512
 
-// Enum 
+// Enum
 
-let weekdays = {   
-    monday:"Monday",
-    tuesday:"Tuesday",
-    wednesday:"Wednesday",
-    thursday:"Thursday",
-    friday:"Friday",
-    saturday:"Saturday",
-    sunday:"Sunday",
-}
+let weekdays = {
+  monday: "Monday",
+  tuesday: "Tuesday",
+  wednesday: "Wednesday",
+  thursday: "Thursday",
+  friday: "Friday",
+  saturday: "Saturday",
+  sunday: "Sunday",
+};
 
 console.log(weekdays.monday);
 
-enum Weekdays{
-    monday = "Monday",
-    tuesday = "Tuesday",
-    wednesday = "Wednesday",
-    thursday = "Thursday",
-    friday = "Friday",
-    saturday = "Saturday",
-    sunday = "Sunday",
+enum Weekdays {
+  monday = "Monday",
+  tuesday = "Tuesday",
+  wednesday = "Wednesday",
+  thursday = "Thursday",
+  friday = "Friday",
+  saturday = "Saturday",
+  sunday = "Sunday",
 }
 
 console.log(Weekdays.monday);
 
-enum Colors{
-    white, //0
-    green, //1
-    yellow, //2
-    red //3
+enum Colors {
+  white, //0
+  green, //1
+  yellow, //2
+  red, //3
 }
 
 console.log(Colors.green);
@@ -51,16 +51,16 @@ console.log(Colors.white === Colors.white);
 // Arrays
 
 // Option 1
-let numbers: number[]  = [1 ,2 ,3 ]
+let numbers: number[] = [1, 2, 3];
 
 // Option 2
-let numbersAgain:Array<number> = [1 ,2 ,3 ]
+let numbersAgain: Array<number> = [1, 2, 3];
 
-// Tuple 
-let employes: [number, string] = [1 ,"Mario" ]
+// Tuple
+let employes: [number, string] = [1, "Mario"];
 
 // Any - Use with caution
-let randomStuff:any[] = [true ,[] ,"nekoj string" ,1 ]
+let randomStuff: any[] = [true, [], "nekoj string", 1];
 
 // Interfaces
 
@@ -78,7 +78,6 @@ let randomStuff:any[] = [true ,[] ,"nekoj string" ,1 ]
 //     name: "Blacky",
 //     age:10
 // }satisfies Animal
-
 
 // Types
 
@@ -124,7 +123,7 @@ let randomStuff:any[] = [true ,[] ,"nekoj string" ,1 ]
 
 // const func2 = ():never=>{
 //     throw new Error("Some error")
-// } 
+// }
 
 // const sumOfTwo = (num1:number,num2:number):number =>{
 //     return num1 + num2
@@ -137,7 +136,7 @@ let randomStuff:any[] = [true ,[] ,"nekoj string" ,1 ]
 // const sumOfItems =(item1 :number|string,item2:number|string):any=>{
 //     console.log(typeof item1 )
 //     console.log(typeof item2 )
-    
+
 //     if (typeof item1==="number"&&typeof item2==="number") {
 //         return item1 +item2
 //     }
@@ -154,8 +153,51 @@ let randomStuff:any[] = [true ,[] ,"nekoj string" ,1 ]
 
 // someMap["fasafaghusgidnhia"]
 
-// Generics 
+// Generics
 
-interface MultiDimensionArray{
+// interface MultiDimensionArray<T>{
+//     [key:string]:T |MultiDimensionArray<T>
+// }
 
+// function flatten<T>(array: MultiDimensionArray<T>, result: T[] = []): T[] {
+//     for (let i = 0; i < (array as any).length; i++) {
+//         if(Array.isArray(array[i])){
+//             flatten(array[i] as MultiDimensionArray<T>,result)
+//         }else{
+//             result.push(array[i] as T)
+//         }
+//     }
+//     return result
+// }
+
+// const list = [1,2,[2,3,[3,4,[5,6,[7,6],1],4],3]]
+
+// console.log(flatten(list as any));
+
+//Class
+
+class Calculator {
+  //Private property in JS
+  // #name = "Mario"
+
+  //Private property in TS
+  private name = "Mario";
+
+  public age = 33;
+
+  readonly job = "instructor";
+
+  constructor(protected value: number = 0) {
+    this.name;
+  }
+}
+
+const newCalc = new Calculator(1);
+
+console.log(newCalc);
+
+interface User {
+  name: string;
+
+  getFullName: () => string;
 }

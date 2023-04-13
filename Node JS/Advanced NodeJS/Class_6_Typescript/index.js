@@ -6,34 +6,34 @@ var isDone = false;
 // Number
 var animalsCount = 3;
 // let number1: bigint = 41251251251512
-// Enum 
+// Enum
 var weekdays = {
-    monday: "Monday",
-    tuesday: "Tuesday",
-    wednesday: "Wednesday",
-    thursday: "Thursday",
-    friday: "Friday",
-    saturday: "Saturday",
-    sunday: "Sunday",
+  monday: "Monday",
+  tuesday: "Tuesday",
+  wednesday: "Wednesday",
+  thursday: "Thursday",
+  friday: "Friday",
+  saturday: "Saturday",
+  sunday: "Sunday",
 };
 console.log(weekdays.monday);
 var Weekdays;
 (function (Weekdays) {
-    Weekdays["monday"] = "Monday";
-    Weekdays["tuesday"] = "Tuesday";
-    Weekdays["wednesday"] = "Wednesday";
-    Weekdays["thursday"] = "Thursday";
-    Weekdays["friday"] = "Friday";
-    Weekdays["saturday"] = "Saturday";
-    Weekdays["sunday"] = "Sunday";
+  Weekdays["monday"] = "Monday";
+  Weekdays["tuesday"] = "Tuesday";
+  Weekdays["wednesday"] = "Wednesday";
+  Weekdays["thursday"] = "Thursday";
+  Weekdays["friday"] = "Friday";
+  Weekdays["saturday"] = "Saturday";
+  Weekdays["sunday"] = "Sunday";
 })(Weekdays || (Weekdays = {}));
 console.log(Weekdays.monday);
 var Colors;
 (function (Colors) {
-    Colors[Colors["white"] = 0] = "white";
-    Colors[Colors["green"] = 1] = "green";
-    Colors[Colors["yellow"] = 2] = "yellow";
-    Colors[Colors["red"] = 3] = "red"; //3
+  Colors[(Colors["white"] = 0)] = "white";
+  Colors[(Colors["green"] = 1)] = "green";
+  Colors[(Colors["yellow"] = 2)] = "yellow";
+  Colors[(Colors["red"] = 3)] = "red"; //3
 })(Colors || (Colors = {}));
 console.log(Colors.green);
 console.log(Colors.white === Colors.white);
@@ -42,7 +42,7 @@ console.log(Colors.white === Colors.white);
 var numbers = [1, 2, 3];
 // Option 2
 var numbersAgain = [1, 2, 3];
-// Tuple 
+// Tuple
 var employes = [1, "Mario"];
 // Any - Use with caution
 var randomStuff = [true, [], "nekoj string", 1];
@@ -81,26 +81,64 @@ var randomStuff = [true, [], "nekoj string", 1];
 //     job:"teacher"
 // }
 //Other Types
-var anything = " fnasofna ";
-var mistery;
-// Void
-var func = function () {
-    console.log("nesto");
-};
-var func2 = function () {
-    throw new Error("Some error");
-};
-var sumOfTwo = function (num1, num2) {
-    return num1 + num2;
-};
-var sum = sumOfTwo(1, 2);
-console.log(sum);
-var sumOfItems = function (item1, item2) {
-    console.log(typeof item1);
-    console.log(typeof item2);
-    if (typeof item1 === "number" && typeof item2 === "number") {
-        return item1 + item2;
+// let anything: any = " fnasofna "
+// let mistery: unknown
+// // Void
+// const func = (): void =>{
+//     console.log("nesto");
+// }
+// const func2 = ():never=>{
+//     throw new Error("Some error")
+// }
+// const sumOfTwo = (num1:number,num2:number):number =>{
+//     return num1 + num2
+// }
+// const sum = sumOfTwo(1,2)
+// console.log(sum);
+// const sumOfItems =(item1 :number|string,item2:number|string):any=>{
+//     console.log(typeof item1 )
+//     console.log(typeof item2 )
+//     if (typeof item1==="number"&&typeof item2==="number") {
+//         return item1 +item2
+//     }
+//     return `${item1}${item2}`
+// }
+// console.log(sumOfItems(1,"2"));
+// Map & Set
+// const someMap:{[key:string]:string } = {
+//     "fasafaghusgidnhia": "Moackingbird"
+// }
+// someMap["fasafaghusgidnhia"]
+// Generics
+// interface MultiDimensionArray<T>{
+//     [key:string]:T |MultiDimensionArray<T>
+// }
+// function flatten<T>(array: MultiDimensionArray<T>, result: T[] = []): T[] {
+//     for (let i = 0; i < (array as any).length; i++) {
+//         if(Array.isArray(array[i])){
+//             flatten(array[i] as MultiDimensionArray<T>,result)
+//         }else{
+//             result.push(array[i] as T)
+//         }
+//     }
+//     return result
+// }
+// const list = [1,2,[2,3,[3,4,[5,6,[7,6],1],4],3]]
+// console.log(flatten(list as any));
+//Class
+var Calculator = /** @class */ (function () {
+  function Calculator(value) {
+    if (value === void 0) {
+      value = 0;
     }
-    return "".concat(item1).concat(item2);
-};
-console.log(sumOfItems(1, "2"));
+    this.value = value;
+    //Private property in JS
+    // #name = "Mario"
+    //Private property in TS
+    this.name = "Mario";
+    this.name;
+  }
+  return Calculator;
+})();
+var newCalc = new Calculator(1);
+console.log(newCalc);
