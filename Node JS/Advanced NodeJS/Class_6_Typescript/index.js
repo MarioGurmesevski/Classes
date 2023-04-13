@@ -103,4 +103,4 @@ var sumOfItems = function (item1, item2) {
     }
     return "".concat(item1).concat(item2);
 };
-console.log(sumOfItems(1, 2));
+console.log(sumOfItems(1, "2"));
