@@ -112,36 +112,50 @@ let randomStuff:any[] = [true ,[] ,"nekoj string" ,1 ]
 
 //Other Types
 
-let anything: any = " fnasofna "
+// let anything: any = " fnasofna "
 
-let mistery: unknown
+// let mistery: unknown
 
-// Void
+// // Void
 
-const func = (): void =>{
-    console.log("nesto");
-}
+// const func = (): void =>{
+//     console.log("nesto");
+// }
 
-const func2 = ():never=>{
-    throw new Error("Some error")
-} 
+// const func2 = ():never=>{
+//     throw new Error("Some error")
+// } 
 
-const sumOfTwo = (num1:number,num2:number):number =>{
-    return num1 + num2
-}
+// const sumOfTwo = (num1:number,num2:number):number =>{
+//     return num1 + num2
+// }
 
-const sum = sumOfTwo(1,2)
+// const sum = sumOfTwo(1,2)
 
-console.log(sum);
+// console.log(sum);
 
-const sumOfItems =(item1 :number|string,item2:number|string):any=>{
-    console.log(typeof item1 )
-    console.log(typeof item2 )
+// const sumOfItems =(item1 :number|string,item2:number|string):any=>{
+//     console.log(typeof item1 )
+//     console.log(typeof item2 )
     
-    if (typeof item1==="number"&&typeof item2==="number") {
-        return item1 +item2
-    }
-    return `${item1}${item2}`
-}
+//     if (typeof item1==="number"&&typeof item2==="number") {
+//         return item1 +item2
+//     }
+//     return `${item1}${item2}`
+// }
 
-console.log(sumOfItems(1,"2"));
+// console.log(sumOfItems(1,"2"));
+
+// Map & Set
+
+// const someMap:{[key:string]:string } = {
+//     "fasafaghusgidnhia": "Moackingbird"
+// }
+
+// someMap["fasafaghusgidnhia"]
+
+// Generics 
+
+interface MultiDimensionArray{
+
+}
