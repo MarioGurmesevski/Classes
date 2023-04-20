@@ -7,9 +7,11 @@ import {
   ProductUpdateDto,
 } from './dtos/product.dto';
 import { ProductQueryDto, SortDierction } from './dtos/product-query.dto';
+import { Logger } from 'nestjs-pino';
 
 @Injectable()
 export class ProductsService {
+  // private readonly logger: Logger = new Logger('ProductsService',);
   constructor(@Inject('PRODUCT_MODEL') private productModel: Model<Product>) {}
 
   getProducts(query: ProductQueryDto): Promise<ProductResponseDto[]> {
