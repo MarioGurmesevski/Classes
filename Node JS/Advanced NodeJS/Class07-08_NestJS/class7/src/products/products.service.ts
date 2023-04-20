@@ -6,14 +6,19 @@ import {
   ProductResponseDto,
   ProductUpdateDto,
 } from './dtos/product.dto';
-import { ProductQueryDto } from './dtos/product-query.dto';
+import { ProductQueryDto, SortDierction } from './dtos/product-query.dto';
 
 @Injectable()
 export class ProductsService {
   constructor(@Inject('PRODUCT_MODEL') private productModel: Model<Product>) {}
 
   getProducts(query: ProductQueryDto): Promise<ProductResponseDto[]> {
-    return this.productModel.find();
+    return this.productModel
+      .find({
+        title: { $regex: query?.title ?? '', $options: 'i' },
+      })
+      .limit(query.size)
+      .sort({ title: query?.sortDierction ?? SortDierction.ASC });
   }
   getProduct(id: string): Promise<ProductResponseDto> {
     return this.productModel.findById(id);

@@ -1,5 +1,10 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+
+export enum SortDierction {
+  ASC = 'asc',
+  DESC = 'desc',
+}
 
 export class ProductQueryDto {
   @IsString()
@@ -18,4 +23,13 @@ export class ProductQueryDto {
     default: 10,
   })
   size?: number = 10;
+  @IsEnum(SortDierction)
+  @IsOptional()
+  @ApiPropertyOptional({
+    type: 'enum',
+    enum: SortDierction,
+    description: 'The sort direction',
+    example: SortDierction.ASC,
+  })
+  sortDierction?: SortDierction;
 }
