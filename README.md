@@ -60,4 +60,4 @@
     - [Class 3/4 - Mongoose](/Node%20JS/Advanced%20NodeJS/Class_3%2C4_Mongoose/)
     - [Class 5 - Workshop](/Node%20JS/Advanced%20NodeJS/Class_5_Workshop/)
     - [Class 6 - Typescript](/Node%20JS/Advanced%20NodeJS/Class_6_Typescript/)
-    - [Class 7 - NestJS](/Node%20JS/Advanced%20NodeJS/Class_7_NestJS/)
+    - [Class 7/8 - NestJS](/Node%20JS/Advanced%20NodeJS/Class_7_NestJS/)
