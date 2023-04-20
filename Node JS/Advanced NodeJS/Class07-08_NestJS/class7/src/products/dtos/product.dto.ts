@@ -1,9 +1,13 @@
+import { ProductStatus } from './../interfaces/product';
 import {
   IsString,
   IsNotEmpty,
   IsNumber,
   Min,
   IsOptional,
+  IsArray,
+  isEnum,
+  IsEnum,
 } from 'class-validator';
 import { Product } from '../interfaces/product';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
@@ -37,6 +41,26 @@ export class ProductCreateDto {
     required: false,
   })
   description?: string;
+
+  @IsString({ each: true })
+  @IsArray()
+  @ApiProperty({
+    type: [String],
+    description: 'The colors in which the product is available in',
+    example: ['white', 'green'],
+  })
+  colors: string[];
+
+  @IsString()
+  @IsNotEmpty()
+  @IsEnum(ProductStatus)
+  @ApiProperty({
+    type: 'enum',
+    enum: ProductStatus,
+    description: 'The status of the product',
+    example: ProductStatus.available,
+  })
+  status: ProductStatus;
 }
 
 export class ProductResponseDto extends ProductCreateDto implements Product {
@@ -49,3 +73,5 @@ export class ProductResponseDto extends ProductCreateDto implements Product {
   })
   id: string;
 }
+
+export class ProductUpdateDto extends ProductCreateDto {}
