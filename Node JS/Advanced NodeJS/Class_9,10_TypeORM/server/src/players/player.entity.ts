@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Team } from '../teams/teams.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Player {
@@ -10,4 +11,11 @@ export class Player {
   age: number;
   @Column()
   position: string;
+  @Column({
+    nullable: true,
+  })
+  teamId: string;
+
+  @ManyToOne(() => Team, (team) => team.players)
+  team: Team;
 }
