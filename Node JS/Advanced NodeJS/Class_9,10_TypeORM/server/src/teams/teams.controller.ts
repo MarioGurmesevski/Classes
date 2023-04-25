@@ -18,7 +18,7 @@ export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Get()
-  getTeams(): TeamResponseDto[] {
+  getTeams(): Promise<TeamResponseDto[]> {
     return this.teamsService.getTeams();
   }
   @Post()

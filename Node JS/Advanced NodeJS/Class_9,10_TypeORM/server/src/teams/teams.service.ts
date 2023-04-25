@@ -13,15 +13,10 @@ export class TeamsService {
     @Inject('TEAM_REPOSITORY') private teamRepository: Repository<Team>,
   ) {}
 
-  getTeams(): TeamResponseDto[] {
-    return [
-      {
-        id: 'POgijsdio12ri',
-        name: 'Real Madrid',
-        location: 'Madrid,Spain',
-        league: 'La Liga',
-      },
-    ];
+  getTeams(): Promise<TeamResponseDto[]> {
+    return this.teamRepository.find({
+      relations: ['players'],
+    });
   }
   createTeam(body: TeamCreateDto): Promise<TeamResponseDto> {
     return this.teamRepository.save(body);
