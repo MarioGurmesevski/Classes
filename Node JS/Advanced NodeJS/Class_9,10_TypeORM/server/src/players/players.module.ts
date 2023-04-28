@@ -1,16 +1,12 @@
-import { DatabaseModule } from '../database/database.module';
-import { PlayersController } from './players.controller';
-import { playerProviders } from './players.providers';
-import { PlayersService } from './players.service';
-/*
-https://docs.nestjs.com/modules
-*/
-
 import { Module } from '@nestjs/common';
+import { PlayersController } from './players.controller';
+import { PlayersService } from './players.service';
+import { playerProvider } from './players.providers';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [PlayersController],
-  providers: [...playerProviders, PlayersService],
+  providers: [...playerProvider, PlayersService],
 })
 export class PlayersModule {}

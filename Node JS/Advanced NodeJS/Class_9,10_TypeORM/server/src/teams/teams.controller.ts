@@ -1,9 +1,3 @@
-import { TeamCreateDto, TeamResponseDto } from './dtos/team.dto';
-import { TeamsService } from './teams.service';
-/*
-https://docs.nestjs.com/controllers#controllers
-*/
-
 import {
   Body,
   Controller,
@@ -12,6 +6,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { TeamsService } from './teams.service';
+import { TeamCreateDto, TeamResponseDto } from './dtos/team.dto';
 
 @Controller('teams')
 export class TeamsController {
@@ -21,6 +17,7 @@ export class TeamsController {
   getTeams(): Promise<TeamResponseDto[]> {
     return this.teamsService.getTeams();
   }
+
   @Post()
   @UsePipes(ValidationPipe)
   createTeam(@Body() body: TeamCreateDto): Promise<TeamResponseDto> {

@@ -5,10 +5,13 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 export class Team {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
   @Column()
   name: string;
+
   @Column()
   location: string;
+
   @Column()
   league: string;
 

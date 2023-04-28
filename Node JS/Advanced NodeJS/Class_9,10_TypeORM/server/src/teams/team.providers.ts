@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Team } from './teams.entity';
+
 export const teamProviders = [
   {
     provide: 'TEAM_REPOSITORY',

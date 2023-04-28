@@ -9,12 +9,14 @@ export class TeamCreateDto {
     type: String,
   })
   name: string;
+
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
     type: String,
   })
   location: string;
+
   @IsString()
   @IsNotEmpty()
   @ApiProperty({

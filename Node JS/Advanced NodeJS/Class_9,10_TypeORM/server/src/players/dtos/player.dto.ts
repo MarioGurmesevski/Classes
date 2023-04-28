@@ -14,8 +14,8 @@ export class PlayerCreateDto {
   name: string;
 
   @IsNumber()
-  @IsNotEmpty()
   @Min(0)
+  @IsNotEmpty()
   age: number;
 
   @IsString()

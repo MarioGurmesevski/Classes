@@ -3,5 +3,5 @@ export interface Team {
   name: string;
   location: string;
   league: string;
-  // player:any[]
+  //players: any[]
 }
