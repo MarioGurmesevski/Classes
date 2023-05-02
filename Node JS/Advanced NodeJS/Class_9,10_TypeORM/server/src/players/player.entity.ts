@@ -1,4 +1,4 @@
-import { Team } from './../teams/teams.entity';
+import { Team } from "./../teams/teams.entity";
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -6,17 +6,18 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm';
+  DeleteDateColumn,
+} from "typeorm";
 
 @Entity()
 export class Player {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   name: string;
 
-  @Column('int')
+  @Column("int")
   age: number;
 
   @Column()
@@ -27,7 +28,7 @@ export class Player {
   })
   teamId: string;
 
-  @ManyToOne(() => Team, (team) => team.players)
+  @ManyToOne(() => Team, team => team.players)
   team: Team;
 
   @CreateDateColumn()
@@ -35,4 +36,7 @@ export class Player {
 
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

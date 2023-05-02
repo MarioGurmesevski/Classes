@@ -5,13 +5,13 @@ import {
   Post,
   UsePipes,
   ValidationPipe,
-} from '@nestjs/common';
-import { TeamsService } from './teams.service';
-import { TeamCreateDto, TeamResponseDto } from './dtos/team.dto';
-import { ApiTags } from '@nestjs/swagger';
+} from "@nestjs/common";
+import { TeamsService } from "./teams.service";
+import { TeamCreateDto, TeamResponseDto } from "./dtos/team.dto";
+import { ApiTags } from "@nestjs/swagger";
 
-@ApiTags('Teams')
-@Controller('teams')
+@ApiTags("Teams")
+@Controller("teams")
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
