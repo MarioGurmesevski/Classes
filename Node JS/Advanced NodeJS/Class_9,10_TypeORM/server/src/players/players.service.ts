@@ -1,13 +1,18 @@
-import { Repository } from "typeorm";
-import { BadRequestException, Inject, Injectable } from "@nestjs/common";
-import { Player } from "./player.entity";
-import { PlayerCreateDto, PlayerResponseDto } from "./dtos/player.dto";
+import { Repository } from 'typeorm';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Player } from './player.entity';
+import { PlayerCreateDto, PlayerResponseDto } from './dtos/player.dto';
 
 @Injectable()
 export class PlayersService {
   constructor(
-    @Inject("PLAYER_REPOSITORY")
-    private playerRepository: Repository<Player>
+    @Inject('PLAYER_REPOSITORY')
+    private playerRepository: Repository<Player>,
   ) {}
 
   getPlayers(): Promise<PlayerResponseDto[]> {
@@ -16,11 +21,17 @@ export class PlayersService {
     });
   }
 
-  getPlayerById(id: string): Promise<PlayerResponseDto> {
-    return this.playerRepository.findOne({
+  async getPlayerById(id: string): Promise<PlayerResponseDto> {
+    const player = await this.playerRepository.findOne({
       where: { id }, // where: { id: id }
-      relations: ["team"],
+      relations: ['team'],
     });
+
+    if (!player) {
+      throw new NotFoundException(`Player with ID ${id} doesn't exist `);
+    }
+
+    return player;
   }
 
   createPlayer(body: PlayerCreateDto): Promise<PlayerResponseDto> {
@@ -34,7 +45,7 @@ export class PlayersService {
 
     if (alreadyPartOfTheTeam) {
       throw new BadRequestException(
-        `Player with ID: ${playerId} is already a part of this team.`
+        `Player with ID: ${playerId} is already a part of this team.`,
       );
     }
 
@@ -46,9 +57,26 @@ export class PlayersService {
     return this.getPlayerById(playerId);
   }
 
-  async deletePlayer(id: string): Promise<void> {
-    const response = await this.playerRepository.softDelete(id);
+  async updatePlayerShirtNumber(
+    id: string,
+    number: number,
+  ): Promise<PlayerResponseDto> {
+    const player = await this.getPlayerById(id);
 
-    console.log(response);
+    try {
+      await this.playerRepository.save({
+        id,
+        number,
+      });
+    } catch (error) {
+      throw new BadRequestException(
+        `Other player already has the number ${number} assigned`,
+      );
+    }
+    return this.getPlayerById(id);
+  }
+
+  async deletePlayer(id: string): Promise<void> {
+    await this.playerRepository.softDelete(id);
   }
 }

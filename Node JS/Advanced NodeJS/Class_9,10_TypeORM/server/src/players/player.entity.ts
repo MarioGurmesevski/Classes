@@ -1,4 +1,4 @@
-import { Team } from "./../teams/teams.entity";
+import { Team } from './../teams/teams.entity';
 import {
   PrimaryGeneratedColumn,
   Column,
@@ -7,28 +7,33 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-} from "typeorm";
+  Unique,
+} from 'typeorm';
 
 @Entity()
+// @Unique(['number'])
 export class Player {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
   name: string;
 
-  @Column("int")
+  @Column('int')
   age: number;
 
   @Column()
   position: string;
+
+  @Column({ type: 'int', unique: true })
+  number: number;
 
   @Column({
     nullable: true,
   })
   teamId: string;
 
-  @ManyToOne(() => Team, team => team.players)
+  @ManyToOne(() => Team, (team) => team.players)
   team: Team;
 
   @CreateDateColumn()

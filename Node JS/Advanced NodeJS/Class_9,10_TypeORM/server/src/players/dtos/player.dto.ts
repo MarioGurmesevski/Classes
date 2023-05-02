@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  Max,
   Min,
 } from 'class-validator';
 import { Player } from '../interfaces/player.interface';
@@ -41,14 +42,20 @@ export class PlayerCreateDto {
   })
   position: string;
 
+  @IsNumber()
+  @IsNotEmpty()
+  @Min(1)
+  @Max(99)
+  @ApiProperty({
+    type: Number,
+    required: true,
+    description: 'The number on the players back',
+    example: 7,
+  })
+  number: number;
+
   @IsOptional()
   @IsString()
-  @ApiPropertyOptional({
-    type: String,
-    required: false,
-    description: 'The team id in which the player plays',
-    example: 'iuybegu7ithy2t1e',
-  })
   teamId?: string;
 }
 
@@ -62,6 +69,28 @@ export class PlayerResponseDto extends PlayerCreateDto implements Player {
     example: 'uhdagiuge2',
   })
   id: string;
+
+  @ApiProperty({
+    type: Date,
+    required: true,
+    description: 'Date and time when player has been created',
+    example: 'fias',
+  })
+  createdAt!: Date;
+  @ApiProperty({
+    type: Date,
+    required: true,
+    description: 'Date and time when player has been updated',
+    example: 'fias',
+  })
+  updatedAt!: Date;
+  @ApiProperty({
+    type: Date,
+    required: true,
+    description: 'Date and time when player has been deleted',
+    example: 'fias',
+  })
+  deletedAt!: Date;
 }
 
 export class PlayerAddToTeamDto {

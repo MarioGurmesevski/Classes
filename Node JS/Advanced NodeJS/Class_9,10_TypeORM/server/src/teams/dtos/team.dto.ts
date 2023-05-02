@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsString, IsUUID } from "class-validator";
-import { Team } from "../interfaces/team.interface";
-import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { Team } from '../interfaces/team.interface';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class TeamCreateDto {
   @IsString()
@@ -8,8 +8,8 @@ export class TeamCreateDto {
   @ApiProperty({
     type: String,
     required: true,
-    description: "The name of the Team",
-    example: "PSG",
+    description: 'The name of the Team',
+    example: 'PSG',
   })
   name: string;
 
@@ -18,8 +18,8 @@ export class TeamCreateDto {
   @ApiProperty({
     type: String,
     required: true,
-    description: "The location of the team",
-    example: "Paris, France",
+    description: 'The location of the team',
+    example: 'Paris, France',
   })
   location: string;
 
@@ -28,8 +28,8 @@ export class TeamCreateDto {
   @ApiProperty({
     type: String,
     required: true,
-    description: "The league in which the team plays in",
-    example: "League 1",
+    description: 'The league in which the team plays in',
+    example: 'League 1',
   })
   league: string;
 }
@@ -40,8 +40,8 @@ export class TeamResponseDto extends TeamCreateDto implements Team {
   @ApiProperty({
     required: true,
     type: String,
-    description: "The id of the team",
-    example: "uyitg21u6",
+    description: 'The id of the team',
+    example: 'uyitg21u6',
   })
   id: string;
 }
