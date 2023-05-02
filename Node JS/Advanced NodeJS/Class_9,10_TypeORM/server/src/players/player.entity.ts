@@ -1,5 +1,12 @@
 import { Team } from './../teams/teams.entity';
-import { PrimaryGeneratedColumn, Column, Entity, ManyToOne } from 'typeorm';
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Player {
@@ -22,4 +29,10 @@ export class Player {
 
   @ManyToOne(() => Team, (team) => team.players)
   team: Team;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 }

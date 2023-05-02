@@ -10,6 +10,9 @@ export class PlayersService {
     private playerRepository: Repository<Player>,
   ) {}
 
+  getPlayers(): Promise<PlayerResponseDto[]> {
+    return this.playerRepository.find({});
+  }
   createPlayer(body: PlayerCreateDto): Promise<PlayerResponseDto> {
     return this.playerRepository.save(body);
   }
