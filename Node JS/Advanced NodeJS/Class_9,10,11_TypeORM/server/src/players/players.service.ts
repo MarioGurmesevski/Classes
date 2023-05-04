@@ -1,5 +1,6 @@
+import { TeamsService } from "./../teams/teams.service";
 import { Repository } from "typeorm";
-import { BadRequestException, Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Inject, Injectable, NotFoundException, forwardRef } from "@nestjs/common";
 import { Player } from "./player.entity";
 import { PlayerCreateDto, PlayerQueryDto, PlayerResponseDto } from "./dtos/player.dto";
 
@@ -7,7 +8,8 @@ import { PlayerCreateDto, PlayerQueryDto, PlayerResponseDto } from "./dtos/playe
 export class PlayersService {
   constructor(
     @Inject("PLAYER_REPOSITORY")
-    private playerRepository: Repository<Player>
+    private playerRepository: Repository<Player>,
+    @Inject(forwardRef(() => TeamsService)) private teamsService: TeamsService
   ) {}
 
   getPlayers(query: PlayerQueryDto): Promise<PlayerResponseDto[]> {
@@ -68,5 +70,13 @@ export class PlayersService {
 
   async deletePlayer(id: string): Promise<void> {
     await this.playerRepository.softDelete(id);
+  }
+  async removePlayerFromTeam(id: string): Promise<void> {
+    const player = await this.getPlayerById(id);
+
+    await this.playerRepository.save({
+      id,
+      teamId: null,
+    });
   }
 }

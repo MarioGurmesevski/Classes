@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, UsePipes, ValidationPipe, Delete } from "@nestjs/common";
 import { TeamsService } from "./teams.service";
 import { TeamCreateDto, TeamResponseDto, TeamQueryDto } from "./dtos/team.dto";
 import { ApiTags } from "@nestjs/swagger";
@@ -18,5 +18,10 @@ export class TeamsController {
   @UsePipes(ValidationPipe)
   createTeam(@Body() body: TeamCreateDto): Promise<TeamResponseDto> {
     return this.teamsService.createTeam(body);
+  }
+
+  @Delete(":id")
+  deleteTeam(@Param("id") id: string): Promise<void> {
+    return this.teamsService.deleteTeam(id);
   }
 }

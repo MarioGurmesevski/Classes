@@ -5,7 +5,7 @@ export interface Team {
   league: string;
   jerseyColors: string[];
   stadiumDetails: StadiumDetails;
-  //players: any[]
+  players: any[];
 }
 
 interface StadiumDetails {
