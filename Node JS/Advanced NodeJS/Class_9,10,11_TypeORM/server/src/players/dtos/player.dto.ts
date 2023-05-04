@@ -4,11 +4,11 @@ import {
   IsOptional,
   IsString,
   IsUUID,
-  Max,
   Min,
-} from 'class-validator';
-import { Player } from '../interfaces/player.interface';
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+  Max,
+} from "class-validator";
+import { Player } from "../interfaces/player.interface";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 export class PlayerCreateDto {
   @IsString()
@@ -16,8 +16,8 @@ export class PlayerCreateDto {
   @ApiProperty({
     type: String,
     required: true,
-    description: 'The name of the player',
-    example: 'Lionel Messi',
+    description: "The name of the player",
+    example: "Lionel Messi",
   })
   name: string;
 
@@ -27,7 +27,7 @@ export class PlayerCreateDto {
   @ApiProperty({
     type: Number,
     required: true,
-    description: 'The age of the player',
+    description: "The age of the player",
     example: 20,
   })
   age: number;
@@ -37,8 +37,8 @@ export class PlayerCreateDto {
   @ApiProperty({
     type: String,
     required: true,
-    description: 'The position in which the player plays',
-    example: 'ST',
+    description: "The position in which the player plays",
+    example: "ST",
   })
   position: string;
 
@@ -49,13 +49,19 @@ export class PlayerCreateDto {
   @ApiProperty({
     type: Number,
     required: true,
-    description: 'The number on the players back',
-    example: 7,
+    description: "The shirt number of the player",
+    example: 10,
   })
   number: number;
 
   @IsOptional()
   @IsString()
+  @ApiPropertyOptional({
+    type: String,
+    required: false,
+    description: "The team id in which the player plays",
+    example: "iuybegu7ithy2t1e",
+  })
   teamId?: string;
 }
 
@@ -65,32 +71,34 @@ export class PlayerResponseDto extends PlayerCreateDto implements Player {
   @ApiProperty({
     type: String,
     required: true,
-    description: 'The ID of the player',
-    example: 'uhdagiuge2',
+    description: "The ID of the player",
+    example: "uhdagiuge2",
   })
   id: string;
 
   @ApiProperty({
     type: Date,
     required: true,
-    description: 'Date and time when player has been created',
-    example: 'fias',
+    description: "Date and time when player has been created",
+    example: "2023-05-02T18:24:24.713Z",
   })
   createdAt!: Date;
+
   @ApiProperty({
     type: Date,
     required: true,
-    description: 'Date and time when player has been updated',
-    example: 'fias',
+    description: "Date and time when player has been updated",
+    example: "2023-05-02T18:24:24.713Z",
   })
   updatedAt!: Date;
-  @ApiProperty({
+
+  @ApiPropertyOptional({
     type: Date,
-    required: true,
-    description: 'Date and time when player has been deleted',
-    example: 'fias',
+    required: false,
+    description: "Date and time when player has been deleted",
+    example: "2023-05-02T18:24:24.713Z",
   })
-  deletedAt!: Date;
+  deletedAt?: Date;
 }
 
 export class PlayerAddToTeamDto {

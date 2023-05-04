@@ -9,17 +9,17 @@ import {
   Param,
   Delete,
   ParseIntPipe,
-} from '@nestjs/common';
-import { PlayersService } from './players.service';
+} from "@nestjs/common";
+import { PlayersService } from "./players.service";
 import {
   PlayerCreateDto,
   PlayerResponseDto,
   PlayerAddToTeamDto,
-} from './dtos/player.dto';
-import { ApiParam, ApiTags } from '@nestjs/swagger';
+} from "./dtos/player.dto";
+import { ApiParam, ApiTags } from "@nestjs/swagger";
 
-@ApiTags('Players')
-@Controller('players')
+@ApiTags("Players")
+@Controller("players")
 export class PlayersController {
   constructor(private readonly playerService: PlayersService) {}
 
@@ -28,8 +28,8 @@ export class PlayersController {
     return this.playerService.getPlayers();
   }
 
-  @Get(':id')
-  getPlayer(@Param('id') id: string): Promise<PlayerResponseDto> {
+  @Get(":id")
+  getPlayer(@Param("id") id: string): Promise<PlayerResponseDto> {
     return this.playerService.getPlayerById(id);
   }
 
@@ -39,22 +39,22 @@ export class PlayersController {
     return this.playerService.createPlayer(body);
   }
 
-  @Patch(':playerId/team/:teamId') // /players/:playerId/team/:teamId
+  @Patch(":playerId/team/:teamId") // /players/:playerId/team/:teamId
   @UsePipes(ValidationPipe)
   addPlayerToTeam(@Param() params: PlayerAddToTeamDto) {
     return this.playerService.addPlayerToTeam(params.playerId, params.teamId);
   }
 
-  @Patch('/:id/number/:number')
+  @Patch(":id/number/:number") // /players/:id/number/:number
   updatePlayerShirtNumber(
-    @Param('id') id: string,
-    @Param('number', ParseIntPipe) number: number,
+    @Param("id") id: string,
+    @Param("number", ParseIntPipe) number: number
   ): Promise<PlayerResponseDto> {
     return this.playerService.updatePlayerShirtNumber(id, number);
   }
 
-  @Delete(':id')
-  deletePlayer(@Param('id') id: string): Promise<void> {
+  @Delete(":id")
+  deletePlayer(@Param("id") id: string): Promise<void> {
     return this.playerService.deletePlayer(id);
   }
 }
