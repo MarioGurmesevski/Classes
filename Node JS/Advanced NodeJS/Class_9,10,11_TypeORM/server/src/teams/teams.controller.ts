@@ -1,13 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { TeamsService } from "./teams.service";
-import { TeamCreateDto, TeamResponseDto } from "./dtos/team.dto";
+import { TeamCreateDto, TeamResponseDto, TeamQueryDto } from "./dtos/team.dto";
 import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags("Teams")
@@ -16,8 +9,9 @@ export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Get()
-  getTeams(): Promise<TeamResponseDto[]> {
-    return this.teamsService.getTeams();
+  @UsePipes(ValidationPipe)
+  getTeams(@Query() query: TeamQueryDto): Promise<TeamResponseDto[]> {
+    return this.teamsService.getTeams(query);
   }
 
   @Post()

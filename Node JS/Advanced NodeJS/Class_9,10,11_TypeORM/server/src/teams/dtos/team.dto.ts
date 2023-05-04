@@ -3,12 +3,13 @@ import {
   IsNotEmpty,
   IsNotEmptyObject,
   IsNumber,
+  IsOptional,
   IsString,
   IsUUID,
   ValidateNested,
 } from "class-validator";
 import { Team } from "../interfaces/team.interface";
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsNotEmptyArray } from "../../common/validators/is-not-empty-array.validator";
 import { Type } from "class-transformer";
 
@@ -41,7 +42,7 @@ export class TeamCreateDto {
     type: String,
     required: true,
     description: "The name of the Team",
-    example: "PSG",
+    example: "Real Madrid",
   })
   name: string;
 
@@ -51,7 +52,7 @@ export class TeamCreateDto {
     type: String,
     required: true,
     description: "The location of the team",
-    example: "Paris, France",
+    example: "Madrid, Spain",
   })
   location: string;
 
@@ -61,7 +62,7 @@ export class TeamCreateDto {
     type: String,
     required: true,
     description: "The league in which the team plays in",
-    example: "League 1",
+    example: "La Liga",
   })
   league: string;
 
@@ -73,7 +74,7 @@ export class TeamCreateDto {
     type: [String],
     description: "The colors od the team jersey",
     required: true,
-    example: ["white", "black"],
+    example: ["purple", "white"],
   })
   jerseyColors: string[];
 
@@ -98,4 +99,36 @@ export class TeamResponseDto extends TeamCreateDto implements Team {
     example: "uyitg21u6",
   })
   id: string;
+}
+
+export class TeamQueryDto {
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({
+    type: String,
+    description: "Search by location",
+    example: "Madrid, Spain",
+    required: false,
+  })
+  location?: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({
+    type: String,
+    description: "Search by league",
+    example: "La Liga",
+    required: false,
+  })
+  league?: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({
+    type: String,
+    description: "Search by name",
+    example: "Real Madrid",
+    required: false,
+  })
+  name?: string;
 }

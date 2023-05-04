@@ -1,12 +1,7 @@
 import { Repository } from "typeorm";
-import {
-  BadRequestException,
-  Inject,
-  Injectable,
-  NotFoundException,
-} from "@nestjs/common";
+import { BadRequestException, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { Player } from "./player.entity";
-import { PlayerCreateDto, PlayerResponseDto } from "./dtos/player.dto";
+import { PlayerCreateDto, PlayerQueryDto, PlayerResponseDto } from "./dtos/player.dto";
 
 @Injectable()
 export class PlayersService {
@@ -15,8 +10,9 @@ export class PlayersService {
     private playerRepository: Repository<Player>
   ) {}
 
-  getPlayers(): Promise<PlayerResponseDto[]> {
+  getPlayers(query: PlayerQueryDto): Promise<PlayerResponseDto[]> {
     return this.playerRepository.find({
+      where: query,
       // withDeleted: true,
     });
   }
@@ -44,9 +40,7 @@ export class PlayersService {
     const alreadyPartOfTheTeam = player?.teamId === teamId;
 
     if (alreadyPartOfTheTeam) {
-      throw new BadRequestException(
-        `Player with ID: ${playerId} is already a part of this team.`
-      );
+      throw new BadRequestException(`Player with ID: ${playerId} is already a part of this team.`);
     }
 
     await this.playerRepository.save({
@@ -57,10 +51,7 @@ export class PlayersService {
     return this.getPlayerById(playerId);
   }
 
-  async updatePlayerShirtNumber(
-    id: string,
-    number: number
-  ): Promise<PlayerResponseDto> {
+  async updatePlayerShirtNumber(id: string, number: number): Promise<PlayerResponseDto> {
     await this.getPlayerById(id);
 
     try {
@@ -69,9 +60,7 @@ export class PlayersService {
         number, // number: number
       });
     } catch (error) {
-      throw new BadRequestException(
-        `Other player already has the number ${number} assigned.`
-      );
+      throw new BadRequestException(`Other player already has the number ${number} assigned.`);
     }
 
     return this.getPlayerById(id);
