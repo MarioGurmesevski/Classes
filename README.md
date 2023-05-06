@@ -61,3 +61,5 @@
     - [Class 5 - Workshop](/Node%20JS/Advanced%20NodeJS/Class_5_Workshop/)
     - [Class 6 - Typescript](/Node%20JS/Advanced%20NodeJS/Class_6_Typescript/)
     - [Class 7/8 - NestJS](/Node%20JS/Advanced%20NodeJS/Class_7_NestJS/)
+    - [Class 9/10/11 - TypeORM](/Node%20JS/Advanced%20NodeJS/Class_9%2C10%2C11_TypeORM/)
+    - [Class 12 - Workshop2](/Node%20JS/Advanced%20NodeJS/Class_12_Workshop/)
