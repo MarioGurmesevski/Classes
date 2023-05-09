@@ -21,7 +21,7 @@
     - [Class 1 - Basics](/JavaScript/Basic%20JavaScript/Class_1_Basics/)
     - [Class 2 - Functions](/JavaScript/Basic%20JavaScript/Class_2_Functions/)
     - [Class 3 - Recap](/JavaScript/Basic%20JavaScript/Class_3_Recap/)
-    - [Class 3/4 - Array/Loops](/JavaScript/Basic%20JavaScript/Class_3%2C4_%20Array_Loops/)
+    - [Class 3/4 - Array/Loops](/JavaScript/Basic%20JavaScript/Class_3%2C4_Array_Loops/)
     - [Class 5 - DOM](/JavaScript/Basic%20JavaScript/Class_5_Dom/)
     - [Class 6 - Events](/JavaScript/Basic%20JavaScript/Class_6_Events/)
     - [Class 7 - Objects](/JavaScript/Basic%20JavaScript/Class_7_Objects/)
