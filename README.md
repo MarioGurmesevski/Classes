@@ -30,17 +30,17 @@
 
   - [Advanced JavaScript](/JavaScript/Advanced%20JavaScript/)
 
-    - [Class 1/2 - Recap of Basic JS](/JavaScript/Advanced%20JavaScript/Class%201%20and%20Class%202-Recap%20Exercises/)
-    - [Class 3 - Ajax recap](/JavaScript/Advanced%20JavaScript/Class%203%20-Ajax-recap/)
-    - [Class 4 - Advanced Functions Part 1](/JavaScript/Advanced%20JavaScript/Class%204-Functions/)
-    - [Class 5/9/13 - Weather API](/JavaScript/Advanced%20JavaScript/Class%205%2C9%2C13-Workshop%2CWeather%20app/)
-    - [Class 6 - Advanced Functions Part 2](/JavaScript/Advanced%20JavaScript/Class%206%20and%207-Functions%20Part%202/)
-    - [Class 7 - UnderTheHood](/JavaScript/Advanced%20JavaScript/Class%207-UnderTheHood/)
+    - [Class 1/2 - Recap of Basic JS](/JavaScript/Advanced%20JavaScript/Class_1%2C2_Recap_Exercises/)
+    - [Class 3 - Ajax recap](/JavaScript/Advanced%20JavaScript/Class_3_Ajax_Recap/)
+    - [Class 4 - Advanced Functions Part 1](/JavaScript/Advanced%20JavaScript/Class_4_Functions/)
+    - [Class 5/9/13 - Weather API](/JavaScript/Advanced%20JavaScript/Class_5%2C9%2C13_Workshop_Weather_app/)
+    - [Class 6 - Advanced Functions Part 2](/JavaScript/Advanced%20JavaScript/Class_6%2C7_Functions_Part_2/)
+    - [Class 7 - UnderTheHood](/JavaScript/Advanced%20JavaScript/Class_7_UnderTheHood/)
     - [Class 8 - Async-Await](/JavaScript/Advanced%20JavaScript/Class%208%20-%20Async-Await/)
-    - [Class 10 - Object Part 1](/JavaScript/Advanced%20JavaScript/Class%2010%20-Objects%20Part%201/)
-    - [Class 11 - Object Part 2](/JavaScript/Advanced%20JavaScript/Class%2011%20-Objects%20Part%202/)
-    - [Class 12 - Todo App](/JavaScript/Advanced%20JavaScript/Class%2012%20-Todo/)
-    - [Class 14 - NodeJS-Intro](/JavaScript/Advanced%20JavaScript/Class%2014%20-NodeJS-Intro/)
+    - [Class 10 - Object Part 1](/JavaScript/Advanced%20JavaScript/Class_10_Objects_Part_1/)
+    - [Class 11 - Object Part 2](/JavaScript/Advanced%20JavaScript/Class_11_Objects_Part_2/)
+    - [Class 12 - Todo App](/JavaScript/Advanced%20JavaScript/Class_12_Todo/)
+    - [Class 14 - NodeJS-Intro](/JavaScript/Advanced%20JavaScript/Class_14_NodeJS-Intro/)
 
   - [Basic Node](/Node%20JS/Basic%20NodeJS/)
 
