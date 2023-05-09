@@ -56,7 +56,7 @@
 
   - [Advnaced Node](/Node%20JS/Advanced%20NodeJS/)
 
-    - [Class 1/2 - MongoDB](/Node%20JS/Advanced%20NodeJS/Class_1_MongoDB/)
+    - [Class 1/2 - MongoDB](/Node%20JS/Advanced%20NodeJS/Class_1%2C2_MongoDB/)
     - [Class 3/4 - Mongoose](/Node%20JS/Advanced%20NodeJS/Class_3%2C4_Mongoose/)
     - [Class 5 - Workshop](/Node%20JS/Advanced%20NodeJS/Class_5_Workshop/)
     - [Class 6 - Typescript](/Node%20JS/Advanced%20NodeJS/Class_6_Typescript/)
