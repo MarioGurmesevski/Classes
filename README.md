@@ -4,17 +4,17 @@
 
   - [HTML & Css](/Html%20%26%20Css/)
 
-    - [Class 1](/Html%20%26%20Css/1st%20class/)
-    - [Class 2](/Html%20%26%20Css/2nd%20class/)
-    - [Class 3](/Html%20%26%20Css/3rd%20class/)
-    - [Class 4](/Html%20%26%20Css/4th%20class/)
-    - [Class 5](/Html%20%26%20Css/5th%20class/)
-    - [Class 6](/Html%20%26%20Css/6th%20class/)
-    - [Class 7](/Html%20%26%20Css/7th%20class/)
-    - [Class 8](/Html%20%26%20Css/8th%20class/)
-    - [Class 9](/Html%20%26%20Css/9th%20class/)
-    - [Class 10](/Html%20%26%20Css/10th%20class/)
-    - [Class 11](/Html%20%26%20Css/11th%20class/)
+    - [Class 1](/Html%20%26%20Css/Class_1/)
+    - [Class 2](/Html%20%26%20Css/Class_2/)
+    - [Class 3](/Html%20%26%20Css/Class_3/)
+    - [Class 4](/Html%20%26%20Css/Class_4/)
+    - [Class 5](/Html%20%26%20Css/Class_5/)
+    - [Class 6](/Html%20%26%20Css/Class_6/)
+    - [Class 7](/Html%20%26%20Css/Class_7/)
+    - [Class 8](/Html%20%26%20Css/Class_8/)
+    - [Class 9](/Html%20%26%20Css/Class_9/)
+    - [Class 10](/Html%20%26%20Css/Class_10/)
+    - [Class 11](/Html%20%26%20Css/Class_11/)
 
   - [Basic JavaScript](/JavaScript/Basic%20JavaScript/)
 

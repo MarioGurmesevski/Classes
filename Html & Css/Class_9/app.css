@@ -1,0 +1,100 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-size: 62.5%;
+    background-color: lightcoral;
+    font-family: sans-serif;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.welcome{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 50px;
+    margin: 0;
+    padding: 300px 0 0 700px;
+    text-align: center;
+}
+.list ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+    padding:100px 0 0 900px;
+    font-size: 20px;
+    width: 300px;
+    height: 20px;
+    gap: 1rem;
+}
+.box{
+    border: 2px black solid;
+    background-color: beige;
+}
+footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-content{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.box-items{
+    padding: 0;
+    width: 340px;
+    border:2px black solid;
+    font-size: 30px;
+    margin: 3px;
+}
+.link{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 15px;
+    flex-direction: row-reverse;
+    align-content: center;
+
+}
+.content{
+    background-color: gray;
+    border: 2px black dotted;
+}
+.companyname{
+    height: 45;
+    width:170px;
+}
+.inspect-content{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.inspect-item{
+    padding: 0;
+    width: 340px;
+    border:2px black solid;
+    font-size: 15px;
+    margin: 3px;
+}
+.inspect-img{
+height: 50%;
+width: 50%;
+}
+.inspect-p{
+    height: 50%;
+    width: 50%;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.footer{
+    display: flex;
+    align-items: center;
+}
