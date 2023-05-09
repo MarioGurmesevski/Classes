@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
+import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class UserLoginDto {
   @IsString()
@@ -7,8 +7,8 @@ export class UserLoginDto {
   @IsEmail()
   @ApiProperty({
     type: String,
-    description: 'Users email',
-    example: 'johndoe@gmail.com',
+    description: "Users email",
+    example: "test@mail.com",
     required: true,
   })
   username: string;
@@ -18,8 +18,8 @@ export class UserLoginDto {
   @MinLength(6)
   @ApiProperty({
     type: String,
-    description: 'Users password',
-    example: 'fasgango',
+    description: "Users password",
+    example: "Password123",
     required: true,
   })
   password: string;
@@ -30,8 +30,8 @@ export class UserRegisterDto extends UserLoginDto {
   @IsNotEmpty()
   @ApiProperty({
     type: String,
-    description: 'Users first and last name',
-    example: 'John Doe',
+    description: "Users name and surname",
+    example: "John Doe",
     required: true,
   })
   name: string;
@@ -40,7 +40,7 @@ export class UserRegisterDto extends UserLoginDto {
 export class UserResponseDto extends UserRegisterDto {
   @ApiProperty({
     type: String,
-    description: 'Users id',
+    description: "Users id",
   })
   id: string;
 
@@ -68,7 +68,7 @@ export class LoginResponseDto {
 
   @ApiProperty({
     type: String,
-    description: 'The access Bearer token',
+    description: "The access Bearer token",
   })
   accessToken: string;
 }

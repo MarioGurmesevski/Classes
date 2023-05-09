@@ -7,6 +7,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
+  // Swagger
   const config = new DocumentBuilder()
     .setTitle('Auth example')
     .setDescription('The auth API description')
@@ -15,6 +16,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
 
-  await app.listen(3001);
+  await app.listen(3000);
 }
 bootstrap();
