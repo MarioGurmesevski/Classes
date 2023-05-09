@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import {
+  LoginResponseDto,
   UserLoginDto,
   UserRegisterDto,
   UserResponseDto,
@@ -29,7 +30,7 @@ export class AuthController {
   }
 
   @Post('login')
-  login(@Body() body: UserLoginDto) {
+  login(@Body() body: UserLoginDto): Promise<LoginResponseDto> {
     return this.authService.login(body);
   }
 }
