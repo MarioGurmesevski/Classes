@@ -18,15 +18,15 @@
 
   - [Basic JavaScript](/JavaScript/Basic%20JavaScript/)
 
-    - [Class 1 - Basics](/JavaScript/Basic%20JavaScript/1st%20Class%20Basics/)
-    - [Class 2 - Functions](/JavaScript/Basic%20JavaScript/2nd%20Class%20Functions/)
-    - [Class 3 - Recap](/JavaScript/Basic%20JavaScript/3rd%20Class%20Recap/)
-    - [Class 3/4 - Array/Loops](/JavaScript/Basic%20JavaScript/3rd%20Class%20and%204th%20Class%20Array%20Loops/)
-    - [Class 5 - DOM](/JavaScript/Basic%20JavaScript/5th%20Class%20Dom/)
-    - [Class 6 - Events](/JavaScript/Basic%20JavaScript/6th%20Class%20Events/)
-    - [Class 7 - Objects](/JavaScript/Basic%20JavaScript/7th%20Class%20Objects/)
-    - [Class 8 - Exercises](/JavaScript/Basic%20JavaScript/8th%20Class%20Exercises/)
-    - [Class 9 - Ajax](/JavaScript/Basic%20JavaScript/9th%20Class%20Ajax/)
+    - [Class 1 - Basics](/JavaScript/Basic%20JavaScript/Class_1_Basics/)
+    - [Class 2 - Functions](/JavaScript/Basic%20JavaScript/Class_2_Functions/)
+    - [Class 3 - Recap](/JavaScript/Basic%20JavaScript/Class_3_Recap/)
+    - [Class 3/4 - Array/Loops](/JavaScript/Basic%20JavaScript/Class_3%2C4_%20Array_Loops/)
+    - [Class 5 - DOM](/JavaScript/Basic%20JavaScript/Class_5_Dom/)
+    - [Class 6 - Events](/JavaScript/Basic%20JavaScript/Class_6_Events/)
+    - [Class 7 - Objects](/JavaScript/Basic%20JavaScript/Class_7_Objects/)
+    - [Class 8 - Exercises](/JavaScript/Basic%20JavaScript/Class_8_Exercises/)
+    - [Class 9 - Ajax](/JavaScript/Basic%20JavaScript/Class_9_Ajax/)
 
   - [Advanced JavaScript](/JavaScript/Advanced%20JavaScript/)
 
