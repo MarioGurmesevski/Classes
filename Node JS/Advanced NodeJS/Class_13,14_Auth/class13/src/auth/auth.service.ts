@@ -1,20 +1,20 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import {
   LoginResponseDto,
   UserLoginDto,
   UserRegisterDto,
   UserResponseDto,
-} from "./dtos/auth.dto";
-import { UserService } from "src/user/user.service";
-import * as bcrypt from "bcrypt";
-import { SALT_ROUNDS } from "./auth.const";
-import { JwtService } from "@nestjs/jwt";
+} from './dtos/auth.dto';
+import { UserService } from 'src/user/user.service';
+import * as bcrypt from 'bcrypt';
+import { SALT_ROUNDS } from './auth.const';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   async register(body: UserRegisterDto): Promise<UserResponseDto> {
@@ -31,10 +31,15 @@ export class AuthService {
   async login(credentials: UserLoginDto): Promise<LoginResponseDto> {
     const user = await this.validateUser(
       credentials.username,
-      credentials.password
+      credentials.password,
     );
 
-    const accessToken = this.jwtService.sign({ test: "test" });
+    const accessToken = this.jwtService.sign({
+      role: user.role,
+      id: user.id,
+      name: user.name,
+      username: user.username,
+    });
 
     return {
       user,
@@ -44,7 +49,7 @@ export class AuthService {
 
   async validateUser(
     username: string,
-    password: string
+    password: string,
   ): Promise<UserResponseDto> {
     const user = await this.userService.getUserByUsername(username);
 
