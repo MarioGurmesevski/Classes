@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './prouct.entity';
 import { Repository } from 'typeorm';
+import { ProductCreateDto } from './dtos/product.dto';
 
 @Injectable()
 export class ProductsService {
@@ -14,7 +15,11 @@ export class ProductsService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  createProduct(body: any) {
-    return this.productRepository.save(body);
+  createProduct(body: ProductCreateDto, creatorEmail: string) {
+    const newProduct = {
+      ...body,
+      createdBy: creatorEmail,
+    };
+    return this.productRepository.save(newProduct);
   }
 }
