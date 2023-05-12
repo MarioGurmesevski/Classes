@@ -2,7 +2,7 @@
     <h1>Students List</h1>
     <ul>
         {{#each students as |student|}}
-        <li>{{student.name}} - {{student.age}}</li>
+        <li><a href="student/{{student.id}}">{{student.name}} - {{student.age}}</a></li>
         {{/each}}
     </ul>
 </div>
