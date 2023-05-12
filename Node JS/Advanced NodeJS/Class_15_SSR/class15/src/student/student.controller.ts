@@ -58,4 +58,10 @@ export class StudentController {
   updateStudent(@Body() body: any, @Param('id') id: string) {
     return this.studentService.updateStudent(body, id);
   }
+
+  @Get('delete-student/:id')
+  @Redirect('/student')
+  deleteStudent(@Param('id') id: string) {
+    return this.studentService.deleteStudent(id);
+  }
 }

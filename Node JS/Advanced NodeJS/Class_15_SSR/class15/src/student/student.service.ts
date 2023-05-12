@@ -12,12 +12,15 @@ export class StudentService {
       name: 'John Doe',
       age: 50,
       track: 'NET',
+      IsMale: true,
     },
     {
       id: 'fasfsf',
       name: 'Jfafs Doe',
       age: 24,
       track: 'JS',
+      gender: 'F',
+      IsMale: false,
     },
   ];
 
@@ -38,6 +41,10 @@ export class StudentService {
       (student) => student.id === studentId,
     );
 
-    this.students[index] = updatedStudentData;
+    this.students[index] = { ...updatedStudentData, id: studentId };
+  }
+
+  deleteStudent(id: string) {
+    this.students = this.students.filter((student) => student.id !== id);
   }
 }
