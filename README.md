@@ -63,4 +63,5 @@
     - [Class 7/8 - NestJS](/Node%20JS/Advanced%20NodeJS/Class_7_NestJS/)
     - [Class 9/10/11 - TypeORM](/Node%20JS/Advanced%20NodeJS/Class_9%2C10%2C11_TypeORM/)
     - [Class 12 - Workshop2](/Node%20JS/Advanced%20NodeJS/Class_12_Workshop/)
-    - [Class 13 - Authentication](/Node%20JS/Advanced%20NodeJS/Class_13%2C14_Auth/)
+    - [Class 13/14 - Authentication](/Node%20JS/Advanced%20NodeJS/Class_13%2C14_Auth/)
+    - [Class 15 - SSR](/Node%20JS/Advanced%20NodeJS/Class_15_SSR/)
