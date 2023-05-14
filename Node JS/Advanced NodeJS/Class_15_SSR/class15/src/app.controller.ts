@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   // @Get()
-  // getHello(@Req() req: Request, @Res() res: Response) {
+  // getHello(@Req() req: Request, @Res() res: any) {
   //   return res.render('index', { message: 'Hello world!' });
   // }
 
