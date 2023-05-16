@@ -65,3 +65,6 @@
     - [Class 12 - Workshop2](/Node%20JS/Advanced%20NodeJS/Class_12_Workshop/)
     - [Class 13/14 - Authentication](/Node%20JS/Advanced%20NodeJS/Class_13%2C14_Auth/)
     - [Class 15 - SSR](/Node%20JS/Advanced%20NodeJS/Class_15_SSR/)
+
+  - [Database Development & Design](/Database%20Development%20%26%20Design/)
+    - [Class 1 - Basics]()
