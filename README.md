@@ -69,3 +69,4 @@
   - [Database Development & Design](/Database%20Development%20%26%20Design/)
 
     - [Class 1 - Intro](/Database%20Development%20%26%20Design/Class_1_Intro/)
+    - [Class 2 - Filtering,Combination,Constraints](/Database%20Development%20%26%20Design/Class_2_Filtering_Combination_Constraints/)
