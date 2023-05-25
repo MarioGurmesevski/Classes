@@ -113,7 +113,7 @@ FROM albums a
 LEFT JOIN songs s ON a.album_id = s.album_id
 WHERE s.song_name IS NULL
 
--- Many-to-Many Relationship (Songs to Genres):
+-- Many to Many (Songs and Genre)
 
 -- Example 1: Retrieve all songs belonging to a specific genre.
 
@@ -133,82 +133,87 @@ WHERE s.song_name = 'Odi zvezdo'
 
 -- Example 3: Retrieve songs that belong to multiple genres.
 
-SELECT s.song_name, COUNT(sg.genre_id) as genre_count
+SELECT s.song_name, COUNT (sg.genre_id) AS genre_count
 FROM songs s
 INNER JOIN songs_genres sg ON s.song_id = sg.song_id
 GROUP BY s.song_name
-HAVING COUNT(sg.genre_id) > 1
+HAVING COUNT (sg.genre_id) > 1
 
--- Example 4: Retrieve the songs and their corresponding album names:
+-- Example 4: Retrieve the songs and their corresponding album names.
 
 SELECT s.song_name, a.album_name
-FROM songs s
+FROM  songs s
 INNER JOIN albums a ON s.album_id = a.album_id
 
--- Example 5: Retrieve the songs, their album names, and the artist names:
+-- Example 5: Retrieve the songs, their album names, and he artist names.
 
 SELECT s.song_name, al.album_name, ar.artist_name
-FROM songs s
+FROM  songs s
 INNER JOIN albums al ON s.album_id = al.album_id
 INNER JOIN artists ar ON ar.artist_id = al.artist_id
 
--- Example 6: Retrieve all albums and their corresponding songs (including albums with no songs):
+-- Example 6: Retrieve all the albums and their corrosponding songs (including albums with no songs).
 
 SELECT al.album_name, s.song_name
 FROM albums al
 LEFT JOIN songs s ON al.album_id = s.album_id
 
--- Example 7: Retrieve all artists and their corresponding albums (including artists with no albums):
+-- Example 7: Retrieve all artists and their corresponding albums (including artists with no albums)
+
+SELECT ar.artist_name, al.album_name
+FROM artists ar
+LEFT JOIN albums al ON ar.album_id = al.album_id
+
+-- Example 8: Retrieve all songs and their corresponding album names (including songs with no albums)
 
 
 
--- Example 8: Retrieve all songs and their corresponding album names (including songs without albums):
+-- Example 9: Retrieve all the number of songs for each album, only including albums with more then 2 songs
 
-
-
--- Example 9: Retrieve all albums and their corresponding artist names (including albums without artists):
-
-
-
--- Example 10: Retrieve all songs and their corresponding album names, including songs without albums and albums without songs:
-
-
-
--- Example 11: Retrieve all albums and their corresponding artist names, including albums without artists and artists without albums:
-
-
-
--- Example 12:Retrieve the number of songs for each album, only including albums with more than 2 songs:
-
-SELECT al.album_name, COUNT(s.song_id) as song_count
+SELECT al.album_name, COUNT(s.song_id) AS song_count
 FROM albums al
 INNER JOIN songs s ON al.album_id = s.album_id
 GROUP BY al.album_name
-HAVING COUNT(s.song_id) > 2
+HAVING COUNT (s.song_id)>2
 
--- Example 13: Retrieve the number of songs for each genre, only including genres with more than 1 song:
+-- Example 10: Retrieve the number of songs for each genre, only including genres with more than 1 song
 
-SELECT g.genre_name, COUNT(sg.song_id) AS song_count
-FROM genres g
+SELECT g.genre_name, COUNT (sg.song_id) AS song_count
+FROM  genres g
 LEFT JOIN songs_genres sg ON g.genre_id = sg.genre_id
 GROUP BY g.genre_name
-HAVING COUNT(sg.song_id) > 1
+HAVING COUNT(sg.song_id)>1
 
--- Example 14: Retrieve the album with the maximum number of songs:
+-- Example 10: Retrieve the genre with the maximum number of songs
+
+SELECT g.genre_name, COUNT(sg.song_id) song_count
+FROM genres g
+INNER JOIN songs_genres sg ON g.genre_id = sg.genre_id
+GROUP BY g.genre_name
+HAVING COUNT (sg.song_id) = (
+	SELECT MAX(song_count)
+	FROM 
+	(
+		SELECT (
+				COUNT(song_id) AS song_count 
+				FROM songs
+				GROUP BY album_id
+			   )
+		AS subquery
+	) 
+)
+
+-- Class 4
 
 
 
--- Example 15: Retrieve the genre with the maximum number of songs:
 
-SELECT genres.genre_name, COUNT(songs_genres.song_id) AS song_count
-FROM genres
-INNER JOIN songs_genres ON genres.genre_id = songs_genres.genre_id
-GROUP BY genres.genre_name
-HAVING COUNT(songs_genres.song_id) = (
-	SELECT MAX(song_count) FROM (
-		SELECT COUNT(song_id) AS song_count FROM songs_genres GROUP BY genre_id
-	) AS subquery
-);
+
+
+
+
+
+
 
 
 
