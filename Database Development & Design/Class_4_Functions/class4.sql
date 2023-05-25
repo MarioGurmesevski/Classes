@@ -113,7 +113,7 @@ FROM albums a
 LEFT JOIN songs s ON a.album_id = s.album_id
 WHERE s.song_name IS NULL
 
--- Many to Many (Songs and Genre)
+-- Many-to-Many Relationship (Songs to Genres):
 
 -- Example 1: Retrieve all songs belonging to a specific genre.
 
@@ -133,82 +133,160 @@ WHERE s.song_name = 'Odi zvezdo'
 
 -- Example 3: Retrieve songs that belong to multiple genres.
 
-SELECT s.song_name, COUNT (sg.genre_id) AS genre_count
+SELECT s.song_name, COUNT(sg.genre_id) as genre_count
 FROM songs s
 INNER JOIN songs_genres sg ON s.song_id = sg.song_id
 GROUP BY s.song_name
-HAVING COUNT (sg.genre_id) > 1
+HAVING COUNT(sg.genre_id) > 1
 
 -- Example 4: Retrieve the songs and their corresponding album names.
 
 SELECT s.song_name, a.album_name
-FROM  songs s
+FROM songs s
 INNER JOIN albums a ON s.album_id = a.album_id
 
--- Example 5: Retrieve the songs, their album names, and he artist names.
+-- Example 5: Retrieve the songs, their album names, and the artist names.
 
 SELECT s.song_name, al.album_name, ar.artist_name
-FROM  songs s
+FROM songs s
 INNER JOIN albums al ON s.album_id = al.album_id
 INNER JOIN artists ar ON ar.artist_id = al.artist_id
 
--- Example 6: Retrieve all the albums and their corrosponding songs (including albums with no songs).
+-- Example 6: Retrieve all albums and their corresponding songs (including albums with no songs).
 
 SELECT al.album_name, s.song_name
 FROM albums al
 LEFT JOIN songs s ON al.album_id = s.album_id
 
--- Example 7: Retrieve all artists and their corresponding albums (including artists with no albums)
-
-SELECT ar.artist_name, al.album_name
-FROM artists ar
-LEFT JOIN albums al ON ar.album_id = al.album_id
-
--- Example 8: Retrieve all songs and their corresponding album names (including songs with no albums)
+-- Example 7: Retrieve all artists and their corresponding albums (including artists with no albums).
 
 
 
--- Example 9: Retrieve all the number of songs for each album, only including albums with more then 2 songs
+-- Example 8: Retrieve all songs and their corresponding album names (including songs without albums).
 
-SELECT al.album_name, COUNT(s.song_id) AS song_count
+
+
+-- Example 9: Retrieve all albums and their corresponding artist names (including albums without artists).
+
+
+
+-- Example 10: Retrieve all songs and their corresponding album names, including songs without albums and albums without songs.
+
+
+
+-- Example 11: Retrieve all albums and their corresponding artist names, including albums without artists and artists without albums.
+
+
+
+-- Example 12:Retrieve the number of songs for each album, only including albums with more than 2 songs.
+
+SELECT al.album_name, COUNT(s.song_id) as song_count
 FROM albums al
 INNER JOIN songs s ON al.album_id = s.album_id
 GROUP BY al.album_name
-HAVING COUNT (s.song_id)>2
+HAVING COUNT(s.song_id) > 2
 
--- Example 10: Retrieve the number of songs for each genre, only including genres with more than 1 song
+-- Example 13: Retrieve the number of songs for each genre, only including genres with more than 1 song.
 
-SELECT g.genre_name, COUNT (sg.song_id) AS song_count
-FROM  genres g
+SELECT g.genre_name, COUNT(sg.song_id) AS song_count
+FROM genres g
 LEFT JOIN songs_genres sg ON g.genre_id = sg.genre_id
 GROUP BY g.genre_name
-HAVING COUNT(sg.song_id)>1
+HAVING COUNT(sg.song_id) > 1
 
--- Example 10: Retrieve the genre with the maximum number of songs
+-- Example 14: Retrieve the album with the maximum number of songs.
 
-SELECT g.genre_name, COUNT(sg.song_id) song_count
-FROM genres g
-INNER JOIN songs_genres sg ON g.genre_id = sg.genre_id
-GROUP BY g.genre_name
-HAVING COUNT (sg.song_id) = (
-	SELECT MAX(song_count)
-	FROM 
-	(
-		SELECT (
-				COUNT(song_id) AS song_count 
-				FROM songs
-				GROUP BY album_id
-			   )
-		AS subquery
-	) 
-)
+
+
+-- Example 15: Retrieve the genre with the maximum number of songs.
+
+SELECT genres.genre_name, COUNT(songs_genres.song_id) AS song_count
+FROM genres
+INNER JOIN songs_genres ON genres.genre_id = songs_genres.genre_id
+GROUP BY genres.genre_name
+HAVING COUNT(songs_genres.song_id) = (
+	SELECT MAX(song_count) FROM (
+		SELECT COUNT(song_id) AS song_count FROM songs_genres GROUP BY genre_id
+	) AS subquery
+);
+
 
 -- Class 4
 
+-- Example 1: Retrieve the average rating of all albums.
 
+SELECT AVG(rating) FROM albums
 
+-- Example 2: Find the maximum duration of songs in an album.
 
+SELECT MAX(duration) FROM songs WHERE album_id = 1;
 
+-- Example 3: Retrieve the minimum rating of all albums by a specific artist.
+
+SELECT MIN(rating) FROM albums WHERE artist_id = 1
+
+-- Example 4: Get the count of songs in each album.
+
+SELECT album_id, COUNT(*) FROM songs GROUP BY album_id
+
+-- Example 5: Retrieve the names of all artists along with a comma-separated list of their album names.
+
+SELECT ar.artist_name, STRING_AGG(al.album_name, ',')  AS album_names
+FROM artists ar
+JOIN albums al ON ar.artist_id = al.artist_id 
+GROUP BY ar.artist_name
+
+-- Example 6: Get a comma-separated list of genres for each song along with their respective song names.
+
+SELECT s.song_name, STRING_AGG(g.genre_name, ',') AS genre_names
+FROM songs s
+JOIN songs_genres sg ON s.song_id = sg.song_id
+JOIN genres g ON sg.genre_id = g.genre_id
+GROUP BY s.song_name
+
+-- Example 7: Retrieve the album names along with a concatenated string of song names in each album.
+
+SELECT a.album_name, STRING_AGG(s.song_name, ' - ') AS song_names
+FROM albums a
+JOIN songs s ON  a.album_id = s.album_id
+GROUP BY a.album_name
+
+-- Example 8: Retrieve the names of all artists along with a concatenated string of album names sorted alphabetically for each artist.
+
+SELECT ar.artist_name, STRING_AGG(al.album_name, ',' ORDER BY al.album_name) AS album_names
+FROM artists ar
+JOIN albums  al ON ar.artist_id = al.artist_id
+GROUP BY ar.artist_name
+
+-- Example 9: Retrieve the names of all artists who have albums with more then 1 songs.
+
+SELECT ar.artist_name
+FROM artists ar
+JOIN albums al ON ar.artist_id = al.artist_id
+JOIN songs s ON al.album_id = s.album_id
+GROUP BY ar.artist_name
+HAVING COUNT(*) > 1
+
+-- Example 10: Find the average duration of songs in a specific genre.
+
+SELECT AVG(duration)
+FROM songs s
+JOIN songs_genres sg ON s.song_id = sg.song_id
+JOIN genres g ON sg.genre_id = g.genre_id
+WHERE g.genre_id = 1
+
+-- to visualize the data above
+SELECT AVG(duration), g.genre_name
+FROM songs s
+JOIN songs_genres sg ON s.song_id = sg.song_id
+JOIN genres g ON sg.genre_id = g.genre_id
+GROUP BY g.genre_name
+
+-- Example 11: Retrieve the minimum duration of songs in a specific album
+
+SELECT MIN(duration)
+FROM songs
+WHERE album_id = 1
 
 
 

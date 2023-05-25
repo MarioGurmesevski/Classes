@@ -139,46 +139,46 @@ INNER JOIN songs_genres sg ON s.song_id = sg.song_id
 GROUP BY s.song_name
 HAVING COUNT(sg.genre_id) > 1
 
--- Example 4: Retrieve the songs and their corresponding album names:
+-- Example 4: Retrieve the songs and their corresponding album names.
 
 SELECT s.song_name, a.album_name
 FROM songs s
 INNER JOIN albums a ON s.album_id = a.album_id
 
--- Example 5: Retrieve the songs, their album names, and the artist names:
+-- Example 5: Retrieve the songs, their album names, and the artist names.
 
 SELECT s.song_name, al.album_name, ar.artist_name
 FROM songs s
 INNER JOIN albums al ON s.album_id = al.album_id
 INNER JOIN artists ar ON ar.artist_id = al.artist_id
 
--- Example 6: Retrieve all albums and their corresponding songs (including albums with no songs):
+-- Example 6: Retrieve all albums and their corresponding songs (including albums with no songs).
 
 SELECT al.album_name, s.song_name
 FROM albums al
 LEFT JOIN songs s ON al.album_id = s.album_id
 
--- Example 7: Retrieve all artists and their corresponding albums (including artists with no albums):
+-- Example 7: Retrieve all artists and their corresponding albums (including artists with no albums).
 
 
 
--- Example 8: Retrieve all songs and their corresponding album names (including songs without albums):
+-- Example 8: Retrieve all songs and their corresponding album names (including songs without albums).
 
 
 
--- Example 9: Retrieve all albums and their corresponding artist names (including albums without artists):
+-- Example 9: Retrieve all albums and their corresponding artist names (including albums without artists).
 
 
 
--- Example 10: Retrieve all songs and their corresponding album names, including songs without albums and albums without songs:
+-- Example 10: Retrieve all songs and their corresponding album names, including songs without albums and albums without songs.
 
 
 
--- Example 11: Retrieve all albums and their corresponding artist names, including albums without artists and artists without albums:
+-- Example 11: Retrieve all albums and their corresponding artist names, including albums without artists and artists without albums.
 
 
 
--- Example 12:Retrieve the number of songs for each album, only including albums with more than 2 songs:
+-- Example 12:Retrieve the number of songs for each album, only including albums with more than 2 songs.
 
 SELECT al.album_name, COUNT(s.song_id) as song_count
 FROM albums al
@@ -186,7 +186,7 @@ INNER JOIN songs s ON al.album_id = s.album_id
 GROUP BY al.album_name
 HAVING COUNT(s.song_id) > 2
 
--- Example 13: Retrieve the number of songs for each genre, only including genres with more than 1 song:
+-- Example 13: Retrieve the number of songs for each genre, only including genres with more than 1 song.
 
 SELECT g.genre_name, COUNT(sg.song_id) AS song_count
 FROM genres g
@@ -194,11 +194,11 @@ LEFT JOIN songs_genres sg ON g.genre_id = sg.genre_id
 GROUP BY g.genre_name
 HAVING COUNT(sg.song_id) > 1
 
--- Example 14: Retrieve the album with the maximum number of songs:
+-- Example 14: Retrieve the album with the maximum number of songs.
 
 
 
--- Example 15: Retrieve the genre with the maximum number of songs:
+-- Example 15: Retrieve the genre with the maximum number of songs.
 
 SELECT genres.genre_name, COUNT(songs_genres.song_id) AS song_count
 FROM genres
