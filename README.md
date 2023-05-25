@@ -70,3 +70,5 @@
 
     - [Class 1 - Intro](/Database%20Development%20%26%20Design/Class_1_Intro/)
     - [Class 2 - Filtering,Combination,Constraints](/Database%20Development%20%26%20Design/Class_2_Filtering_Combination_Constraints/)
+    - [Class 3 - Relations](/Database%20Development%20%26%20Design/Class_3_Relations/)
+    - [Class 4 - Functions](/Database%20Development%20%26%20Design/Class_4_Functions/)
