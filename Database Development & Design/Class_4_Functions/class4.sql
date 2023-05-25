@@ -211,7 +211,9 @@ HAVING COUNT(songs_genres.song_id) = (
 );
 
 
--- Class 4
+-- Class 4 --
+
+-- AVG, MIN, MAX, STRING_AGG --
 
 -- Example 1: Retrieve the average rating of all albums.
 
@@ -282,15 +284,194 @@ JOIN songs_genres sg ON s.song_id = sg.song_id
 JOIN genres g ON sg.genre_id = g.genre_id
 GROUP BY g.genre_name
 
--- Example 11: Retrieve the minimum duration of songs in a specific album
+-- Example 11: Retrieve the minimum duration of songs in a specific album.
 
 SELECT MIN(duration)
 FROM songs
 WHERE album_id = 1
 
+-- Views --
 
+-- Example 1: View to retrieve the album names and their respective artist name.
 
+CREATE VIEW album_artist_view AS 
+SELECT al.album_name, ar.artist_name
+FROM albums al
+JOIN artists ar ON al.artist_id = ar.artist_id
 
+SELECT * FROM album_artist_view
+
+-- Example 2: View to get the count of songs in each album along with the album name.
+
+CREATE VIEW album_songs_count_view AS
+SELECT al.album_name, COUNT(*) AS song_count
+FROM albums al
+JOIN songs s ON al.album_id = s.album_id
+GROUP BY al.album_name
+
+SELECT * FROM album_songs_count_view
+
+-- Example 3: View to retrieve the average rating of albums released by each artist.
+
+CREATE VIEW artist_avg_rating_view AS
+SELECT ar.artist_name,AVG(al.rating) AS avg_rating
+FROM artists ar
+JOIN albums al ON ar.artist_id = al.artist_id
+GROUP BY ar.artist_name
+
+SELECT * FROM artist_avg_rating_view
+
+-- Example 4: View to retrieve the names of all artists who have albums with a rating higher than the average rating of all albums.
+
+CREATE VIEW high_rated_artist_view AS
+SELECT ar.artist_name
+FROM artists ar
+JOIN albums al ON ar.artist_id = al.artist_id
+WHERE al.rating > (SELECT AVG(rating)FROM albums)
+
+SELECT * FROM high_rated_artist_view
+
+-- Example 5: View to retrieve the names of all albums that songs with a duration longer than 4m
+
+CREATE VIEW long_duration_albums_view AS
+SELECT al.album_name, s.duration
+FROM albums al
+JOIN songs s ON al.album_id = s.album_id
+WHERE s.duration > interval '4:00'
+
+SELECT * FROM long_duration_albums_view
+
+-- Limit --
+
+-- Example 1: Retrieve the top 5 albums based on rating, along with their artists.
+
+SELECT al.album_name, ar.artist_name, al.rating
+FROM albums al
+INNER JOIN artists ar ON al.artist_id = ar.artist_id
+ORDER BY al.rating DESC
+LIMIT 3
+
+-- Example 2: Retrieve the 3 shortest songs and their corresponding albums.
+
+SELECT s.song_name, al.album_name, s.duration
+FROM songs s
+INNER JOIN albums al ON s.album_id = al.album_id
+ORDER BY s.duration ASC
+LIMIT 3
+
+-- Example 3: Retrieve the songs and their genres, ordered by genre name.
+
+SELECT s.song_name, g.genre_name
+FROM songs s
+INNER JOIN songs_genres sg ON s.song_id = sg.song_id
+INNER JOIN genres g ON sg.genre_id = g.genre_id
+ORDER BY g.genre_name
+
+-- Example 4: Retrieve the albums along with the count of songs in each album, ordered by the number of songs in desceding order.
+
+SELECT al.album_name, COUNT(s.song_id) AS song_count
+FROM albums al 
+LEFT JOIN songs s ON s.album_id = al.album_id
+GROUP BY al.album_name
+ORDER BY song_count DESC
+
+-- Example 5: Retrieve the artists who have at least 2 albums, ordered alphabetically by artist name.
+
+SELECT ar.artist_name
+FROM artists ar
+INNER JOIN albums al ON ar.artist_id = al.artist_id
+GROUP BY ar.artist_name
+HAVING COUNT(al.album_id) >= 2 
+ORDER BY ar.artist_name 
+
+-- Example 6: Get the count of songs in each album along with the corresponding album name.
+
+SELECT a.album_name, COUNT(*) AS song_count
+FROM songs s
+INNER JOIN albums a ON s.album_id = a.album_id
+GROUP BY a.album_name
+
+-- Example 7: Retrieve the album names and their rating in descending order of average rating.
+
+SELECT a.album_name, a.rating
+FROM albums a
+ORDER BY a.album_name DESC
+
+-- Example 8: Find the average duration of songs in albums with a rating greater than 4.0.
+
+SELECT AVG(duration)
+FROM songs s 
+JOIN albums a ON s.album_id = a.album_id
+WHERE a.rating >4 
+
+-- Example 9: Get the maximum rating among albums in a specific genre
+
+SELECT MAX(rating)
+FROM albums a
+INNER JOIN songs s ON a.album_id = s.album_id
+INNER JOIN songs_genres sg ON s.song_id = sg.song_id
+WHERE sg.genre_id = 1
+
+-- Example 10: Find the count of songs in each genre.
+
+SELECT g.genre_name, COUNT(*) AS song_count
+FROM genres g
+JOIN songs_genres sg ON g.genre_id = sg.genre_id
+GROUP BY g.genre_name
+
+-- Example 11: Retrieve the album names and their respective artist names.
+
+SELECT al.album_name, ar.artist_name
+FROM albums al
+JOIN artists ar ON al.artist_id = ar.artist_id
+
+-- Example 12: Get the average duration of songs in albums by a specific artist.
+
+SELECT AVG(duration) 
+FROM songs s 
+INNER JOIN albums al ON s.album_id = al.album_id
+WHERE al.artist_id = 2
+
+-- Example 13: Retrieve the names of all genres associated with a specific song.
+
+SELECT g.genre_name
+FROM genres g
+JOIN songs_genres sg ON sg.genre_id = g.genre_id
+WHERE sg.song_id = 2
+
+-- Example 14: Find the count fo albums released by each artist.
+
+SELECT ar.artist_name, COUNT(*) AS album_count
+FROM albums al
+JOIN artists ar ON al.artist_id = ar.artist_id
+GROUP BY ar.artist_name
+
+-- Example 15: Retrieve the names of all artists who have albums with a rating higher than 4.0 and have at least 3 songs in their album.
+
+SELECT ar.artist_name
+FROM artists ar
+INNER JOIN albums al ON ar.artist_id = al.artist_id
+INNER JOIN songs s ON al.album_id = s.album_id
+WHERE al.rating > 4.0
+GROUP BY ar.artist_name
+HAVING COUNT(s.song_id) >= 2
+
+-- Example 16: Retrieve the album names along with a concatenated string of song names in each albums.
+
+SELECT al.album_name, STRING_AGG(s.song_name, ',') AS song_names
+FROM albums al
+JOIN songs s ON al.album_id = s.album_id
+GROUP BY al.album_name
+
+-- Example 17: Retrieve the names of all artists who have albums with a rating higer than the average rating of all albums and have at least one song longer than 5 minutres.
+
+SELECT ar.artist_name
+FROM artists ar
+JOIN albums al ON al.artist_id = ar.artist_id
+JOIN songs s ON al.album_id = s.album_id
+WHERE al.rating > (SELECT AVG(rating)FROM albums)
+GROUP BY ar.artist_name
+HAVING MAX (s.duration) > interval '5:00'
 
 
 
