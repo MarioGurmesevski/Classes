@@ -386,7 +386,7 @@ CREATE INDEX idx_album_name ON albums (album_name)
 
 
 
-
+-- ** Templates 
 
 -- Function template
 
