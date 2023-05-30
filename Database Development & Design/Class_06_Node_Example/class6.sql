@@ -1,4 +1,39 @@
+CREATE TABLE artists (
+	artist_id serial primary key,
+	artist_name varchar (50)
+);
+
+CREATE TABLE albums (
+	album_id serial primary key,
+	album_name varchar (50),
+	rating decimal (3,2),
+	artist_id int,
+	foreign key (artist_id) references artists (artist_id)
+);
+
+CREATE TABLE songs (
+	song_id serial primary key,
+	song_name varchar (50),
+	duration interval, -- '02:56'
+	album_id int,
+	foreign key (album_id) references albums (album_id)
+);
+
+CREATE TABLE genres (
+	genre_id serial primary key,
+	genre_name varchar (50)
+);
+
+CREATE TABLE songs_genres (
+	song_id int,
+	genre_id int,
+	primary key (song_id, genre_id),
+	foreign key (song_id) references songs (song_id),
+	foreign key (genre_id) references genres (genre_id)
+);
+
 -- Inserting data into artists table
+
 INSERT INTO artists (artist_name)
 VALUES
 ('Ed Sheeran'),
