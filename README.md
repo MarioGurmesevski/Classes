@@ -62,7 +62,7 @@
     - [Class 6 - Typescript](/Node%20JS/Advanced%20NodeJS/Class_06_Typescript/)
     - [Class 7/8 - NestJS](/Node%20JS/Advanced%20NodeJS/Class_07%2C08_NestJS/)
     - [Class 9/10/11 - TypeORM](/Node%20JS/Advanced%20NodeJS/Class_09%2C10%2C11_TypeORM/)
-    - [Class 12 - Workshop2](/Node%20JS/Advanced%20NodeJS/Class_12_Workshop/)
+    - [Class 12 - Workshop 2](/Node%20JS/Advanced%20NodeJS/Class_12_Workshop/)
     - [Class 13/14 - Authentication](/Node%20JS/Advanced%20NodeJS/Class_13%2C14_Auth/)
     - [Class 15 - SSR](/Node%20JS/Advanced%20NodeJS/Class_15_SSR/)
 
@@ -72,4 +72,5 @@
     - [Class 2 - Filtering,Combination,Constraints](/Database%20Development%20%26%20Design/Class_02_Filtering_Combination_Constraints/)
     - [Class 3 - Relations](/Database%20Development%20%26%20Design/Class_03_Relations/)
     - [Class 4 - Functions Part 1](/Database%20Development%20%26%20Design/Class_04_Functions_Part_1/)
-    - [Class 4 - Functions Part 2](/Database%20Development%20%26%20Design/Class_05_Functions_Part_2/)
+    - [Class 5 - Functions Part 2](/Database%20Development%20%26%20Design/Class_05_Functions_Part_2/)
+    - [Class 6 - Procedure](/Database%20Development%20%26%20Design/Class_06_Procedure/)
