@@ -60,7 +60,7 @@
     - [Class 3/4 - Mongoose](/Node%20JS/Advanced%20NodeJS/Class_03%2C04_Mongoose/)
     - [Class 5 - Workshop](/Node%20JS/Advanced%20NodeJS/Class_05_Workshop/)
     - [Class 6 - Typescript](/Node%20JS/Advanced%20NodeJS/Class_06_Typescript/)
-    - [Class 7/8 - NestJS](/Node%20JS/Advanced%20NodeJS/Class_07_NestJS/)
+    - [Class 7/8 - NestJS](/Node%20JS/Advanced%20NodeJS/Class_07%2C08_NestJS/)
     - [Class 9/10/11 - TypeORM](/Node%20JS/Advanced%20NodeJS/Class_09%2C10%2C11_TypeORM/)
     - [Class 12 - Workshop2](/Node%20JS/Advanced%20NodeJS/Class_12_Workshop/)
     - [Class 13/14 - Authentication](/Node%20JS/Advanced%20NodeJS/Class_13%2C14_Auth/)
