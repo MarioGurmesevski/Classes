@@ -68,7 +68,8 @@
 
   - [Database Development & Design](/Database%20Development%20%26%20Design/)
 
-    - [Class 1 - Intro](/Database%20Development%20%26%20Design/Class_1_Intro/)
-    - [Class 2 - Filtering,Combination,Constraints](/Database%20Development%20%26%20Design/Class_2_Filtering_Combination_Constraints/)
-    - [Class 3 - Relations](/Database%20Development%20%26%20Design/Class_3_Relations/)
-    - [Class 4 - Functions](/Database%20Development%20%26%20Design/Class_4_Functions/)
+    - [Class 1 - Intro](/Database%20Development%20%26%20Design/Class_01_Intro/)
+    - [Class 2 - Filtering,Combination,Constraints](/Database%20Development%20%26%20Design/Class_02_Filtering_Combination_Constraints/)
+    - [Class 3 - Relations](/Database%20Development%20%26%20Design/Class_03_Relations/)
+    - [Class 4 - Functions Part 1](/Database%20Development%20%26%20Design/Class_04_Functions_Part_1/)
+    - [Class 4 - Functions Part 2](/Database%20Development%20%26%20Design/Class_05_Functions_Part_2/)
