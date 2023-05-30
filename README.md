@@ -74,3 +74,4 @@
     - [Class 4 - Functions Part 1](/Database%20Development%20%26%20Design/Class_04_Functions_Part_1/)
     - [Class 5 - Functions Part 2](/Database%20Development%20%26%20Design/Class_05_Functions_Part_2/)
     - [Class 6 - Procedure](/Database%20Development%20%26%20Design/Class_06_Procedure/)
+    - [Class 6 - Nest Example](/Database%20Development%20%26%20Design/Class_06_Node_Example/)

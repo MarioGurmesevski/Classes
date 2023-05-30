@@ -55,6 +55,36 @@ $$;
 
 CALL create_artist_and_album();
 		
+-- Procedure 3 - Get Songs Count Per Genre
+
+CREATE OR REPLACE PROCEDURE get_song_count_per_genre()
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	-- Create temp table to hold the result
+	CREATE TEMPORARY TABLE genre_song_count(
+	genre_name text,
+	song_count int
+	);
+	
+	-- Insert the song count per genre into the temp table
+	INSERT INTO genre_song_count
+	SELECT g.genre_name, COUNT(*) AS song_count
+	FROM genres g
+	JOIN songs_genres sg ON g.genre_id = sg.genre_id
+	GROUP BY g.genre_name;
+	
+	-- Perform the query to discard the results
+	PERFORM * FROM genre_song_count;
+	
+	-- Drop the temp table
+	DROP TABLE genre_song_count;
+	
+END;
+$$;
+
+CALL get_song_count_per_genre()
+		
 SELECT * FROM artists;
 SELECT * FROM albums;
 
