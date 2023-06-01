@@ -2,12 +2,16 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Artist } from "./artists.entity";
 import { Repository } from "typeorm";
+import { ArtistAvgRatingView } from "./artist-avg-rating-view.entity";
 
 @Injectable()
 export class ArtistsService {
   constructor(
     @InjectRepository(Artist)
-    private readonly artistsRepository: Repository<Artist>
+    private readonly artistsRepository: Repository<Artist>,
+
+    @InjectRepository(ArtistAvgRatingView)
+    private readonly artistAvgRatingViewRepository: Repository<ArtistAvgRatingView>
   ) {}
 
   // -- Retrieve the names of all artists along with a comma-separated list of their album names.
@@ -67,21 +71,26 @@ export class ArtistsService {
   //     .getRawMany();
   // }
 
-  async getArtists() {
-    const query = `
-        SELECT ar.artist_name
-        FROM artists ar
-        JOIN albums al ON ar.artist_id = al.artist_id
-        JOIN songs s ON s.album_id = al.album_id
-        WHERE al.rating > (SELECT AVG(rating) from albums)
-        GROUP BY ar.artist_name
-        HAVING MAX(s.duration) > '00:04:00'
-      `;
+  // async getArtists() {
+  //   const query = `
+  //       SELECT ar.artist_name
+  //       FROM artists ar
+  //       JOIN albums al ON ar.artist_id = al.artist_id
+  //       JOIN songs s ON s.album_id = al.album_id
+  //       WHERE al.rating > (SELECT AVG(rating) from albums)
+  //       GROUP BY ar.artist_name
+  //       HAVING MAX(s.duration) > '00:04:00'
+  //     `;
 
-    const results = await this.artistsRepository.query(query);
-    console.log(results);
-    return results.map((r) => r.artist_name);
-  }
+  //   const results = await this.artistsRepository.query(query);
+  //   console.log(results);
+  //   return results.map((r) => r.artist_name);
+  // }
+
+  // getArtists() {
+  //   return this.artistAvgRatingViewRepository.find();
+  // }
+
   getArtist(id: number) {
     return this.artistsRepository.createQueryBuilder("artist").where("artist.artist_id = :id", { id }).getOne();
   }
@@ -92,6 +101,7 @@ export class ArtistsService {
 
     return body;
   }
+
   async updateArtist(id: number, body: Artist) {
     const response = await this.artistsRepository
       .createQueryBuilder("artist")
@@ -115,5 +125,45 @@ export class ArtistsService {
       .execute();
 
     console.log(response);
+  }
+
+  // Get TOP 3 artists by album rating
+  // getArtists() {
+  //   return this.artistsRepository
+  //     .createQueryBuilder("artist")
+  //     .leftJoinAndSelect("artist.albums", "album")
+  //     .groupBy("artist.artist_id")
+  //     .addGroupBy("album.album_id")
+  //     .orderBy("AVG(album.rating)", "DESC")
+  //     .limit(3)
+  //     .getMany();
+  // }
+
+  // Get all artist which have "a" or "e" in their name
+
+  // getArtists() {
+  //   return this.artistsRepository
+  //     .createQueryBuilder("artist")
+  //     .where("artist.artist_name ILIKE :pattern", { pattern: "%a%" })
+  //     .orWhere("artist.artist_name ILIKE :pattern", { pattern: "%e%" })
+  //     .getMany();
+  // }
+
+  // Get all artists that have albums
+  // getArtists() {
+  //   return this.artistsRepository
+  //     .createQueryBuilder("artist")
+  //     .leftJoinAndSelect("artist.albums", "album")
+  //     .where("album.album_id IS NOT NULL")
+  //     .getMany();
+  // }
+
+  // Get all artists that don't have albums
+  getArtists() {
+    return this.artistsRepository
+      .createQueryBuilder("artist")
+      .leftJoinAndSelect("artist.albums", "album")
+      .where("album.album_id IS NULL")
+      .getMany();
   }
 }
