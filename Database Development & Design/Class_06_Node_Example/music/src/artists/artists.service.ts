@@ -80,6 +80,40 @@ export class ArtistsService {
 
     const results = await this.artistsRepository.query(query);
     console.log(results);
-    return results.map(r => r.artist_name);
+    return results.map((r) => r.artist_name);
+  }
+  getArtist(id: number) {
+    return this.artistsRepository.createQueryBuilder("artist").where("artist.artist_id = :id", { id }).getOne();
+  }
+  async createArtist(body: Artist) {
+    const response = await this.artistsRepository.createQueryBuilder().insert().into(Artist).values(body).execute();
+
+    console.log(response);
+
+    return body;
+  }
+  async updateArtist(id: number, body: Artist) {
+    const response = await this.artistsRepository
+      .createQueryBuilder("artist")
+      .update(Artist)
+      .set(body)
+      .where("artist_id = :id", { id })
+      .returning("*")
+      .execute();
+
+    console.log(response);
+
+    return response.raw[0];
+  }
+
+  async deleteArtist(id: number) {
+    const response = await this.artistsRepository
+      .createQueryBuilder()
+      .delete()
+      .from(Artist)
+      .where("artist_id = :id", { id })
+      .execute();
+
+    console.log(response);
   }
 }
