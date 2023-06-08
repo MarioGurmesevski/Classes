@@ -1,16 +1,15 @@
-
-main{
+main {
   font-size: 20px;
   background-color: lightgray;
   color: black;
 }
 
-.main__article{
+.main__article {
   font-size: 18px;
   font-weight: 400;
   color: blue;
 }
 
-#footer{
-  color: #5cbfe0;
+#footer {
+  color: yellow
 }
