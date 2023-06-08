@@ -1,20 +1,19 @@
-import React from 'react'
+import React from "react"
 
-export default class Footer extends React.Component{
-    
-    constructor(props){
+export default class Footer extends React.Component {
+
+    constructor(props) {
         super(props)
-
-        // console.log(props);
-        console.log('constructor Footer');
+        // console.log(props)
+        console.log('constructor Footer')
     }
 
-    render(){
+    render() {
 
-        console.log('render Footer');
+        console.log('render Footer')
 
-        return(
+        return (
             <footer>Footer</footer>
         )
-    }    
+    }
 }

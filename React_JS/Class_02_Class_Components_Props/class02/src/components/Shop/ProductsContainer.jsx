@@ -1,15 +1,66 @@
-import React from "react";
+import React  from "react";
+import ProductList from "./ProductList";
+import './ProductsContainer.css'
+import Cart from "./Cart";
 
-export default class ProductsContainer extends React.Component{
+export default class ProductsContainer extends React.Component {
 
-    constructor(){
+    constructor() {
         super()
+
+        this.state = {
+            products: [
+                {
+                    id: 1,
+                    name: 'Umbrella',
+                    color: 'blue',
+                    price: 12,
+                    inStock: true
+                },
+                {
+                    id: 2,
+                    name: 'Ball',
+                    color: 'white',
+                    price: 3,
+                    inStock: true
+                },
+                {
+                    id: 3,
+                    name: 'Socks',
+                    color: 'yellow',
+                    price: 2,
+                    inStock: false
+                },
+                {
+                    id: 4,
+                    name: 'Chair',
+                    color: 'brown',
+                    price: 20,
+                    inStock: true
+                }
+            ],
+            productInCart: []
+        }
+    }
+
+    addToCart(id){
+        // console.log(id);
+        const product = this.state.products.find(p => p.id === id)
+        // console.log(product);
+        this.setState((prevState) => ({
+            productsInCart: [...prevState.productsInCart, product]
+        }))
+
+        removeFromCart(id){
+
+        }
     }
 
     render() {
         return (
-            <div>
-                
+            <div className="wrapper">
+                <ProductList products={this.state.products} addToCart={this.addToCart.bind(this)} />
+                <Cart  productInCart = {this.state.productInCart} r/>
             </div>
         )
     }
