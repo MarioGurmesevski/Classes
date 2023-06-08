@@ -82,4 +82,5 @@
 
   - [React JS](/React_JS/)
 
-    - [Class - Introduction](/React_JS/Class_01_Introduction/)
+    - [Class 1 - Introduction](/React_JS/Class_01_Introduction/)
+    - [Class 2 - Class,Components & Props](/React_JS/Class_02_Class_Components_Props)
