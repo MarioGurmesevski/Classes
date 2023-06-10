@@ -8,6 +8,7 @@ export default class Footer extends React.Component {
         console.log('constructor Footer')
     }
 
+
     render() {
 
         console.log('render Footer')

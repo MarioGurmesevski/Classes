@@ -11,9 +11,19 @@ export default class Product extends React.Component {
         return (
             <li>
                 <h3>{this.props.name}</h3>
-                <p style={{backgroundColor:this.props.color}}>{this.props.color}</p>
-                <p >{this.props.price}</p>
-                <button disabled ={!this.props.inStock} type="button" onClick={() => this.props.addToCart(this.props.id)}>Add to cart</button>
+                <p style={{ 
+                        backgroundColor: this.props.color
+                    }}>
+                        {this.props.color}
+                </p>
+                <p>{this.props.price}</p>
+                <button
+                    disabled={!this.props.inStock}
+                    type="button"
+                    onClick={() => this.props.addToCart(this.props.id)}
+                >
+                        Add to cart
+                </button>
             </li>
         )
     }

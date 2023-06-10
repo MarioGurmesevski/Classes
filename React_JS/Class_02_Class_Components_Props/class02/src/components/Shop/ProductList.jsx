@@ -17,7 +17,7 @@ export default class ProductList extends React.Component {
                             .map(product => <Product 
                                                 key={product.id}
                                                 {...product}
-                                                addToCart = {this.props.addToCart}
+                                                addToCart={this.props.addToCart}
                                             />)
                                             // id={product.id}
                                             // name={product.name}
