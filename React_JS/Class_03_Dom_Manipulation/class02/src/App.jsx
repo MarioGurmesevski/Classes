@@ -1,7 +1,7 @@
+import { Outlet } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Layout/Footer'
 import Header from './components/Layout/Header'
-import ProductsContainer from './components/Shop/ProductsContainer'
 
 function App() {
   const title = 'Class 2 app'
@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Header title={title} />
-      <ProductsContainer />
+      <Outlet/>
       <Footer title={title} />
     </>
   )

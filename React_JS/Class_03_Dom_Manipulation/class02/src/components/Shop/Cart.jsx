@@ -35,7 +35,7 @@ export default class Cart extends React.Component {
     }
 
     handleScroll(e){
-        // console.log('We are scrolling', e);
+        console.log('We are scrolling', e);
     }
 
     getSnapshotBeforeUpdate(prevProps,prevState){
@@ -50,6 +50,12 @@ export default class Cart extends React.Component {
         if (snapshot !== null && snapshot === window.pageYOffset){
             window.scrollTo(0,0)
         }
+    }
+
+    componentWillUnmount(){
+        console.log('componentWillUnmount Cart');
+        
+        window.removeEventListener('scroll', this.handleScroll)
     }
 
     render() {
