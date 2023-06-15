@@ -23,7 +23,7 @@
       - [Class 1 - Basics](/JavaScript/Basic_JavaScript/Class_01_Basics/)
       - [Class 2 - Functions](/JavaScript/Basic_JavaScript/Class_02_Functions/)
       - [Class 3 - Recap](/JavaScript/Basic_JavaScript/Class_03_Recap/)
-      - [Class 3/4 - Array/Loops](/JavaScript/Basic_JavaScript/Class_03%2C04_Array_Loops/)
+      - [Class 3/4 - Array/Loops](/JavaScript/Basic_JavaScript/Class_03_04_Array_Loops/)
       - [Class 5 - DOM](/JavaScript/Basic_JavaScript/Class_05_Dom/)
       - [Class 6 - Events](/JavaScript/Basic_JavaScript/Class_06_Events/)
       - [Class 7 - Objects](/JavaScript/Basic_JavaScript/Class_07_Objects/)
@@ -32,11 +32,11 @@
 
     - [Advanced JavaScript](/JavaScript/Advanced_JavaScript/)
 
-      - [Class 1/2 - Recap of Basic JS](/JavaScript/Advanced_JavaScript/Class_01%2C02_Recap_Exercises/)
+      - [Class 1/2 - Recap of Basic JS](/JavaScript/Advanced_JavaScript/Class_01_02_Recap_Exercises/)
       - [Class 3 - Ajax recap](/JavaScript/Advanced_JavaScript/Class_03_Ajax_Recap/)
       - [Class 4 - Advanced Functions Part 1](/JavaScript/Advanced_JavaScript/Class_04_Functions/)
-      - [Class 5/9/13 - Weather API](/JavaScript/Advanced_JavaScript/Class_05%2C09%2C13_Workshop_Weather_app/)
-      - [Class 6 - Advanced Functions Part 2](/JavaScript/Advanced_JavaScript/Class_06%2C07_Functions_Part_2/)
+      - [Class 5/9/13 - Weather API](/JavaScript/Advanced_JavaScript/Class_05_09_13_Workshop_Weather_app/)
+      - [Class 6 - Advanced Functions Part 2](/JavaScript/Advanced_JavaScript/Class_06_07_Functions_Part_2/)
       - [Class 7 - UnderTheHood](/JavaScript/Advanced_JavaScript/Class_07_UnderTheHood/)
       - [Class 8 - Async-Await](/JavaScript/Advanced_JavaScript/Class_08_Async_Await/)
       - [Class 10 - Object Part 1](/JavaScript/Advanced_JavaScript/Class_10_Objects_Part_1/)

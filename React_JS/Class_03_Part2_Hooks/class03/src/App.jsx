@@ -1,13 +1,12 @@
-import './App.css'
-import PlannerContainer from "./components/PlannerContainer";
+import "./App.css";
+import Testing from "./components/Testing";
 
 function App() {
-
   return (
     <>
-      <PlannerContainer/>
+      <Testing />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
