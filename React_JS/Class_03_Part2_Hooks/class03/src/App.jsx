@@ -1,10 +1,10 @@
 import "./App.css";
-import Testing from "./components/Testing";
+import PlannerContainer from "./components/PlannerContainer";
 
 function App() {
   return (
     <>
-      <Testing />
+      <PlannerContainer />
     </>
   );
 }
