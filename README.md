@@ -60,14 +60,14 @@
 
     - [Advnaced Node JS](/Node_JS/Advanced_NodeJS/)
 
-      - [Class 1/2 - MongoDB](/Node_JS/Advanced_NodeJS/Class_01%2C02_MongoDB/)
-      - [Class 3/4 - Mongoose](/Node_JS/Advanced_NodeJS/Class_03%2C04_Mongoose/)
+      - [Class 1/2 - MongoDB](/Node_JS/Advanced_NodeJS/Class_01_02_MongoDB/)
+      - [Class 3/4 - Mongoose](/Node_JS/Advanced_NodeJS/Class_03_04_Mongoose/)
       - [Class 5 - Workshop](/Node_JS/Advanced_NodeJS/Class_05_Workshop/)
       - [Class 6 - Typescript](/Node_JS/Advanced_NodeJS/Class_06_Typescript/)
-      - [Class 7/8 - NestJS](/Node_JS/Advanced_NodeJS/Class_07%2C08_NestJS/)
-      - [Class 9/10/11 - TypeORM](/Node_JS/Advanced_NodeJS/Class_09%2C10%2C11_TypeORM/)
+      - [Class 7/8 - NestJS](/Node_JS/Advanced_NodeJS/Class_07_08_NestJS/)
+      - [Class 9/10/11 - TypeORM](/Node_JS/Advanced_NodeJS/Class_09_10_11_TypeORM/)
       - [Class 12 - Workshop 2](/Node_JS/Advanced_NodeJS/Class_12_Workshop/)
-      - [Class 13/14 - Authentication](/Node_JS/Advanced_NodeJS/Class_13%2C14_Auth/)
+      - [Class 13/14 - Authentication](/Node_JS/Advanced_NodeJS/Class_13_14_Auth/)
       - [Class 15 - SSR](/Node_JS/Advanced_NodeJS/Class_15_SSR/)
 
   - [Database Development & Design](/Database_Development_and_Design/)
