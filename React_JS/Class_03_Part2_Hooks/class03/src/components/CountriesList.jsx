@@ -1,5 +1,5 @@
 import CountryBox from "./CountryBox";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import SearchInput from "./SearchInput";
 import RegionInputs from "./RegionInputs";
 
@@ -37,20 +37,24 @@ export default function CountriesList({ countries, addToTrip }) {
     <>
       <SearchInput setSearchTerm={setSearchTerm} />
       <RegionInputs setRegion={setRegion} />
-      {filteredCountries.map((country) => (
-        <CountryBox
-          key={country.cca2 + "initial-country"} // use unique values for KEY
-          id={country.cca2}
-          name={country.name.common}
-          capital={country.capital?.[0]}
-          region={country.region}
-          subregion={country.subregion}
-          flagSrc={country.flags.png}
-          flagAlt={country.flags.alt}
-          addToTrip={addToTrip}
-          showAddButton={true}
-        />
-      ))}
+      {!filteredCountries?.length ? (
+        <h1>No Countries Found</h1>
+      ) : (
+        filteredCountries.map((country) => (
+          <CountryBox
+            key={country.cca2 + "initial-country"} // use unique values for KEY
+            id={country.cca2}
+            name={country.name.common}
+            capital={country.capital?.[0]}
+            region={country.region}
+            subregion={country.subregion}
+            flagSrc={country.flags.png}
+            flagAlt={country.flags.alt}
+            addToTrip={addToTrip}
+            showAddButton={true}
+          />
+        ))
+      )}
     </>
   );
 }
