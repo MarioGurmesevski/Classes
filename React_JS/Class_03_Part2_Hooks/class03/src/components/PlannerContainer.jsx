@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import CountryBox from "./CountryBox";
 
+// Using CSS like this is similar to using the "CSS in JS" way, read more on: https://cssinjs.org/
 const wrapperStyle = {
   display: "flex",
   flexWrap: "nowrap",
@@ -20,70 +21,69 @@ const countriesListStyle = {
 };
 
 export default function PlannerContainer() {
-  const [countries, setCountries] = useState([]);
-  const [tripList, setTripList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [cost, setCost] = useState(0);
-  const inputRef = useRef(null);
+  const [countries, setCountries] = useState([]); // all counties
+  const [tripList, setTripList] = useState([]); // countries that are added to my personal trip list
+  const [searchTerm, setSearchTerm] = useState(""); // value in the search input
+  const [cost, setCost] = useState(0); // total cost of the trip
+  const inputRef = useRef(null); // reference to the input element
 
+  useEffect(() => {
+    // Try to avoid using async callbacks in useEffect
+    axios.get("https://restcountries.com/v3.1/all").then(response => {
+      setCountries(response.data); // set all countries received from the BE api
+      inputRef.current.focus(); // focus on the search input once the countries are rendered
+    });
+  }, []);
+
+  // Update cost on each change of tripList
   useEffect(() => {
     const newCost = tripList.reduce((acc, country) => {
       return acc + Math.round(country.area / 300);
     }, 1);
+
     setCost(newCost);
   }, [tripList]);
 
-  useEffect(() => {
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((response) => {
-        console.log(response.data);
-        setCountries(response.data);
-        inputRef.current.focus();
-      });
-  }, []);
-
+  // Using useMemo to prevent unnecessary rerenders
   const filteredCountries = useMemo(() => {
-    return countries.filter((country) =>
-      country.name.common
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+    return countries.filter(country =>
+      country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [countries, searchTerm]);
 
-  const addToTrip = (id) => {
-    const countryToAdd = countries.find(
-      (country) => country.cca2 === id
-    );
-    setTripList((prevTripListCountries) => [
+  const addToTrip = id => {
+    // find the country
+    const countryToAdd = countries.find(country => country.cca2 === id);
+    // add the country to the trip list (right column)
+    setTripList(prevTripListCountries => [
       ...prevTripListCountries,
       countryToAdd,
     ]);
-    setCountries((prevCountries) =>
-      prevCountries.filter((country) => country.cca2 !== id)
-    );
 
-    // console.log("tripList", tripList);
+    // remove the country from the list of all countries (left column)
+    setCountries(prevCountries =>
+      prevCountries.filter(country => country.cca2 !== id)
+    );
+    // updated state is NOT AVAILABLE here. State is updated within this loop, and you can access the value ONLY the next event loop.
+    // You can't await setState because setState technically doesn't return a Promise to be awaited
+    // console.log("trip list", tripList);
   };
 
-  //   useEffect(() => {
-  //     console.log("trip list in useEffect", tripList);
-  //   }, [tripList]);
+  // Regarding previous comment above, you can only get updated state in a useEffect, which will be executed when the state is updated
+  // useEffect(() => {
+  //   console.log("trip list vo useEffect", tripList);
+  // }, [tripList]);
 
-  const removeFromTrip = (id) => {
-    const countryToRemove = tripList.find(
-      (country) => country.cca2 === id
-    );
-    setCountries((prevCountries) => [
-      ...prevCountries,
-      countryToRemove,
-    ]);
-    setTripList((prevTripListCountries) =>
-      prevTripListCountries.filter((country) => country.cca2 !== id)
+  const removeFromTrip = id => {
+    // find the country to be removed
+    const countryToRemove = tripList.find(country => country.cca2 === id);
+    // add the country back to the all countries list (left column)
+    setCountries(prevCountries => [countryToRemove, ...prevCountries]);
+    // remove the country from the list of selected countries
+    setTripList(prevTripListCountries =>
+      prevTripListCountries.filter(country => country.cca2 !== id)
     );
   };
-
-  console.log("countries", countries);
 
   return (
     <div style={wrapperStyle}>
@@ -93,11 +93,11 @@ export default function PlannerContainer() {
           type="search"
           ref={inputRef}
           placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={e => setSearchTerm(e.target.value)}
         />
-        {filteredCountries.map((country) => (
+        {filteredCountries.map(country => (
           <CountryBox
-            key={country.cca2 + "initial-country"}
+            key={country.cca2 + "initial-country"} // use unique values for KEY
             id={country.cca2}
             name={country.name.common}
             capital={country.capital?.[0]}
@@ -112,10 +112,10 @@ export default function PlannerContainer() {
         ))}
       </div>
       <div style={countriesListStyle}>
-        <h3 style={{ flexBasis: "100%" }}>Cost:{cost}$</h3>
-        {tripList.map((country) => (
+        <h3 style={{ flexBasis: "100%" }}>Cost: {cost}$</h3>
+        {tripList.map(country => (
           <CountryBox
-            key={country.cca2 + "trip-list-country"}
+            key={country.cca2 + "trip-list-country"} // use unique values for KEY
             id={country.cca2}
             name={country.name.common}
             capital={country.capital?.[0]}
@@ -132,3 +132,10 @@ export default function PlannerContainer() {
     </div>
   );
 }
+
+// Countries model structure
+// name: name.common
+// capital: capital[0]
+// region: region
+// subregion: subregion
+// flag: flags.png / alt: flags.alt

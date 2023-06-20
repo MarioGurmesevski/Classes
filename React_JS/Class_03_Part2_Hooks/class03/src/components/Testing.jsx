@@ -9,11 +9,9 @@ export default function Testing() {
   //   let test = "";
 
   useEffect(() => {
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((response) => {
-        console.log(response.data);
-      });
+    axios.get("https://restcountries.com/v3.1/all").then(response => {
+      console.log(response.data);
+    });
 
     console.log("Welcome to PlannerContainer!");
     inputRef.current.focus();
@@ -51,7 +49,7 @@ export default function Testing() {
           type="search"
           ref={inputRef}
           placeholder="Search"
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={e => setSearch(e.target.value)}
         />
       </div>
       <h1>{search}</h1>
