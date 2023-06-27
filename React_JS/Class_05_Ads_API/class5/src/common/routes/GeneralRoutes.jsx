@@ -1,5 +1,5 @@
-import AdsList from "../../components/AdsList";
 import Layout from "../../components/Layout";
+import AdsList from "../../components/AdsList";
 import AdDetails from "../../components/AdDetails";
 import AdForm from "../../components/AdForm";
 

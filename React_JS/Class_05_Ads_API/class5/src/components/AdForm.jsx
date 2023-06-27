@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -62,9 +62,11 @@ const AdForm = () => {
   const validateForm = useCallback(() => {
     console.log("validating");
     const validationErrors = {};
+
     if (!title.trim()) {
       validationErrors.title = "Title is required";
     }
+
     if (!body.trim()) {
       validationErrors.body = "Description is required";
     }

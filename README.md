@@ -86,3 +86,4 @@
     - [Class 2 - Class,Components & Props](/React_JS/Class_02_Class_Components_Props)
     - [Class 3 - Dom Manipulation](/React_JS/Class_03_Part1_Dom_Manipulation/)
     - [Class 3/4 - Hooks](/React_JS/Class_03_Part2_Hooks/)
+    - [Class 5/6 - Ads API Example](/React_JS/Class_05_Ads_API/)

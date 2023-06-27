@@ -38,7 +38,7 @@ const AdDetails = () => {
               <li key={comment.id} className="list-group-item">
                 <strong>{comment.name}</strong>
                 <p>{comment.body}</p>
-                <em>Author:{comment.email}</em>
+                <em>Author: {comment.email}</em>
               </li>
             ))}
           </ul>
