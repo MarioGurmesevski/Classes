@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import CommentSection from "./CommentsSection";
 
 const AdDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [ad, setAd] = useState({});
-  const [comments, setComments] = useState([]);
-
   useEffect(() => {
-    Promise.all([
-      axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`),
-      axios.get(
-        `https://jsonplaceholder.typicode.com/posts/${id}/comments`
-      ),
-    ]).then(([adResponse, commentsResponse]) => {
-      setAd(adResponse.data);
-      setComments(commentsResponse.data);
-    });
+    axios
+      .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+      .then((adResponse) => {
+        setAd(adResponse.data);
+      });
   }, [id]);
 
   return (
@@ -33,15 +28,7 @@ const AdDetails = () => {
         <h2 className="card-header">{ad.title}</h2>
         <div className="card-body">
           <p className="card-text">{ad.body}</p>
-          <ul className="list-group list-group-flush">
-            {comments.map((comment) => (
-              <li key={comment.id} className="list-group-item">
-                <strong>{comment.name}</strong>
-                <p>{comment.body}</p>
-                <em>Author: {comment.email}</em>
-              </li>
-            ))}
-          </ul>
+          <CommentSection id={id} />
         </div>
       </div>
     </div>
