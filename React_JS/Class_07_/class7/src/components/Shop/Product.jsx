@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../common/actions/productActions";
 
-const Product = ({ imgUrl, title, description, price }) => {
-  const dispatch = useDispatch;
+const Product = ({ id, imgUrl, title, description, price }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="col-6">
       <div className="card">
@@ -23,14 +24,14 @@ const Product = ({ imgUrl, title, description, price }) => {
           <p className="card-text">{description}</p>
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">{price}$</li>
+          <li className="list-group-item">Price: {price}$</li>
         </ul>
         <div className="card-body">
           <button
             className="btn btn-primary"
-            onClick={dispatch(addToCart())}
+            onClick={() => dispatch(addToCart(id))}
           >
-            Add to Cart
+            Add to cart
           </button>
         </div>
       </div>

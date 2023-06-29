@@ -1,9 +1,9 @@
 const CartItem = ({ title, price }) => {
   return (
     <li className="list-group-item text-end">
-      <span> {title} </span>
+      <span>{title}</span>
       <span> | </span>
-      <span> {price} </span>
+      <span>{price}$</span>
     </li>
   );
 };

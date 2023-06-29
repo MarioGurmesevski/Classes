@@ -14,10 +14,6 @@ const GeneralRoutes = {
       path: "/cart",
       element: <Cart />,
     },
-    {
-      path: "*",
-      element: <h1>Page Not Found</h1>,
-    },
   ],
 };
 

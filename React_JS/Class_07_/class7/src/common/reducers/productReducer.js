@@ -1,7 +1,4 @@
-import {
-  ADD_TO_CART,
-  FETCH_PRODUCTS,
-} from "../const/productActions.const";
+import { ADD_TO_CART, FETCH_PRODUCTS } from "../const/productActions.const";
 
 const initialState = {
   products: [],
@@ -19,9 +16,7 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: [
-          state.products.find(
-            (product) => product.id === action.payload
-          ),
+          state.products.find(product => product.id === action.payload),
         ],
       };
     default:
