@@ -1,7 +1,7 @@
 # How to initialize a vite project
 
 ```sh
-npm create vite@last
+npm create vite@latest
 ```
 
 Set a project name
