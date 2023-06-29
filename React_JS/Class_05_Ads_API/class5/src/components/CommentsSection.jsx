@@ -1,6 +1,6 @@
 import useComments from "../common/hooks/useComments";
 
-const CommentSection = (id) => {
+const CommentsSection = ({ id }) => {
   const comments = useComments(id);
 
   return (
@@ -16,4 +16,4 @@ const CommentSection = (id) => {
   );
 };
 
-export default CommentSection;
+export default CommentsSection;

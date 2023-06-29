@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import CommentSection from "./CommentsSection";
+import CommentsSection from "./CommentsSection";
 
 const AdDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [ad, setAd] = useState({});
+
   useEffect(() => {
     axios
       .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
@@ -28,7 +29,7 @@ const AdDetails = () => {
         <h2 className="card-header">{ad.title}</h2>
         <div className="card-body">
           <p className="card-text">{ad.body}</p>
-          <CommentSection id={id} />
+          <CommentsSection id={id} />
         </div>
       </div>
     </div>
