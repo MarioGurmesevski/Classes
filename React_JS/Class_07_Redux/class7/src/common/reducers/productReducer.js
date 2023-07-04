@@ -2,13 +2,17 @@ import {
   ADD_TO_CART,
   FETCH_PRODUCTS,
   REMOVE_FROM_CART,
+  SET_CATEGORIES,
   SET_SEARCH_TERM,
+  SET_SELECTED_CATEGORIES,
 } from "../const/productActions.const";
 
 const initialState = {
   products: [],
   cartItems: [],
   searchTerm: "",
+  categories: [],
+  selectedCategories: [],
 };
 
 const productReducer = (state = initialState, action) => {
@@ -39,6 +43,16 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         searchTerm: action.payload,
+      };
+    case SET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    case SET_SELECTED_CATEGORIES:
+      return {
+        ...state,
+        selectedCategories: action.payload,
       };
     default:
       return state;
