@@ -1,14 +1,27 @@
 import { useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../common/actions/authActions";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const activeLinkCart = useMemo(
     () => location.pathname.includes("/cart"),
     [location.pathname]
   );
+
+  const handleLogin = () => {
+    if (isLoggedIn) {
+      dispatch(logout());
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <header>
@@ -48,6 +61,15 @@ const Header = () => {
                 >
                   Cart
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleLogin}
+                >
+                  {isLoggedIn ? "Logout" : "Login"}
+                </button>
               </li>
             </ul>
           </div>
