@@ -21,16 +21,17 @@ const Shop = () => {
 
   return (
     <div className="container text-center">
-      <div className="row align-item-start">
+      <div className="row align-items-start">
         <div className="col-12">
           <Search />
         </div>
       </div>
+
       <div className="row align-items-start">
         <div className="col-3"></div>
         <div className="col-9">
           <div className="row align-items-start">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <Product key={product.id} {...product} />
             ))}
           </div>

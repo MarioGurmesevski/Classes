@@ -3,6 +3,7 @@ import { setSearchTerm } from "../../common/actions/productActions";
 
 const Search = () => {
   const dispatch = useDispatch();
+
   return (
     <div className="input-group my-3">
       <input

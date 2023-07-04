@@ -18,7 +18,6 @@ const productReducer = (state = initialState, action) => {
         ...state,
         products: action.payload,
       };
-
     case ADD_TO_CART:
       return {
         ...state,
@@ -29,7 +28,6 @@ const productReducer = (state = initialState, action) => {
           ),
         ],
       };
-
     case REMOVE_FROM_CART:
       return {
         ...state,
@@ -37,13 +35,11 @@ const productReducer = (state = initialState, action) => {
           (item) => item.id !== action.payload
         ),
       };
-
     case SET_SEARCH_TERM:
       return {
         ...state,
         searchTerm: action.payload,
       };
-
     default:
       return state;
   }

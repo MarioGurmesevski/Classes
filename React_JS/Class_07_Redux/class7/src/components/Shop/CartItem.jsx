@@ -3,6 +3,7 @@ import { removeFromCart } from "../../common/actions/productActions";
 
 const CartItem = ({ id, title, price }) => {
   const dispatch = useDispatch();
+
   return (
     <li className="list-group-item text-end">
       <span>{title}</span>
