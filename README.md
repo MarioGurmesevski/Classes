@@ -88,3 +88,4 @@
     - [Class 3/4 - Hooks](/React_JS/Class_03_Part2_Hooks/)
     - [Class 5/6 - Ads API Example](/React_JS/Class_05_Ads_API/)
     - [Class 7/8 - Redux Example](/React_JS/Class_07_Redux/)
+    - [Class 9/10 - NextJS Example](/React_JS/Class_09_NextJs/)
