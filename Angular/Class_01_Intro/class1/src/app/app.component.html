@@ -1,0 +1,9 @@
+<!-- <h1>Hello World</h1> -->
+
+<h1>{{ title }}</h1>
+
+<div>
+  <input type="text" [value]="title" (keyup)="onInputChange($event)" />
+</div>
+
+<app-pets-list></app-pets-list>
