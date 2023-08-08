@@ -11,7 +11,7 @@ export class PetsListComponent {
       id: 1,
       name: 'Boem',
       type: PetType.dog,
-      color: 'yellow',
+      color: 'lightgray',
       age: 5,
       hasOwner: true,
     },
@@ -19,7 +19,7 @@ export class PetsListComponent {
       id: 2,
       name: 'Bill',
       type: PetType.cat,
-      color: 'black',
+      color: 'white',
       age: 4,
       hasOwner: false,
     },
@@ -39,5 +39,10 @@ export class PetsListComponent {
     console.log(newView);
 
     this.inView = newView;
+  }
+  handlePetRemove(id: number) {
+    console.log('Parent remove pet', id);
+
+    this.pets = this.pets.filter((pet) => pet.id !== id);
   }
 }
