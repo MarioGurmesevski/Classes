@@ -8,7 +8,6 @@ export interface IPet {
   name: string;
   color: string;
   age: number;
-  type: PetType;
-  //   type: 'dog' | 'cat';
+  type: PetType; // 'dog' | 'cat';
   hasOwner: boolean;
 }

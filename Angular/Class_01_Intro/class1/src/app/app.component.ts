@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IPet, PetType } from './interfaces/pet.interface';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,40 @@ import { Component } from '@angular/core';
   // styles: [
   //   `
   //     h1 {
-  //       color: lightblue;
+  //       color: red;
   //     }
   //   `,
   // ],
 })
 export class AppComponent {
   title = 'class1';
+
+  pets: IPet[] = [
+    {
+      id: 1,
+      name: 'Boem',
+      type: PetType.cat,
+      color: 'orange',
+      age: 5,
+      hasOwner: false,
+    },
+    {
+      id: 2,
+      name: 'Galen',
+      type: PetType.dog,
+      color: 'lightgrey',
+      age: 6,
+      hasOwner: true,
+    },
+    {
+      id: 3,
+      name: 'Max',
+      type: PetType.dog,
+      color: 'Gold',
+      age: 6,
+      hasOwner: true,
+    },
+  ];
 
   onInputChange(event: any) {
     console.log('input changed', event.target.value);
