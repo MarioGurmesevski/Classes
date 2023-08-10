@@ -20,7 +20,7 @@ export class AppComponent {
   pets: IPet[] = [
     {
       id: 1,
-      name: 'Boem',
+      name: 'Milo',
       type: PetType.cat,
       color: 'orange',
       age: 5,

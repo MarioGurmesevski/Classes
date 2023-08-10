@@ -19,6 +19,9 @@
         ></app-pet>
       </ng-container>
     </ol>
+
+    <app-pet-count [pets]="pets"></app-pet-count>
+
     <p *ngIf="!pets.length">No pets available!</p>
   </div>
   <div *ngSwitchCase="'form'">
