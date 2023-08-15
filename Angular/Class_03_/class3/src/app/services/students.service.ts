@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { AcademyTypeEnum } from 'src/app/interfaces/academy-type.enum';
-import { Student } from 'src/app/interfaces/student.interface';
+import { SearchFilters } from './../interfaces/search-filters.interface';
+import { Injectable } from '@angular/core';
+import { AcademyTypeEnum } from '../interfaces/academy-type.enum';
+import { Student } from '../interfaces/student.interface';
 
-@Component({
-  selector: 'app-student-list',
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.css'],
+@Injectable({
+  providedIn: 'root',
 })
-export class StudentListComponent {
-  students: Student[] = [
+export class StudentsService {
+  private students: Student[] = [
     {
       id: 1,
       name: 'Aleksandar Ivanov',
@@ -291,4 +290,49 @@ export class StudentListComponent {
       grades: [10, 5, 8, 9, 8],
     },
   ];
+
+  getStudents(): Student[] {
+    return this.students;
+  }
+
+  getStudentById(id: number): Student | undefined {
+    return this.students.find((s) => s.id === id);
+  }
+
+  getTopThreeStudentsPerAcademy(academy: AcademyTypeEnum): Student[] {
+    return this.students
+      .filter((student) => student.academy === academy)
+      .sort((a, b) => {
+        const aAverageGrade =
+          a.grades.reduce((acc, grade) => acc + grade, 0) / a.grades.length;
+        const bAverageGrade =
+          b.grades.reduce((acc, grade) => acc + grade, 0) / b.grades.length;
+        return bAverageGrade - aAverageGrade;
+      })
+      .slice(0, 3);
+  }
+
+  searchStudents(searchFilters: SearchFilters): Student[] {
+    if (!searchFilters) {
+      return this.students;
+    }
+    return this.students.filter((student) => {
+      if (
+        searchFilters.searchTerm &&
+        student.name
+          .toLowerCase()
+          .includes(searchFilters.searchTerm.toLowerCase())
+      ) {
+        return false;
+      }
+      if (
+        searchFilters.isPassing &&
+        student.grades.reduce((a, b) => a + b, 0) / student.grades.length < 5
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+  }
 }

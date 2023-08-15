@@ -6,13 +6,16 @@ import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 export class GradeColorDirective implements OnInit {
   @Input() grade: number = 0;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+    console.log('bg color directive');
+  }
 
   ngOnInit() {
     this.setBackgroundColor();
   }
 
   setBackgroundColor() {
+    console.log('calculate bg color');
     if (this.grade >= 9) {
       this.renderer.setStyle(
         this.el.nativeElement,
@@ -35,7 +38,7 @@ export class GradeColorDirective implements OnInit {
       this.renderer.setStyle(
         this.el.nativeElement,
         'background-color',
-        'yellow'
+        'lightblue'
       );
     } else if (this.grade >= 5 && this.grade < 6) {
       this.renderer.setStyle(

@@ -1,4 +1,29 @@
-<!-- <pre>{{ students | json }}</pre> -->
+<!-- ONLY WHILE DEVELOPMENT -->
+<!-- <pre>
+    {{students | json}}
+</pre> -->
+
+<div class="search-wrapper">
+  <input
+    type="search"
+    id="search"
+    placeholder="Search..."
+    (keyup)="onKeyUp($event)"
+  />
+</div>
+<div class="filters-wrapper">
+  <div>
+    <input
+      type="checkbox"
+      id="is-passing"
+      (change)="onIsPassingChange($event)"
+    />
+    <label for="is-passing">Is Passing</label>
+  </div>
+</div>
+
+<div></div>
+
 <table>
   <thead>
     <th>#</th>
@@ -8,7 +33,6 @@
     <th>Group</th>
     <th>Avg Grade</th>
   </thead>
-
   <tbody>
     <tr *ngFor="let student of students">
       <td>{{ student.id }}</td>
