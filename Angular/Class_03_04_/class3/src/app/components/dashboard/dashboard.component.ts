@@ -1,7 +1,7 @@
-import { StudentsService } from 'src/app/services/students.service';
 import { AcademyTypeEnum } from './../../interfaces/academy-type.enum';
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../../interfaces/student.interface';
+import { StudentsService } from '../../services/students.service';
 
 @Component({
   selector: 'app-dashboard',
