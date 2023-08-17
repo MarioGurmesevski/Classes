@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../../interfaces/student.interface';
 import { StudentsService } from '../../services/students.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SearchFilters } from 'src/app/interfaces/search-filters.interface';
+import { SortByEnum, SortDirectionEnum } from '../../interfaces/sort.enum';
 
 @Component({
   selector: 'app-students-list',
@@ -9,6 +12,11 @@ import { StudentsService } from '../../services/students.service';
 })
 export class StudentsListComponent implements OnInit {
   students: Student[] = []; // local copy of the list of students, this can be both all students or filtered students depending on if we are searching something or not
+  sortByEnum = SortByEnum;
+  sortBy: SortByEnum = SortByEnum.id;
+  sortDirection: SortDirectionEnum = SortDirectionEnum.asc;
+
+  showGrading = new Map(); // {}
 
   // list of all filters values
   searchTerm: string = '';
@@ -33,69 +41,184 @@ export class StudentsListComponent implements OnInit {
     'G12',
   ];
 
-  constructor(private studentsService: StudentsService) {}
+  constructor(
+    private studentsService: StudentsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.students = this.studentsService.getStudents(); // assigning all students on initialization of the component
+    this.searchTerm = this.route.snapshot.queryParams['searchTerm'] || '';
+    this.isPassing = !!this.route.snapshot.queryParams['isPassing'];
+    this.selectedGroup = this.route.snapshot.queryParams['group'] || '';
+    this.startDate = !!this.route.snapshot.queryParams['startDate']
+      ? new Date(this.route.snapshot.queryParams['startDate'])
+      : undefined;
+    this.endDate = !!this.route.snapshot.queryParams['endDate']
+      ? new Date(this.route.snapshot.queryParams['endDate'])
+      : undefined;
+
+    this.students = this.prepareFiltersAndGetStudents();
+  }
+
+  sortStudents(sortBy: SortByEnum) {
+    this.sortBy = sortBy;
+
+    this.students = this.students.sort((a, b) => {
+      // Sorting ascending
+      if (this.sortDirection === SortDirectionEnum.asc) {
+        // Sort by name
+        if (
+          this.sortBy === SortByEnum.name ||
+          this.sortBy === SortByEnum.academy
+        ) {
+          return a[this.sortBy]
+            .toLocaleLowerCase()
+            .localeCompare(b[this.sortBy].toLocaleLowerCase());
+        }
+
+        // Sort by group
+        if (this.sortBy === SortByEnum.group) {
+          return (
+            Number(a.group.replace('G', '')) - Number(b.group.replace('G', ''))
+          );
+        }
+
+        // Sort by avg grade
+        if (this.sortBy === SortByEnum.avgGrade) {
+          return (
+            a.grades.reduce((sum, curr) => sum + curr, 0) -
+            b.grades.reduce((sum, curr) => sum + curr, 0)
+          );
+        }
+
+        return a[this.sortBy] > b[this.sortBy] ? 1 : -1;
+        // Sorting descending
+      } else {
+        // Sort by name
+        if (
+          this.sortBy === SortByEnum.name ||
+          this.sortBy === SortByEnum.academy
+        ) {
+          return b[this.sortBy]
+            .toLocaleLowerCase()
+            .localeCompare(a[this.sortBy].toLocaleLowerCase());
+        }
+
+        // Sort by group
+        if (this.sortBy === SortByEnum.group) {
+          return (
+            Number(b.group.replace('G', '')) - Number(a.group.replace('G', ''))
+          );
+        }
+
+        // Sort by avg grade
+        if (this.sortBy === SortByEnum.avgGrade) {
+          return (
+            b.grades.reduce((sum, curr) => sum + curr, 0) -
+            a.grades.reduce((sum, curr) => sum + curr, 0)
+          );
+        }
+
+        return a[this.sortBy] < b[this.sortBy] ? 1 : -1;
+      }
+    });
+
+    this.sortDirection =
+      this.sortDirection === SortDirectionEnum.asc
+        ? SortDirectionEnum.desc
+        : SortDirectionEnum.asc;
+  }
+
+  prepareFiltersAndGetStudents(): Student[] {
+    this.setQueryParams();
+
+    return this.studentsService.searchStudents({
+      searchTerm: this.searchTerm,
+      isPassing: this.isPassing,
+      group: this.selectedGroup,
+      startDate: this.startDate,
+      endDate: this.endDate,
+    });
+  }
+
+  setQueryParams() {
+    let queryParams: SearchFilters = {};
+
+    if (this.searchTerm) {
+      queryParams.searchTerm = this.searchTerm;
+    }
+
+    if (this.isPassing) {
+      queryParams.isPassing = this.isPassing;
+    }
+
+    if (this.selectedGroup) {
+      queryParams.group = this.selectedGroup;
+    }
+
+    if (this.startDate) {
+      queryParams.startDate = this.startDate;
+    }
+
+    if (this.endDate) {
+      queryParams.endDate = this.endDate;
+    }
+
+    this.router.navigate([], {
+      queryParams,
+    });
   }
 
   onKeyUp(e: any) {
-    // console.log(e.target.value);
     this.searchTerm = e.target.value;
-    this.students = this.studentsService.searchStudents({
-      searchTerm: e.target.value,
-      isPassing: this.isPassing,
-      group: this.selectedGroup,
-      startDate: this.startDate,
-      endDate: this.endDate,
-    });
+
+    if (e.target.value) {
+      this.router.navigate([], {
+        queryParams: {
+          searchTerm: e.target.value,
+        },
+      });
+    } else {
+      this.router.navigate([], {
+        queryParams: {},
+      });
+    }
+
+    this.students = this.prepareFiltersAndGetStudents();
   }
 
   onIsPassingChange(e: any) {
-    // console.log(e.target.checked);
     this.isPassing = e.target.checked;
-    this.students = this.studentsService.searchStudents({
-      isPassing: e.target.checked,
-      searchTerm: this.searchTerm,
-      group: this.selectedGroup,
-      startDate: this.startDate,
-      endDate: this.endDate,
-    });
+    this.students = this.prepareFiltersAndGetStudents();
   }
 
   onGroupSelect(e: any) {
-    // console.log(e.target.value);
     this.selectedGroup = e.target.value;
-    this.students = this.studentsService.searchStudents({
-      group: e.target.value,
-      searchTerm: this.searchTerm,
-      isPassing: this.isPassing,
-      startDate: this.startDate,
-      endDate: this.endDate,
-    });
+    this.students = this.prepareFiltersAndGetStudents();
   }
 
   onStartDateChange(e: any) {
-    // console.log(e.target.value, new Date(e.target.value));
     this.startDate = new Date(e.target.value);
-    this.students = this.studentsService.searchStudents({
-      group: this.selectedGroup,
-      searchTerm: this.searchTerm,
-      isPassing: this.isPassing,
-      startDate: new Date(e.target.value),
-      endDate: this.endDate,
-    });
+    this.students = this.prepareFiltersAndGetStudents();
   }
 
   onEndDateChange(e: any) {
-    // console.log(e.target.value, new Date(e.target.value));
     this.endDate = new Date(e.target.value);
-    this.students = this.studentsService.searchStudents({
-      group: this.selectedGroup,
-      searchTerm: this.searchTerm,
-      isPassing: this.isPassing,
-      startDate: this.startDate,
-      endDate: new Date(e.target.value),
-    });
+    this.students = this.prepareFiltersAndGetStudents();
+  }
+
+  onChangedGrade({ studentId, grade }: { studentId: number; grade: number }) {
+    console.log(grade);
+  }
+
+  onShowGrading(studentId: number) {
+    console.log('onShowGrading', studentId);
+    /*{
+      key===id id of the student
+      value === boolean (is it opened?)
+    }*/
+
+    this.showGrading.set(studentId, !this.showGrading.get(studentId));
   }
 }
