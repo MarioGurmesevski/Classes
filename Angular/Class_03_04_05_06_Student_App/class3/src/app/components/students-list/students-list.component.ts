@@ -15,8 +15,7 @@ export class StudentsListComponent implements OnInit {
   sortByEnum = SortByEnum;
   sortBy: SortByEnum = SortByEnum.id;
   sortDirection: SortDirectionEnum = SortDirectionEnum.asc;
-
-  showGrading = new Map(); // {}
+  showGrading = new Map(); // this will create an empty map that is similar (visually) to an empty object {}
 
   // list of all filters values
   searchTerm: string = '';
@@ -48,6 +47,7 @@ export class StudentsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // fetching the query params from the URL
     this.searchTerm = this.route.snapshot.queryParams['searchTerm'] || '';
     this.isPassing = !!this.route.snapshot.queryParams['isPassing'];
     this.selectedGroup = this.route.snapshot.queryParams['group'] || '';
@@ -72,13 +72,15 @@ export class StudentsListComponent implements OnInit {
           this.sortBy === SortByEnum.name ||
           this.sortBy === SortByEnum.academy
         ) {
+          // sorting strings is done with localeCompare
           return a[this.sortBy]
-            .toLocaleLowerCase()
-            .localeCompare(b[this.sortBy].toLocaleLowerCase());
+            .toLowerCase()
+            .localeCompare(b[this.sortBy].toLowerCase());
         }
 
         // Sort by group
         if (this.sortBy === SortByEnum.group) {
+          // we remove the letter G so that we can compare the numbers
           return (
             Number(a.group.replace('G', '')) - Number(b.group.replace('G', ''))
           );
@@ -86,6 +88,7 @@ export class StudentsListComponent implements OnInit {
 
         // Sort by avg grade
         if (this.sortBy === SortByEnum.avgGrade) {
+          // we are comparing the sum of grades
           return (
             a.grades.reduce((sum, curr) => sum + curr, 0) -
             b.grades.reduce((sum, curr) => sum + curr, 0)
@@ -95,6 +98,8 @@ export class StudentsListComponent implements OnInit {
         return a[this.sortBy] > b[this.sortBy] ? 1 : -1;
         // Sorting descending
       } else {
+        // else should be same as the above statement, we just change the places of a and b
+
         // Sort by name
         if (
           this.sortBy === SortByEnum.name ||
@@ -145,6 +150,8 @@ export class StudentsListComponent implements OnInit {
   setQueryParams() {
     let queryParams: SearchFilters = {};
 
+    // If a filter exists, we are going to assign the value to the query params
+
     if (this.searchTerm) {
       queryParams.searchTerm = this.searchTerm;
     }
@@ -165,6 +172,7 @@ export class StudentsListComponent implements OnInit {
       queryParams.endDate = this.endDate;
     }
 
+    // updating the query params
     this.router.navigate([], {
       queryParams,
     });
@@ -172,19 +180,6 @@ export class StudentsListComponent implements OnInit {
 
   onKeyUp(e: any) {
     this.searchTerm = e.target.value;
-
-    if (e.target.value) {
-      this.router.navigate([], {
-        queryParams: {
-          searchTerm: e.target.value,
-        },
-      });
-    } else {
-      this.router.navigate([], {
-        queryParams: {},
-      });
-    }
-
     this.students = this.prepareFiltersAndGetStudents();
   }
 
@@ -209,16 +204,47 @@ export class StudentsListComponent implements OnInit {
   }
 
   onChangedGrade({ studentId, grade }: { studentId: number; grade: number }) {
-    console.log(grade);
+    this.showGrading.set(studentId, false);
+
+    this.studentsService.gradeStudent(studentId, grade);
+
+    this.students = this.prepareFiltersAndGetStudents(); // refetch students from the service
+
+    // This should not be used while working with Objects and Arrays, as we need to create a new reference so that
+    // Angular knows that it needs to rerender (this is valid for properties that are used in the template)
+    // this.students[studentIndex].grades.push(grade);
+
+    // This is going to update the students locally in this component, and any other action fetching the students from the service will overwrite the new grade value
+    // console.log('Students in component', this.students);
+    // const studentIndex = this.students.findIndex((s) => s.id === studentId);
+    // this.students[studentIndex] = {
+    //   ...this.students[studentIndex],
+    //   grades: [...this.students[studentIndex].grades, grade],
+    // };
   }
 
   onShowGrading(studentId: number) {
-    console.log('onShowGrading', studentId);
-    /*{
-      key===id id of the student
-      value === boolean (is it opened?)
-    }*/
+    // A map is basically an object
+    // {
+    // key === id of the student
+    // value === boolean (is it opened?)
+    // }
 
+    // set is used to assign value to a property in a Map
+    // get is used to fetch the value
     this.showGrading.set(studentId, !this.showGrading.get(studentId));
+  }
+
+  onEdit(studentId: number) {
+    this.router.navigate(['/form', studentId]);
+  }
+
+  onDelete(studentId: number) {
+    this.studentsService.deleteStudent(studentId);
+
+    // console.log('Component', this.students); the deleted student is still in this array
+
+    // we need to refetch students to get the fresh copy where the student is actually deleted
+    this.students = this.prepareFiltersAndGetStudents();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-add-grades',
@@ -9,7 +9,7 @@ export class AddGradesComponent {
   @Input() studentId: number = 0;
   @Output() changedValue: EventEmitter<{ grade: number; studentId: number }> =
     new EventEmitter<{ grade: number; studentId: number }>();
-  rangeValue = 1;
+  rangeValue: number = 1;
 
   addGrade() {
     this.changedValue.emit({

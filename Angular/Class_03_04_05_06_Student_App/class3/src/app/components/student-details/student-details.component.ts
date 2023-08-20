@@ -20,6 +20,7 @@ export class StudentDetailsComponent implements OnInit {
 
   ngOnInit() {
     let id: string = this.route.snapshot.params['id'];
+    // console.log('id', id);
 
     this.student = this.studentsService.getStudentById(Number(id));
   }

@@ -312,6 +312,17 @@ export class StudentsService {
       .slice(0, 3);
   }
 
+  gradeStudent(studentId: number, grade: number) {
+    const studentIndex = this.students.findIndex((s) => s.id === studentId);
+
+    this.students[studentIndex] = {
+      ...this.students[studentIndex],
+      grades: [...this.students[studentIndex].grades, grade],
+    };
+
+    console.log('OD SERVISOT', this.students);
+  }
+
   searchStudents(searchFilters?: SearchFilters): Student[] {
     // if this method is called without parameters, we are not searching, return all students
     if (!searchFilters) {
@@ -372,5 +383,24 @@ export class StudentsService {
       // if the student meets all criteria (hasn't failed any check above) it will be returned
       return true;
     });
+  }
+
+  addStudent(student: Student) {
+    this.students.push(student);
+  }
+
+  updateStudent(student: Student) {
+    const index = this.students.findIndex((s) => s.id === student.id);
+
+    this.students[index] = {
+      ...this.students[index],
+      ...student,
+    };
+  }
+
+  deleteStudent(studentId: number) {
+    this.students = this.students.filter((s) => s.id !== studentId);
+
+    // console.log('Service', this.students);
   }
 }

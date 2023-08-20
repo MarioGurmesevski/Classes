@@ -1,9 +1,9 @@
 export enum SortByEnum {
   id = 'id',
   name = 'name',
-  dateOfBirth = 'dateOfBirth',
-  academy = 'academy',
   group = 'group',
+  academy = 'academy',
+  dateOfBirth = 'dateOfBirth',
   avgGrade = 'avgGrade',
 }
 
