@@ -267,7 +267,7 @@ export class StudentsService {
       grades: [6, 10, 1, 2, 3],
     },
     {
-      id: 32,
+      id: 31,
       name: 'Boshko Dzaferov',
       dateOfBirth: new Date('2000-10-18'),
       academy: AcademyTypeEnum.qa,
@@ -275,7 +275,7 @@ export class StudentsService {
       grades: [6, 10, 10, 9, 3],
     },
     {
-      id: 33,
+      id: 31,
       name: 'Marija Timkova',
       dateOfBirth: new Date('1999-03-04'),
       academy: AcademyTypeEnum.development,
@@ -283,7 +283,7 @@ export class StudentsService {
       grades: [2, 5, 4, 9, 3],
     },
     {
-      id: 34,
+      id: 32,
       name: 'Dobrila Kirkova',
       dateOfBirth: new Date('1999-12-04'),
       academy: AcademyTypeEnum.devops,
@@ -385,8 +385,10 @@ export class StudentsService {
   }
 
   addStudent(student: Student) {
+    // this.students.push(student);
     const students = this.studentData.getValue();
     students.push(student);
+
     this.updateStudentData(students);
   }
 
@@ -402,6 +404,7 @@ export class StudentsService {
     let students: Student[] = this.studentData.getValue();
 
     students = students.filter((s) => s.id !== studentId);
+
     this.updateStudentData(students);
   }
 }
