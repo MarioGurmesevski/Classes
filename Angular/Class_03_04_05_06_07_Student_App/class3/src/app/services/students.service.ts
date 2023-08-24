@@ -243,7 +243,7 @@ export class StudentsService {
       grades: [2, 6, 1, 4, 3],
     },
     {
-      id: 29,
+      id: 30,
       name: 'Sara Radonjic',
       dateOfBirth: new Date('1999-03-12'),
       academy: AcademyTypeEnum.development,
@@ -251,7 +251,7 @@ export class StudentsService {
       grades: [10, 9, 10, 7, 9],
     },
     {
-      id: 30,
+      id: 31,
       name: 'Darko Kostic',
       dateOfBirth: new Date('2000-09-20'),
       academy: AcademyTypeEnum.digitalMarketing,
@@ -259,7 +259,7 @@ export class StudentsService {
       grades: [8, 10, 10, 7, 9],
     },
     {
-      id: 31,
+      id: 32,
       name: 'Stojan Gjorgiev',
       dateOfBirth: new Date('2000-08-08'),
       academy: AcademyTypeEnum.devops,
@@ -267,7 +267,7 @@ export class StudentsService {
       grades: [6, 10, 1, 2, 3],
     },
     {
-      id: 31,
+      id: 33,
       name: 'Boshko Dzaferov',
       dateOfBirth: new Date('2000-10-18'),
       academy: AcademyTypeEnum.qa,
@@ -275,7 +275,7 @@ export class StudentsService {
       grades: [6, 10, 10, 9, 3],
     },
     {
-      id: 31,
+      id: 34,
       name: 'Marija Timkova',
       dateOfBirth: new Date('1999-03-04'),
       academy: AcademyTypeEnum.development,
@@ -283,7 +283,7 @@ export class StudentsService {
       grades: [2, 5, 4, 9, 3],
     },
     {
-      id: 32,
+      id: 35,
       name: 'Dobrila Kirkova',
       dateOfBirth: new Date('1999-12-04'),
       academy: AcademyTypeEnum.devops,
@@ -341,61 +341,49 @@ export class StudentsService {
     this.updateStudentData(students);
   }
 
-  searchStudents(searchFilters?: SearchFilters): Student[] {
-    return [];
+  searchStudents(searchFilters?: SearchFilters): Observable<Student[]> {
     // // if this method is called without parameters, we are not searching, return all students
-    // if (!searchFilters) {
-    //   return this.students;
-    // }
-    // // beginning of searching for students
-    // return this.students.filter((student) => {
-    //   // 1. are we searching with a search term?
-    //   // 2. make sure the search term IS INCLUDED in the students name
-    //   if (
-    //     searchFilters.searchTerm &&
-    //     !student.name
-    //       .toLowerCase()
-    //       .includes(searchFilters.searchTerm.toLowerCase())
-    //   ) {
-    //     // if it's not included, there is no reason to continue checking with other filters, don't return this student
-    //     return false;
-    //   }
-    //   // 1. are we filtering out only students that are passing?
-    //   // 2. make sure the search term IS HIGHER or EQUAL to 5
-    //   if (
-    //     searchFilters.isPassing &&
-    //     student.grades.reduce((a, b) => a + b, 0) / student.grades.length < 5
-    //   ) {
-    //     // if it's less than 5, there is no reason to continue checking with other filters, don't return this student
-    //     return false;
-    //   }
-    //   // 1. are we filtering out students by a group?
-    //   // 2. make sure the student IS IN this group
-    //   if (searchFilters.group && student.group !== searchFilters.group) {
-    //     // if the student is not in this group, there is no reason to continue checking with other filters, don't return this student
-    //     return false;
-    //   }
-    //   // 1. are we filtering out students by date of birth?
-    //   // 2. make sure the student IS OLDER THAN the start date
-    //   if (
-    //     searchFilters.startDate &&
-    //     student.dateOfBirth < searchFilters.startDate
-    //   ) {
-    //     // if it's not older than the start date, there is no reason to continue checking with other filters, don't return this student
-    //     return false;
-    //   }
-    //   // 1. are we filtering out students by date of birth?
-    //   // 2. make sure the student IS YOUNGER THAN the end date
-    //   if (
-    //     searchFilters.endDate &&
-    //     student.dateOfBirth > searchFilters.endDate
-    //   ) {
-    //     // if it's not younger than the end date, there is no reason to continue checking with other filters, don't return this student
-    //     return false;
-    //   }
-    //   // if the student meets all criteria (hasn't failed any check above) it will be returned
-    //   return true;
-    // });
+    if (!searchFilters) {
+      return this.students$;
+    }
+    return this.students$.pipe(
+      map((students) => {
+        return students.filter((student) => {
+          if (
+            searchFilters.searchTerm &&
+            !student.name
+              .toLowerCase()
+              .includes(searchFilters.searchTerm.toLowerCase())
+          ) {
+            return false;
+          }
+          if (
+            searchFilters.isPassing &&
+            student.grades.reduce((a, b) => a + b, 0) / student.grades.length <
+              5
+          ) {
+            return false;
+          }
+
+          if (searchFilters.group && student.group !== searchFilters.group) {
+            return false;
+          }
+          if (
+            searchFilters.startDate &&
+            student.dateOfBirth < searchFilters.startDate
+          ) {
+            return false;
+          }
+          if (
+            searchFilters.endDate &&
+            student.dateOfBirth > searchFilters.endDate
+          ) {
+            return false;
+          }
+          return true;
+        });
+      })
+    );
   }
 
   addStudent(student: Student) {
@@ -406,11 +394,13 @@ export class StudentsService {
   }
 
   updateStudent(student: Student) {
-    // const index = this.students.findIndex((s) => s.id === student.id);
-    // this.students[index] = {
-    //   ...this.students[index],
-    //   ...student,
-    // };
+    const students = this.studentData.getValue();
+    const index = students.findIndex((s) => s.id === student.id);
+    students[index] = {
+      ...students[index],
+      ...student,
+    };
+    this.updateStudentData(students);
   }
 
   deleteStudent(studentId: number) {
