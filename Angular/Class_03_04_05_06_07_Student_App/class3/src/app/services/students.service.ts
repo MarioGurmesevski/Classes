@@ -2,7 +2,7 @@ import { SearchFilters } from './../interfaces/search-filters.interface';
 import { Injectable } from '@angular/core';
 import { AcademyTypeEnum } from '../interfaces/academy-type.enum';
 import { Student } from '../interfaces/student.interface';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root', // determines the scope of the service. This is deprecated, in future versions, this will be the default behavior
@@ -399,7 +399,6 @@ export class StudentsService {
   }
 
   addStudent(student: Student) {
-    // this.students.push(student);
     const students = this.studentData.getValue();
     students.push(student);
 

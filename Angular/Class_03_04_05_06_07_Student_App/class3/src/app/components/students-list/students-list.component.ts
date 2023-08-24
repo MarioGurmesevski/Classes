@@ -204,14 +204,6 @@ export class StudentsListComponent implements OnInit {
   }
 
   onShowGrading(studentId: number) {
-    // A map is basically an object
-    // {
-    // key === id of the student
-    // value === boolean (is it opened?)
-    // }
-
-    // set is used to assign value to a property in a Map
-    // get is used to fetch the value
     this.showGrading.set(studentId, !this.showGrading.get(studentId));
   }
 

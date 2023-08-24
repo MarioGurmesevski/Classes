@@ -29,14 +29,14 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
             map((students) => students.find((s) => s.id === id)) // returns a single student
           )
         )
-      ) // merges the params stream with the students stream and provides a single student object
+        // tap((student) => {
+        //   console.log('Student details executed');
+        //   this.student = student;
+        // })
+      )
       .subscribe((student) => {
         this.student = student;
       });
-    //   tap((student) => {
-    //     this.student = student;
-    //   })
-    // ).subscribe()
   }
 
   goBack() {
