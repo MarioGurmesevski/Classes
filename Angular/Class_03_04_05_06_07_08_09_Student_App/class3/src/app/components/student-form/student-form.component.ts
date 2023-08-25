@@ -7,6 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { Subscription, map, mergeMap, tap } from 'rxjs';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { Store } from '@ngrx/store';
+import { StudentsState } from 'src/app/interfaces/students-state';
+import { studentsSelector } from 'src/app/store/students.selectors';
+import { addStudent, updateStudent } from 'src/app/store/students.actions';
 
 @Component({
   selector: 'app-student-form',
@@ -96,7 +100,7 @@ export class StudentFormComponent implements OnInit {
   }
 
   constructor(
-    private studentsService: StudentsService,
+    private store: Store<StudentsState>,
     private notificationsService: NotificationsService,
     private router: Router,
     private route: ActivatedRoute
@@ -111,9 +115,9 @@ export class StudentFormComponent implements OnInit {
         // }),
         map((params) => Number(params['id'])),
         mergeMap((id) =>
-          this.studentsService.students$.pipe(
-            map((students) => students.find((s) => s.id === id) || null)
-          )
+          this.store
+            .select(studentsSelector)
+            .pipe(map((students) => students.find((s) => s.id === id) || null))
         )
       )
       .subscribe((student: Student | null) => {
@@ -147,14 +151,14 @@ export class StudentFormComponent implements OnInit {
 
     if (this.isEditing) {
       // we are updating
-      this.studentsService.updateStudent(student as Student);
+      this.store.dispatch(updateStudent({ student: student as Student }));
       this.notificationsService.pushNotification(
         'Student updated successfully',
         'success'
       );
     } else {
       // we are creating
-      this.studentsService.addStudent(student as Student);
+      this.store.dispatch(addStudent({ student: student as Student }));
       this.notificationsService.pushNotification(
         'Student added successfully',
         'success'
