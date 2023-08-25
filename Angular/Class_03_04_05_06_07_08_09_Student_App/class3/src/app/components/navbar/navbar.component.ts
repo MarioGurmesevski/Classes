@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationMessage } from 'src/app/interfaces/notification-message';
-import { NotificationsService } from 'src/app/services/notifications.service';
+import { NotificationsService } from '../../services/notifications.service';
+import { NotificationMessage } from 'src/app/interfaces/notification-message.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +9,18 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 })
 export class NavbarComponent implements OnInit {
   notification: NotificationMessage | null = null;
+
   constructor(private notificationsService: NotificationsService) {}
 
   ngOnInit() {
-    this.notificationsService.pushNotification(
-      'This is a test from navbar',
-      'success'
-    );
+    // let count = 1;
+    // setInterval(() => {
+    //   this.notificationsService.pushNotification(`sega e ${count}`, 'error');
+    //   count++;
+    // }, 7000);
+
     this.notificationsService.notification$.subscribe((notification) => {
+      console.log(notification);
       this.notification = notification;
     });
   }

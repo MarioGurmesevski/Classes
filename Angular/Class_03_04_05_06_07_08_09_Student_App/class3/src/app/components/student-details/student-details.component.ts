@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Student } from '../../interfaces/student.interface';
 import { Location } from '@angular/common';
 import { StudentsService } from '../../services/students.service';
-import { Subscription, map, mergeMap } from 'rxjs';
+import { Subscription, map, mergeMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-student-details',
@@ -37,6 +37,10 @@ export class StudentDetailsComponent implements OnInit, OnDestroy {
       .subscribe((student) => {
         this.student = student;
       });
+    // merges the params stream with the students stream and provides a single student object
+    // .subscribe((student) => {
+    //   this.student = student;
+    // });
   }
 
   goBack() {

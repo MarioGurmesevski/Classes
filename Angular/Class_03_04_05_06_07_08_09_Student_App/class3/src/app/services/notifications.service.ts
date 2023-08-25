@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { NotificationMessage } from '../interfaces/notification-message';
+import { NotificationMessage } from '../interfaces/notification-message.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +21,7 @@ export class NotificationsService {
       message,
       type,
     });
+
     setTimeout(() => {
       this.updateNotificationData(null);
     }, 2000);

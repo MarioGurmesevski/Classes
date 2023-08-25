@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SearchFilters } from 'src/app/interfaces/search-filters.interface';
 import { SortByEnum, SortDirectionEnum } from '../../interfaces/sort.enum';
 import { Observable, map, mergeMap, tap } from 'rxjs';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-students-list',
@@ -22,7 +23,7 @@ export class StudentsListComponent implements OnInit {
   searchTerm: string = '';
   isPassing: boolean = false;
   selectedGroup: string = '';
-  startDate: Date = new Date();
+  startDate: Date = new Date('1995-01-01');
   endDate: Date = new Date();
 
   // hardcoded value of all the groups
@@ -43,6 +44,7 @@ export class StudentsListComponent implements OnInit {
 
   constructor(
     private studentsService: StudentsService,
+    private notificationsService: NotificationsService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -152,8 +154,6 @@ export class StudentsListComponent implements OnInit {
   setQueryParams() {
     let queryParams: SearchFilters = {};
 
-    // If a filter exists, we are going to assign the value to the query params
-
     if (this.searchTerm) {
       queryParams.searchTerm = this.searchTerm;
     }
@@ -174,7 +174,6 @@ export class StudentsListComponent implements OnInit {
       queryParams.endDate = this.endDate;
     }
 
-    // updating the query params
     this.router.navigate([], {
       queryParams,
     });
@@ -221,5 +220,9 @@ export class StudentsListComponent implements OnInit {
 
   onDelete(studentId: number) {
     this.studentsService.deleteStudent(studentId);
+    this.notificationsService.pushNotification(
+      'Student deleted successfully',
+      'success'
+    );
   }
 }
