@@ -20,7 +20,6 @@ import { CountriesService } from 'src/app/services/countries.service';
 })
 export class StudentFormComponent implements OnInit {
   studentForm = new FormGroup({
-    id: new FormControl<number>(Date.now()), // just a workaround, this is not common practice
     name: new FormControl<string>(
       '',
       Validators.compose([
@@ -107,14 +106,14 @@ export class StudentFormComponent implements OnInit {
     private store: Store<StudentsState>,
     private router: Router,
     private route: ActivatedRoute,
-    private counriesService: CountriesService
+    private countriesService: CountriesService
   ) {}
 
   ngOnInit() {
     this.subscriptions.push(
       this.route.params
         .pipe(
-          map((params) => Number(params['id'])),
+          map((params) => params['id']),
           mergeMap((id) =>
             this.store
               .select(studentsSelector)
@@ -143,10 +142,13 @@ export class StudentFormComponent implements OnInit {
             );
           }
         }),
-      this.counriesService.getCountries().subscribe((countries) => {
+      this.countriesService.getCountries().subscribe((countries) => {
+        console.log(countries);
         this.countries = countries;
       })
     );
+
+    this.studentForm.valueChanges.subscribe((value) => console.log(value));
   }
 
   onSubmit() {

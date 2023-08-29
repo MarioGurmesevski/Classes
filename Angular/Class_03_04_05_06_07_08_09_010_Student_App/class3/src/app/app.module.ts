@@ -25,6 +25,12 @@ import { StudentsEffects } from './store/students.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { CountriesService } from './services/countries.service';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { enviroment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +61,10 @@ import { CountriesService } from './services/countries.service';
     StoreModule.forFeature('students', reducer),
     EffectsModule.forFeature([StudentsEffects]),
     HttpClientModule,
+    AngularFireModule.initializeApp(enviroment.firebase),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ],
   providers: [StudentsService, NotificationsService, CountriesService],
   bootstrap: [AppComponent],
