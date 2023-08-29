@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Student } from '../../interfaces/student.interface';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SearchFilters } from '../../interfaces/search-filters.interface';
+import { SearchFilters } from 'src/app/interfaces/search-filters.interface';
 import { SortByEnum, SortDirectionEnum } from '../../interfaces/sort.enum';
 import { Observable, map, mergeMap, tap, Subscription } from 'rxjs';
-import { NotificationsService } from '../../services/notifications.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 import { Store } from '@ngrx/store';
-import { StudentsState } from '../../interfaces/students-state';
+import { StudentsState } from '../../interfaces/student-state.interface';
 import { studentsSelector } from '../../store/students.selectors';
 import {
   deleteStudent,
@@ -59,7 +59,8 @@ export class StudentsListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.students$ = this.store.select(studentsSelector);
-    this.route.queryParams
+
+    this.subscription = this.route.queryParams
       .pipe(
         tap((queryParams) => {
           this.searchTerm = queryParams['searchTerm'] || '';
@@ -163,14 +164,6 @@ export class StudentsListComponent implements OnInit, OnDestroy {
         },
       })
     );
-
-    // return this.studentsService.searchStudents({
-    // searchTerm: this.searchTerm,
-    // isPassing: this.isPassing,
-    // group: this.selectedGroup,
-    // startDate: this.startDate,
-    // endDate: this.endDate,
-    // });
   }
 
   setQueryParams() {
@@ -229,7 +222,12 @@ export class StudentsListComponent implements OnInit, OnDestroy {
   onChangedGrade({ studentId, grade }: { studentId: number; grade: number }) {
     this.showGrading.set(studentId, false);
 
-    this.store.dispatch(gradeStudent({ studentId, grade }));
+    this.store.dispatch(
+      gradeStudent({
+        studentId,
+        grade,
+      })
+    );
   }
 
   onShowGrading(studentId: number) {
@@ -241,12 +239,17 @@ export class StudentsListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: number) {
-    this.store.dispatch(deleteStudent({ id }));
+    this.store.dispatch(
+      deleteStudent({
+        id,
+      })
+    );
     this.notificationsService.pushNotification(
       'Student deleted successfully',
       'success'
     );
   }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

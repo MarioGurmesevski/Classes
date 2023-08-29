@@ -8,9 +8,10 @@ import { formatDate } from '@angular/common';
 import { Subscription, map, mergeMap, tap } from 'rxjs';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Store } from '@ngrx/store';
-import { StudentsState } from 'src/app/interfaces/students-state';
-import { studentsSelector } from 'src/app/store/students.selectors';
+import { StudentsState } from 'src/app/interfaces/student-state.interface';
 import { addStudent, updateStudent } from 'src/app/store/students.actions';
+import { studentsSelector } from 'src/app/store/students.selectors';
+import { CountriesService } from 'src/app/services/countries.service';
 
 @Component({
   selector: 'app-student-form',
@@ -36,8 +37,9 @@ export class StudentFormComponent implements OnInit {
       Validators.required
     ),
     grades: new FormControl<number[]>([]), // a form control that is not connected to the template
+    location: new FormControl<string>(''),
   });
-  subscription: Subscription = new Subscription();
+  subscriptions: Subscription[] = [];
   academies = Object.values(AcademyTypeEnum);
   groups: string[] = [
     'G1',
@@ -54,6 +56,7 @@ export class StudentFormComponent implements OnInit {
     'G12',
   ];
   isEditing: boolean = false; // we are editing if we have ID as parameter
+  countries: string[] = [];
 
   get nameHasErrorRequired() {
     return this.studentForm.get('name')?.hasError('required');
@@ -100,50 +103,53 @@ export class StudentFormComponent implements OnInit {
   }
 
   constructor(
-    private store: Store<StudentsState>,
     private notificationsService: NotificationsService,
+    private store: Store<StudentsState>,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private counriesService: CountriesService
   ) {}
 
   ngOnInit() {
-    this.subscription = this.route.params
-      .pipe(
-        // tap((value) => {
-        //   debugger;
-        //   return value;
-        // }),
-        map((params) => Number(params['id'])),
-        mergeMap((id) =>
-          this.store
-            .select(studentsSelector)
-            .pipe(map((students) => students.find((s) => s.id === id) || null))
+    this.subscriptions.push(
+      this.route.params
+        .pipe(
+          map((params) => Number(params['id'])),
+          mergeMap((id) =>
+            this.store
+              .select(studentsSelector)
+              .pipe(
+                map((students) => students.find((s) => s.id === id) || null)
+              )
+          )
         )
-      )
-      .subscribe((student: Student | null) => {
-        if (student) {
-          this.isEditing = true;
-          const studentValue = {
-            ...student,
-            dateOfBirth: formatDate(
-              new Date(student.dateOfBirth).toISOString(),
-              'yyyy-MM-dd',
-              'en'
-            ),
-          };
-          this.studentForm.patchValue(studentValue);
-        } else {
-          this.router.navigate(['/form']);
-          this.notificationsService.pushNotification(
-            'Student not found',
-            'error'
-          );
-        }
-      });
+        .subscribe((student: Student | null) => {
+          if (student) {
+            this.isEditing = true;
+            const studentValue = {
+              ...student,
+              dateOfBirth: formatDate(
+                new Date(student.dateOfBirth).toISOString(),
+                'yyyy-MM-dd',
+                'en'
+              ),
+            };
+            this.studentForm.patchValue(studentValue);
+          } else {
+            this.router.navigate(['/form']);
+            this.notificationsService.pushNotification(
+              'Student not found',
+              'error'
+            );
+          }
+        }),
+      this.counriesService.getCountries().subscribe((countries) => {
+        this.countries = countries;
+      })
+    );
   }
 
   onSubmit() {
-    // console.log('form submitted', this.studentForm.value);
     const student = {
       ...this.studentForm.value,
       dateOfBirth: new Date(this.studentForm.value.dateOfBirth ?? ''),
@@ -151,14 +157,22 @@ export class StudentFormComponent implements OnInit {
 
     if (this.isEditing) {
       // we are updating
-      this.store.dispatch(updateStudent({ student: student as Student }));
+      this.store.dispatch(
+        updateStudent({
+          student: student as Student,
+        })
+      );
       this.notificationsService.pushNotification(
         'Student updated successfully',
         'success'
       );
     } else {
       // we are creating
-      this.store.dispatch(addStudent({ student: student as Student }));
+      this.store.dispatch(
+        addStudent({
+          student: student as Student,
+        })
+      );
       this.notificationsService.pushNotification(
         'Student added successfully',
         'success'
@@ -169,6 +183,6 @@ export class StudentFormComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 }

@@ -1,5 +1,5 @@
-import { Student } from './student.interface';
 import { SearchFilters } from './search-filters.interface';
+import { Student } from './student.interface';
 
 export interface StudentsState {
   students: Student[];

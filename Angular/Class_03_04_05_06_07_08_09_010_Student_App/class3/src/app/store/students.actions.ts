@@ -1,4 +1,3 @@
-import { filter } from 'rxjs';
 import { createAction, props } from '@ngrx/store';
 import { SearchFilters } from '../interfaces/search-filters.interface';
 import { Student } from '../interfaces/student.interface';
@@ -14,7 +13,7 @@ export const getStudentsSuccess = createAction(
 );
 
 export const getStudentsFailure = createAction(
-  '[Students] Get students failure',
+  '[Students] Get students error',
   props<{ error: string }>()
 );
 
@@ -26,7 +25,7 @@ export const addStudent = createAction(
 export const addStudentSuccess = createAction('[Students] Add student success');
 
 export const addStudentFailure = createAction(
-  '[Students] Add student failure',
+  '[Students] Add student error',
   props<{ error: string }>()
 );
 
@@ -40,7 +39,7 @@ export const updateStudentSuccess = createAction(
 );
 
 export const updateStudentFailure = createAction(
-  '[Students] Update student failure',
+  '[Students] Update student error',
   props<{ error: string }>()
 );
 
@@ -54,7 +53,7 @@ export const deleteStudentSuccess = createAction(
 );
 
 export const deleteStudentFailure = createAction(
-  '[Students] Delete student failure',
+  '[Students] Delete student error',
   props<{ error: string }>()
 );
 
@@ -68,6 +67,6 @@ export const gradeStudentSuccess = createAction(
 );
 
 export const gradeStudentFailure = createAction(
-  '[Students] Add student grade failure',
+  '[Student] Add student grade error',
   props<{ error: string }>()
 );

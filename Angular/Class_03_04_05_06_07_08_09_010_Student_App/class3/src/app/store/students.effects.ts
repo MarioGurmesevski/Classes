@@ -1,8 +1,7 @@
-import { Student } from './../interfaces/student.interface';
 import { SearchFilters } from './../interfaces/search-filters.interface';
-import { StudentsService } from './../services/students.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { StudentsService } from '../services/students.service';
 import {
   addStudent,
   addStudentFailure,
@@ -21,6 +20,7 @@ import {
   updateStudentSuccess,
 } from './students.actions';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { Student } from '../interfaces/student.interface';
 
 @Injectable()
 export class StudentsEffects {
