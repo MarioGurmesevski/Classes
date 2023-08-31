@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
   styleUrls: ['./add-grades.component.css'],
 })
 export class AddGradesComponent {
-  @Input() studentId: string = '0';
+  @Input() studentId: string = '';
   @Output() changedValue: EventEmitter<{ grade: number; studentId: string }> =
     new EventEmitter<{ grade: number; studentId: string }>();
   rangeValue: number = 1;

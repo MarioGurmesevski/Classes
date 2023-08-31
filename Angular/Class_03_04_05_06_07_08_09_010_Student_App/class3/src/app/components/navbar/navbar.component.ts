@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
     // }, 7000);
 
     this.notificationsService.notification$.subscribe((notification) => {
-      console.log(notification);
       this.notification = notification;
     });
   }

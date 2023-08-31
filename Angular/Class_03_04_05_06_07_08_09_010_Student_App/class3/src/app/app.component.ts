@@ -11,7 +11,7 @@ export class AppComponent {
 
   ngOnInit() {
     // this.firestore
-    //   .collection('pets')
+    //   .collection('students')
     //   .valueChanges()
     //   .subscribe((students) => console.log('firebase', students));
     // this.firestore.collection('students').add({
@@ -20,7 +20,7 @@ export class AppComponent {
     //   academy: 'Development',
     //   group: 'G10',
     //   grades: [1, 2, 3, 10],
-    //   location: 'Macedonia',
+    //   location: 'Greece',
     // });
   }
 }

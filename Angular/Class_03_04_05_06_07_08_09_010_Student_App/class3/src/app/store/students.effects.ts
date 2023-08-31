@@ -21,12 +21,14 @@ import {
 } from './students.actions';
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { Student } from '../interfaces/student.interface';
+import { NotificationsService } from '../services/notifications.service';
 
 @Injectable()
 export class StudentsEffects {
   constructor(
     private actions$: Actions,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private notificationsService: NotificationsService
   ) {}
 
   getStudents$ = createEffect(() =>
@@ -57,9 +59,10 @@ export class StudentsEffects {
   updateStudent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateStudent),
-      tap(({ student }: { student: Student }) =>
+      switchMap(({ student }: { student: Student }) =>
         this.studentsService.updateStudent(student)
       ),
+      tap(()=>this.notificationsService.pushNotification('student updated','success'))
       map(() => updateStudentSuccess()),
       catchError((error) => of(updateStudentFailure({ error: error.message })))
     )
@@ -68,20 +71,37 @@ export class StudentsEffects {
   deleteStudent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteStudent),
-      tap(({ id }: { id: string }) => this.studentsService.deleteStudent(id)),
+      switchMap(({ id }: { id: string }) =>
+        this.studentsService.deleteStudent(id)
+      ),
+      tap(() =>
+        this.notificationsService.pushNotification(
+          'Student deleted successfully',
+          'success'
+        )
+      ),
       map(() => deleteStudentSuccess()),
-      catchError((error) => of(deleteStudentFailure({ error: error.message })))
+      catchError((error) => {
+        this.notificationsService.pushNotification(
+          error?.message || 'Error while deleting student',
+          'error'
+        );
+      })
     )
   );
 
   gradeStudent$ = createEffect(() =>
     this.actions$.pipe(
       ofType(gradeStudent),
-      tap(({ studentId, grade }: { studentId: string; grade: number }) =>
+      switchMap(({ studentId, grade }: { studentId: string; grade: number }) =>
         this.studentsService.gradeStudent(studentId, grade)
       ),
+      tap(()=>this.notificationsService.pushNotification('Grade added successfully','success'))
       map(() => gradeStudentSuccess()),
-      catchError((error) => of(gradeStudentFailure({ error: error.message })))
+      catchError((error)=>{
+        this.notificationsService.pushNotification(error?.message || 'Error while adding grade','error')
+        return of()
+      })
     )
   );
 }

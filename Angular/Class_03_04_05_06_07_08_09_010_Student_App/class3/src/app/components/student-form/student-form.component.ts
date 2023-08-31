@@ -23,7 +23,6 @@ export class StudentFormComponent implements OnInit {
     name: new FormControl<string>(
       '',
       Validators.compose([
-        // Validators.compose is used when we have more than 1 validator
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20),
@@ -56,6 +55,7 @@ export class StudentFormComponent implements OnInit {
   ];
   isEditing: boolean = false; // we are editing if we have ID as parameter
   countries: string[] = [];
+  studentId: string = '';
 
   get nameHasErrorRequired() {
     return this.studentForm.get('name')?.hasError('required');
@@ -124,6 +124,7 @@ export class StudentFormComponent implements OnInit {
         )
         .subscribe((student: Student | null) => {
           if (student) {
+            this.studentId = student.id;
             this.isEditing = true;
             const studentValue = {
               ...student,
@@ -136,24 +137,24 @@ export class StudentFormComponent implements OnInit {
             this.studentForm.patchValue(studentValue);
           } else {
             this.router.navigate(['/form']);
-            this.notificationsService.pushNotification(
-              'Student not found',
-              'error'
-            );
+            if (this.isEditing) {
+              this.notificationsService.pushNotification(
+                'Student not found',
+                'error'
+              );
+            }
           }
         }),
       this.countriesService.getCountries().subscribe((countries) => {
-        console.log(countries);
         this.countries = countries;
       })
     );
-
-    this.studentForm.valueChanges.subscribe((value) => console.log(value));
   }
 
   onSubmit() {
     const student = {
       ...this.studentForm.value,
+      id: this.studentId,
       dateOfBirth: new Date(this.studentForm.value.dateOfBirth ?? ''),
     };
 
