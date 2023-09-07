@@ -1,4 +1,4 @@
-import { AuthService } from './../components/auth/auth.service';
+import { Observable, map, take, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -6,22 +6,22 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { AuthService } from '../components/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard {
+export class AdminGuard {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
-    return this.authService.isLoggedIn$.pipe(
-      tap(
-        (isLoggedIn: boolean) => !isLoggedIn && this.router.navigate(['/login'])
-      )
+    return this.authService.userData$.pipe(
+      take(1),
+      map((user) => !!user?.roles?.['admin']),
+      tap((isAdmin) => !isAdmin && this.router.navigate(['/dashboard']))
     );
   }
 }

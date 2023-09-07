@@ -1,6 +1,6 @@
-import { AuthService } from './auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -34,6 +34,8 @@ export class AuthComponent {
       if (!email || !password) {
         return;
       }
+
+      this.authService.login(email, password);
     } else {
       if (!email || !password || !name) {
         return;

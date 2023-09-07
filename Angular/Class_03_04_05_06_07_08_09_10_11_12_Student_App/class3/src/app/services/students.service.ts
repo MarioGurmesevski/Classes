@@ -35,7 +35,6 @@ export class StudentsService {
           }
 
           const { grades } = student.data() as Student;
-
           grades.push(grade);
 
           return from(
