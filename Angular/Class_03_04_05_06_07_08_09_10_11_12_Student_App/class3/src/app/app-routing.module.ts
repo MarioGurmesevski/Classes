@@ -1,4 +1,3 @@
-import { EditorGuard } from './guards/editor.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -9,6 +8,9 @@ import { StudentFormComponent } from './components/student-form/student-form.com
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { EditorGuard } from './guards/editor.guard';
+import { NotAllowedComponent } from './components/not-allowed/not-allowed.component';
+import { AdminSettingsComponent } from './components/admin-settings/admin-settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -26,14 +28,20 @@ const routes: Routes = [
   {
     path: 'form',
     component: StudentFormComponent,
-    canActivate: [AuthGuard, AdminGuard],
+    canActivate: [AuthGuard, EditorGuard],
   },
   {
     path: 'form/:id',
     component: StudentFormComponent,
-    canActivate: [AuthGuard, AdminGuard],
+    canActivate: [AuthGuard, EditorGuard],
   },
   { path: 'login', component: AuthComponent },
+  {
+    path: 'admin-settings',
+    component: AdminSettingsComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  { path: 'not-allowed', component: NotAllowedComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

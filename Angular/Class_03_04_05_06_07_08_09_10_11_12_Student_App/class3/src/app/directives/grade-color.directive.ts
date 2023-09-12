@@ -38,7 +38,7 @@ export class GradeColorDirective implements OnInit {
       this.renderer.setStyle(
         this.el.nativeElement,
         'background-color',
-        'yellow'
+        'lightblue'
       );
     } else if (this.grade >= 5 && this.grade < 6) {
       this.renderer.setStyle(

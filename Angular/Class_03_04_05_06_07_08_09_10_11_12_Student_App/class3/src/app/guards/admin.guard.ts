@@ -1,4 +1,4 @@
-import { Observable, map, take, tap } from 'rxjs';
+import { AuthService } from './../components/auth/auth.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { AuthService } from '../components/auth/auth.service';
+import { Observable, map, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class AdminGuard {
     return this.authService.userData$.pipe(
       take(1),
       map((user) => !!user?.roles?.['admin']),
-      tap((isAdmin) => !isAdmin && this.router.navigate(['/dashboard']))
+      tap((isAdmin) => !isAdmin && this.router.navigate(['/not-allowed']))
     );
   }
 }
